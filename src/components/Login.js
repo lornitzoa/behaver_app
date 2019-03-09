@@ -32,10 +32,9 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // if(userService.loggedIn()) {
-    //   const { from } = this.props.location.state || {from: {pathname: '/posts'}}
-    //   this.props.history.push(from)
-    // }
+    if(this.Auth.loggedIn()) {
+      this.props.history.replace('/dashboard')
+    }
   }
 
   render() {

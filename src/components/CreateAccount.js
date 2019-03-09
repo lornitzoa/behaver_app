@@ -21,6 +21,11 @@ class CreateAccount extends Component {
         password: this.state.password
       }
       this.Auth.register(user)
+        .then(
+          res => {
+            this.props.history.replace('/login')
+          }
+        )
     }
   }
 
