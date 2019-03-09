@@ -16,6 +16,8 @@ class NewMember extends Component {
     }
   }
 
+
+
   handlePin = (e) => {
     this.setState({
       parent_pin: e

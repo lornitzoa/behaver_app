@@ -1,53 +1,28 @@
 import React, { Component } from 'react'
 import NewMember from './NewMember'
 
+let api_url = 'http://localhost:3000'
+
 class ShowMembers extends Component {
   constructor(props) {
     super(props)
     this.state = {
       staticState: true,
       editingMember: {},
-      members: [
-        {
-          id: 0,
-          name: 'Adam',
-          role: 'parent',
-          pin: '5430',
-          family_id: '0'
-        },
-        {
-          id: 1,
-          name: 'laura',
-          role: 'parent',
-          pin: '1234',
-          family_id: '0'
-        },
-        {
-          id: 2,
-          name: 'Gus',
-          role: 'child',
-          pin: '9876',
-          family_id: '0'
-        },
-        {
-          id: 3,
-          name: 'Mack',
-          role: 'child',
-          pin: '4567',
-          family_id: '0'
-        },
-        {
-          id: 4,
-          name: 'Edie',
-          role: 'child',
-          pin: '0000',
-          family_id: '0'
-        }
-      ]
+      members: []
     }
     this.member = {}
   }
 
+  fetchMembers = () => {
+    fetch(`${api_url}/members`)
+      .then(data => data.json())
+      .then(jData => {
+        this.setState({
+          members: jData
+        })
+      })
+  }
 
 
   setMember = (member) => {
@@ -58,6 +33,10 @@ class ShowMembers extends Component {
     this.setState({
       staticState: !this.state.staticState
     })
+  }
+
+  componentDidMount() {
+    this.fetchMembers()
   }
 
 
