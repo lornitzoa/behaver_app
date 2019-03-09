@@ -10,15 +10,26 @@ import CreateAccount from './components/CreateAccount'
 
 
 
+
+
 class App extends Component {
 
   render() {
     return (
       <Router>
         <div>
-          <Route path='/' exact component={Landing}/>
-          <Route path='/dashboard' exact component={Dashboard}/>
-          <Route path='/login' component={Login}/>
+          <Route
+            path='/'
+            exact component={Landing}
+          />
+          <Route
+            path='/dashboard'
+            exact component={Dashboard}
+          />
+          <Route
+            path='/login'
+            component={Login}
+          />
           <Route path='/register' component={CreateAccount}/>
         </div>
       </Router>

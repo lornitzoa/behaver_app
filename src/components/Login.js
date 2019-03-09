@@ -42,9 +42,9 @@ class Login extends Component {
       <form onSubmit={this.handleSubmit}>
       <h1>Log In</h1>
         <label htmlFor='familyname'>Family Name</label>
-        <input type='text' id='username' onChange={this.handleChange}/>
+        <input type='text' id='username' onChange={this.props.handleChange}/>
         <label htmlFor='password'>Password</label>
-        <input type='password' id='password' onChange={this.handleChange}/>
+        <input type='password' id='password' onChange={this.props.handleChange}/>
         <input type='submit'/>
       </form>
     )

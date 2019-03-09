@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-// import AuthService from '../services/user.service'
+// import {Link } from 'react-router-dom'
 
+
+// Header and General Navigations
 class Header extends Component {
   constructor(props) {
     super(props)
@@ -33,10 +34,13 @@ class Header extends Component {
   }
 
   render() {
+
     return (
       <div>
         <h2>{this.state.familyName} Family Dashboard</h2>
         <button onClick={this.handleLogout}>Log Out</button>
+
+
 
 
       </div>
