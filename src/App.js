@@ -5,7 +5,6 @@ import './App.css';
 
 import Landing from './components/Landing'
 import Dashboard from './components/Dashboard'
-import Household from './components/Household'
 import Login from './components/Login'
 import CreateAccount from './components/CreateAccount'
 
@@ -19,7 +18,6 @@ class App extends Component {
         <div>
           <Route path='/' exact component={Landing}/>
           <Route path='/dashboard' exact component={Dashboard}/>
-          <Route path='/household' exact component={Household}/>
           <Route path='/login' component={Login}/>
           <Route path='/register' component={CreateAccount}/>
         </div>

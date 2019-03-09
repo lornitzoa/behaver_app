@@ -18,7 +18,8 @@ export default class AuthService {
           })
       }).then(res => {
           this.setToken(res.token) // Setting the token in localStorage
-          return Promise.resolve(res);
+          this.setUser(res.user.username)
+          return Promise.resolve(res)
       })
     }
 
@@ -57,6 +58,10 @@ export default class AuthService {
         localStorage.setItem('id_token', idToken)
     }
 
+    setUser(username) {
+      localStorage.setItem('username', username)
+    }
+
     getToken() {
         // Retrieves the user token from localStorage
         return localStorage.getItem('id_token')
@@ -64,7 +69,8 @@ export default class AuthService {
 
     logout() {
         // Clear user token and profile data from localStorage
-        localStorage.removeItem('id_token');
+        localStorage.removeItem('id_token')
+        // localStorage.removeItem('username')
     }
 
     getProfile() {
