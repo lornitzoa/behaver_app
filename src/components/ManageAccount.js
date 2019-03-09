@@ -6,7 +6,8 @@ class ManageAccount extends Component {
       <div>
         Edit Account
         <button onClick={() => {
-          this.props.handleOpts('manageAccount')
+          this.props.handleOpts('manageAccount');
+          this.props.handleOpts('showMembers')
         }}>Done</button>
       </div>
     )

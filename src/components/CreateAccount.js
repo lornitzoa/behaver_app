@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PinInput from 'react-pin-input'
+
 import AuthService from '../services/user.service'
 
 class CreateAccount extends Component {
@@ -49,8 +49,6 @@ class CreateAccount extends Component {
         <input type='text' id='username' onChange={this.handleChange}/>
         <label htmlFor='password'>Password</label>
         <input type='password' id='password' onChange={this.handleChange}/>
-        <label htmlFor='parent_pin'>Parent Pin (4 digit number)</label>
-        <PinInput length={4} secret onChange={this.handlePin} id='parent_pin'/>
         <input type='submit'/>
       </form>
     )

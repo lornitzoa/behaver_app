@@ -12,59 +12,137 @@ class ManageHousehold extends Component {
     this.state = {
       addMember: false,
       manageAccount: false,
-      members: ['Adam', 'Laura', 'Gus', 'Mack', 'Edie', 'Sue', 'Doug', 'Anna','Babysitter']
+      editMembers: false,
+      editingMember: {
+        id: 0,
+        name: '',
+        role: '',
+        pin: '',
+        family_id: ''
+      },
+      showMembers: true,
+      members: [
+        {
+          id: 0,
+          name: 'Adam',
+          role: 'parent',
+          pin: '5430',
+          family_id: '0'
+        },
+        {
+          id: 1,
+          name: 'laura',
+          role: 'parent',
+          pin: '1234',
+          family_id: '0'
+        },
+        {
+          id: 2,
+          name: 'Gus',
+          role: 'child',
+          pin: '9876',
+          family_id: '0'
+        },
+        {
+          id: 3,
+          name: 'Mack',
+          role: 'child',
+          pin: '4567',
+          family_id: '0'
+        },
+        {
+          id: 4,
+          name: 'Edie',
+          role: 'child',
+          pin: '0000',
+          family_id: '0'
+        }
+      ]
     }
   }
 
   handleOpts = (opt) => {
-    console.log(opt);
     this.setState({
-      [opt]: !this.state[opt]
+      [opt]: !this.state[opt],
+      showMembers: !this.state.showMembers
     })
+  }
+
+  setMember = (member) => {
+    console.log(member)
+    this.setState({
+      editingMember: {
+        id: member.id,
+        name: member.name,
+        role: member.role,
+        pin: member.role,
+        family_id: member.family_id
+      }
+    })
+    console.log(this.state.editingMember);
   }
 
   render() {
     return (
       <div>
         <h2>Your Family</h2>
-        <button onClick={() => {
-            this.handleOpts('addMember')
-          }}>
-          Add Member
-        </button>
-        <button onClick={() => {
-            this.handleOpts('manageAccount')
-          }}>
-          Manage Account
-        </button>
-        <button onClick={() => {
-            this.handleOpts('manageMembers')
-          }}>
-          Manage Members
-        </button>
         <div>
+          <button onClick={() => {
+              this.handleOpts('showMembers')
+            }}>
+            Members
+          </button>
+          <button onClick={() => {
+              this.handleOpts('addMember')
+
+            }}>
+            Add Member
+          </button>
+          <button onClick={() => {
+              this.handleOpts('manageAccount')
+            }}>
+            Manage Account
+          </button>
+        </div>
+        <div>
+          {
+            this.state.showMembers ?
+            <div>
+              <ul>
+               {this.state.members.map((member, index) => {
+                  return (
+                    <li key={index}>{member.name}
+                      <button onClick={() => {
+                        this.handleOpts('editMember');
+                        this.setMember(member)
+                      }}>Edit</button>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
+            :
+            <div>
+              {
+                this.state.showMembers === false ?
+                  <NewMember
+                    member={this.state.member}
+                    handleOpts={this.handleOpts}
+                  />
+                  :
+                  ''
+              }
+            </div>
+          }
           {this.state.addMember ?
-            <NewMember
-              handleOpts={this.handleOpts}
-            /> : ''}
+            <NewMember/> : ''
+          }
           {this.state.manageAccount ?
-            <ManageAccount
-              handleOpts={this.handleOpts}
-            /> : ''}
+            <ManageAccount/> : ''
+          }
+
         </div>
-        <div>
-          <ul>
-            {
-              this.state.members ? this.state.members.map((member, index) => {
-                return (
-                  <li>{member}</li>
-                )
-              })
-              :
-              ''
-            }
-          </ul>
-        </div>
+
       </div>
 
     )
