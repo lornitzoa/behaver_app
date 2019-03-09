@@ -56,9 +56,10 @@ class ShowMembers extends Component {
 
   changeStaticState = () => {
     this.setState({
-      staticState: false
+      staticState: !this.state.staticState
     })
   }
+
 
   render() {
     return (
@@ -80,7 +81,10 @@ class ShowMembers extends Component {
                 })}
               </ul>
               :
-              <NewMember member={this.member} showTab={this.props.showTab}/>
+              <NewMember
+                member={this.member}
+                changeStaticState={this.changeStaticState}
+                />
             }
           </div>
           :

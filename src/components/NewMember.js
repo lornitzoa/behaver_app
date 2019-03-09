@@ -58,7 +58,12 @@ class NewMember extends Component {
           <input type='submit'/>
         </form>
         <button onClick={() => {
-          this.props.showTab('showMembers')
+          if(this.state.type === 'addMember') {
+            this.props.showTab('showMembers')
+          } else {
+            this.props.changeStaticState()
+          }
+
         }}>Done</button>
       </div>
 

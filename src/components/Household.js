@@ -12,9 +12,7 @@ class ManageHousehold extends Component {
     super(props)
     this.state = {
       showTab: 'showMembers',
-
     }
-
   }
 
   changeTabTo = (tabName) => {
@@ -35,7 +33,6 @@ class ManageHousehold extends Component {
 
 
   setMember = (member) => {
-    console.log(member)
     this.setState({
       editingMember: {
         id: member.id,
@@ -45,7 +42,6 @@ class ManageHousehold extends Component {
         family_id: member.family_id
       }
     })
-    console.log(this.state.editingMember);
   }
 
   render() {
@@ -85,8 +81,6 @@ class ManageHousehold extends Component {
               showTab={this.changeTabTo}
             /> : ''
           }
-
-
         </div>
 
       </div>
