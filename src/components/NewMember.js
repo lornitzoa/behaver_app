@@ -40,7 +40,7 @@ class NewMember extends Component {
   }
 
 
-  componentDidMount() {
+  componentWillMount() {
     this.checkIfEditing()
   }
 
@@ -58,9 +58,10 @@ class NewMember extends Component {
           <input type='submit'/>
         </form>
         <button onClick={() => {
-          this.props.handleOpts(this.state.type)
+          this.props.showTab('showMembers')
         }}>Done</button>
       </div>
+
     )
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import NewMember from './NewMember'
 import ManageAccount from './ManageAccount'
+import ShowMembers from './ShowMembers'
 
 
 
@@ -10,63 +11,28 @@ class ManageHousehold extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      addMember: false,
-      manageAccount: false,
-      editMembers: false,
-      editingMember: {
-        id: 0,
-        name: '',
-        role: '',
-        pin: '',
-        family_id: ''
-      },
-      showMembers: true,
-      members: [
-        {
-          id: 0,
-          name: 'Adam',
-          role: 'parent',
-          pin: '5430',
-          family_id: '0'
-        },
-        {
-          id: 1,
-          name: 'laura',
-          role: 'parent',
-          pin: '1234',
-          family_id: '0'
-        },
-        {
-          id: 2,
-          name: 'Gus',
-          role: 'child',
-          pin: '9876',
-          family_id: '0'
-        },
-        {
-          id: 3,
-          name: 'Mack',
-          role: 'child',
-          pin: '4567',
-          family_id: '0'
-        },
-        {
-          id: 4,
-          name: 'Edie',
-          role: 'child',
-          pin: '0000',
-          family_id: '0'
-        }
-      ]
+      showTab: 'showMembers',
+
     }
+
   }
 
-  handleOpts = (opt) => {
+  changeTabTo = (tabName) => {
+
     this.setState({
-      [opt]: !this.state[opt],
-      showMembers: !this.state.showMembers
+      showTab: tabName
     })
   }
+
+  resetTabState = () => {
+    this.setState({
+      addMember: false,
+      manageAccount: false,
+      editMember: false,
+      showMembers: true
+    })
+  }
+
 
   setMember = (member) => {
     console.log(member)
@@ -88,58 +54,38 @@ class ManageHousehold extends Component {
         <h2>Your Family</h2>
         <div>
           <button onClick={() => {
-              this.handleOpts('showMembers')
-            }}>
-            Members
+              this.changeTabTo('showMembers')
+            }}> Members
           </button>
           <button onClick={() => {
-              this.handleOpts('addMember')
-
+              this.changeTabTo('newMember')
             }}>
             Add Member
           </button>
           <button onClick={() => {
-              this.handleOpts('manageAccount')
-            }}>
-            Manage Account
+              this.changeTabTo('manageAccount')
+            }}> Manage Account
           </button>
         </div>
-        <div>
+        <div className='tab-sheets'>
           {
-            this.state.showMembers ?
-            <div>
-              <ul>
-               {this.state.members.map((member, index) => {
-                  return (
-                    <li key={index}>{member.name}
-                      <button onClick={() => {
-                        this.handleOpts('editMember');
-                        this.setMember(member)
-                      }}>Edit</button>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-            :
-            <div>
-              {
-                this.state.showMembers === false ?
-                  <NewMember
-                    member={this.state.member}
-                    handleOpts={this.handleOpts}
-                  />
-                  :
-                  ''
-              }
-            </div>
+            this.state.showTab === 'showMembers' ? <ShowMembers
+              showTab={this.changeTabTo}
+
+            /> : ''
           }
-          {this.state.addMember ?
-            <NewMember/> : ''
+          {
+            this.state.showTab === 'newMember' ? <NewMember
+              showTab={this.changeTabTo}
+
+            /> : ''
           }
-          {this.state.manageAccount ?
-            <ManageAccount/> : ''
+          {
+            this.state.showTab === 'manageAccount' ? <ManageAccount
+              showTab={this.changeTabTo}
+            /> : ''
           }
+
 
         </div>
 
