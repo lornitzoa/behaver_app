@@ -12,7 +12,7 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      childName: 'Gus',
+      children: ['Gus', 'Mack', 'Edie'],
       manageHousehold: false
     }
 
@@ -35,30 +35,28 @@ class Dashboard extends Component {
           auth={this.Auth}
           history={this.props.history}
         />
-
-          <div>
-            <button onClick={this.toggleManageHousehold}>Manage Household</button>
-            {this.state.manageHousehold ?
-              <div>
-                <ManageHousehold/>
-              </div>
-              :
-              <div>
-                {/* Show child overviews*/}
-              </div>
-
-            }
-          </div>
-
         <div>
-          <ChildOverview
-            child={this.childName}
-          />
+          <button onClick={this.toggleManageHousehold}>Manage Household</button>
+          {this.state.manageHousehold ?
+            <div>
+              <ManageHousehold/>
+            </div>
+            :
+            <div>
+              {
+                this.state.children ? this.state.children.map((child, index) => {
+                  return (
+                    <ChildOverview child={child}/>
+                  )
+                })
+                :
+                ''
+              }
+              {/* Show child overviews*/}
+            </div>
+
+          }
         </div>
-
-
-
-
       </div>
 
     )
