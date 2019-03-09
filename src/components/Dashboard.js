@@ -20,7 +20,6 @@ class Dashboard extends Component {
   }
 
   toggleManageHousehold = () => {
-    console.log(this.state.manageHousehold);
     this.setState({
       manageHousehold: !this.state.manageHousehold
     })
@@ -39,14 +38,16 @@ class Dashboard extends Component {
           <button onClick={this.toggleManageHousehold}>Manage Household</button>
           {this.state.manageHousehold ?
             <div>
-              <ManageHousehold/>
+              <ManageHousehold
+                toggleManageHousehold={this.toggleManageHousehold}
+              />
             </div>
             :
             <div>
               {
                 this.state.children ? this.state.children.map((child, index) => {
                   return (
-                    <ChildOverview child={child}/>
+                    <ChildOverview child={child} key={index}/>
                   )
                 })
                 :
