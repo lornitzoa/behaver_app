@@ -24,6 +24,26 @@ class ShowMembers extends Component {
       })
   }
 
+  deleteMember = (memberID, arrayIndex) => {
+    console.log(memberID);
+    fetch(`${api_url}/members/${memberID}`, {
+      method: 'DELETE'
+    })
+    .then(data =>  {
+      this.removeFromArr(arrayIndex)
+    })
+    .catch(err => console.log(err))
+  }
+
+  removeFromArr = (index) => {
+    this.setState(prevState => {
+      prevState['members'].splice(index, 1)
+      return {
+        'members': prevState['members']
+      }
+    })
+  }
+
 
   setMember = (member) => {
     this.member = member
@@ -51,10 +71,14 @@ class ShowMembers extends Component {
                   return (
                     <li key={index}>
                       {member.name}
+                      {member.id}
                       <button onClick={() => {
                         this.setMember(member);
                         this.changeStaticState()
                       }}>Edit</button>
+                      <button onClick={() => {
+                        this.deleteMember(member.member_id, index)
+                      }}>Delete</button>
                     </li>
                   )
                 })}
