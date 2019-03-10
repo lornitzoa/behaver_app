@@ -16,7 +16,6 @@ class Dashboard extends Component {
       manageHousehold: false,
       childDetails: false
     }
-
     this.Auth = new AuthService()
   }
 
@@ -75,6 +74,14 @@ class Dashboard extends Component {
                 </div>
                 :
                 <div>
+                <table>
+                  <thead>
+                    <th>CHILD</th>
+                    <th>BEHAVIOR POINTS</th>
+                    <th>TASKS COMPLETED</th>
+                    <th>DAILY SCORE</th>
+                    <th>WEEKLY SCORE</th>
+                  </thead>
                   {
                     this.state.children ? this.state.children.map((child, index) => {
                       return (
@@ -88,6 +95,8 @@ class Dashboard extends Component {
                     :
                     ''
                   }
+                </table>
+
                 </div>
               }
             </div>
