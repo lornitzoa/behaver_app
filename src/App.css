@@ -96,9 +96,10 @@ td {
 
 .header {
   display: flex;
+  justify-content: space-between;
 }
 
-#familyName-header {
-  width: 75%;
+#h1-header {
+  width: 70%;
   padding-left: 20px;
 }

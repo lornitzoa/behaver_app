@@ -37,9 +37,11 @@ class Header extends Component {
 
     return (
       <div className='header'>
-        <h1 id='familyName-header'>{this.state.familyName} Family Dashboard</h1>
-        <button onClick={this.handleLogout}>Log Out</button>
-        <button onClick={this.props.toggleManageHousehold}>Manage Household</button>
+        <h1 id='h1-header'>{this.state.familyName} Family Dashboard</h1>
+        <div>
+          <button onClick={this.props.toggleManageHousehold}>Manage Household</button>
+          <button onClick={this.handleLogout}>Log Out</button>
+        </div>
 
 
 
