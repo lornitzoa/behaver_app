@@ -31,3 +31,74 @@
     transform: rotate(360deg);
   }
 }
+
+body {
+  background: blue;
+}
+
+button {
+  padding: 10px;
+  margin: 15px;
+  border-radius: 30px;
+}
+
+li {
+  list-style: none;
+}
+
+table {
+  margin: 20px auto;
+  color: white;
+}
+
+thead {
+  text-align: center;
+  height: 100px;
+
+}
+
+tbody {
+
+}
+
+tr {
+  /* border: solid gold 2px; */
+  border-radius: 30px;
+  height: 100px;
+}
+
+
+th {
+  padding: 0 15px;
+}
+
+td {
+  padding: 20px;
+  border: none;
+
+}
+
+.data {
+  text-align: center;
+}
+
+.childNameCol {
+  padding: 0 50px;
+}
+
+.childName {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  background-color: white;
+  color: blue;
+}
+
+
+.header {
+  display: flex;
+}
+
+#familyName-header {
+  width: 75%;
+  padding-left: 20px;
+}

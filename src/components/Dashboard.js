@@ -54,14 +54,16 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-        <Header
-          auth={this.Auth}
-          history={this.props.history}
-        />
+
         <div>
-          <button onClick={this.toggleManageHousehold}>Manage Household</button>
+
           {this.state.manageHousehold ?
             <div>
+              <Header
+                auth={this.Auth}
+                history={this.props.history}
+                toggleManageHousehold={this.toggleManageHousehold}
+              />
               <ManageHousehold
                 toggleManageHousehold={this.toggleManageHousehold}
               />
@@ -78,17 +80,25 @@ class Dashboard extends Component {
                 </div>
                 :
                 <div>
+                <Header
+                  auth={this.Auth}
+                  history={this.props.history}
+                  toggleManageHousehold={this.toggleManageHousehold}
+                />
                 <table>
                   <thead>
-                    <th>CHILD</th>
-                    <th>BEHAVIOR POINTS</th>
-                    <th>TASKS COMPLETED</th>
-                    <th>DAILY SCORE</th>
-                    <th>WEEKLY SCORE</th>
+                    <tr>
+                      <th className='childNameCol'>CHILD</th>
+                      <th className='data'>BEHAVIOR POINTS</th>
+                      <th className='data'>TASKS COMPLETED</th>
+                      <th className='data'>DAILY SCORE</th>
+                      <th className='data'>WEEKLY SCORE</th>
+                    </tr>
                   </thead>
                   {
                     this.state.children ? this.state.children.map((child, index) => {
                       return (
+
                         <ChildOverview
                           child={child}
                           key={index}
