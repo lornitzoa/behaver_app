@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import TasksBehaviors from './TasksBehaviors'
+import CashIns from './CashIns'
 
 class ChildDashboard extends Component {
   constructor(props) {
@@ -8,6 +9,13 @@ class ChildDashboard extends Component {
       sheet: 'tasks-behaviors'
     }
   }
+
+  changeSheetTo = (sheet) => {
+    this.setState({
+      sheet: sheet
+    })
+  }
+
   render() {
     return (
       <div>
@@ -19,8 +27,32 @@ class ChildDashboard extends Component {
             }}>Back to Main Dashboard</button>
           </div>
         </div>
-        <div className='tasks-behaviors'>
-          <TasksBehaviors/>
+        <div className='sheets-nav'>
+          <button
+            onClick={() => {
+            this.changeSheetTo('tasks-behaviors')
+            }}>
+            Tasks & Behaviors
+          </button>
+          <button
+            onClick={() => {
+            this.changeSheetTo('cash-ins')
+            }}>
+            Cash Ins
+          </button>
+        </div>
+        <div className='sheets'>
+          {this.state.sheet === 'tasks-behaviors' ?
+            <TasksBehaviors/>
+            :
+            ''
+          }
+          {
+            this.state.sheet === 'cash-ins' ?
+            <CashIns/>
+            :
+            ''
+          }
         </div>
 
       </div>
