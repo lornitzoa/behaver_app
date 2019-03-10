@@ -17,6 +17,7 @@ class Dashboard extends Component {
       childDetails: false
     }
     this.Auth = new AuthService()
+    this.childName = ''
   }
 
   // Open/Close Household Management Dashboard to manage members and account info. Will need to to limit access to parents only.
@@ -38,8 +39,8 @@ class Dashboard extends Component {
   }
 
   // Change whether dashboard shows overview of children or specific child's dashbaord
-  toggleChildDetails = () => {
-    console.log('clicked');
+  toggleChildDetails = (childName) => {
+    this.childName = childName
     this.setState({
       childDetails: !this.state.childDetails
     })
@@ -70,7 +71,10 @@ class Dashboard extends Component {
               {
                 this.state.childDetails ?
                 <div>
-                  <ChildDashboard />
+                  <ChildDashboard
+                    childName={this.childName}
+                    childDetails={this.toggleChildDetails}
+                  />
                 </div>
                 :
                 <div>

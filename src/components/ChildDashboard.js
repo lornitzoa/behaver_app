@@ -4,7 +4,10 @@ class ChildDashboard extends Component {
   render() {
     return (
       <div>
-        CHILD DASHBOARD
+        {this.props.childName}'s' DASHBOARD
+        <button onClick={() => {
+          this.props.childDetails('')
+        }}>Back to Main Dashboard</button>
       </div>
     )
   }

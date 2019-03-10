@@ -5,7 +5,9 @@ class ChildOverview extends Component {
 
   render() {
     return(
-      <tr onClick={this.props.childDetails}>
+      <tr onClick={() => {
+        this.props.childDetails(this.props.child.name)
+      }}>
         <td>{this.props.child.name}</td>
         <td>50</td>
         <td>3/5</td>
