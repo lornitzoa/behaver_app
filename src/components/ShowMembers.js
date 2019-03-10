@@ -38,7 +38,6 @@ class ShowMembers extends Component {
   }
 
   editMember = (member) => {
-    console.log(member);
     fetch(`${api_url}/members/${member.member_id}`,
       {
         body: JSON.stringify(member),
@@ -58,7 +57,6 @@ class ShowMembers extends Component {
   }
 
   deleteMember = (memberID, arrayIndex) => {
-    console.log(memberID);
     fetch(`${api_url}/members/${memberID}`, {
       method: 'DELETE'
     })

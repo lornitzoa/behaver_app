@@ -40,8 +40,7 @@ class ManageHousehold extends Component {
 
 
   // Create New Member
-  createMember = (member) => {
-    console.log(member)
+  createMember = (member, formID) => {
     fetch(`${api_url}/members`, {
       body: JSON.stringify(member),
       method: 'POST',
@@ -51,13 +50,13 @@ class ManageHousehold extends Component {
       }
     })
     .then(createdMember => {
-      console.log(createdMember);
+      // console.log(createdMember);
       // this.state.showTab('showMembers')
     })
     .catch(err => console.log(err))
   }
 
-  
+
 
 
 
@@ -85,6 +84,7 @@ class ManageHousehold extends Component {
             this.state.showTab === 'showMembers' ? <ShowMembers
               showTab={this.changeTabTo}
               editMember={this.editMember}
+        
 
             /> : ''
           }
@@ -93,7 +93,6 @@ class ManageHousehold extends Component {
             <NewMember
               showTab={this.changeTabTo}
               createMember={this.createMember}
-
             /> : ''
           }
           {

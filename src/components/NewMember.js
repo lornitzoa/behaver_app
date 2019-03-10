@@ -17,7 +17,6 @@ class NewMember extends Component {
 
 
   handleChange = (e) => {
-
     this.setState({
       [e.target.id]: e.target.value
     })
@@ -33,6 +32,7 @@ class NewMember extends Component {
         family_id: this.state.family_id
       }
       this.props.createMember(member)
+      this.props.showTab('showMembers')
     } else if(this.state.type === 'editMember') {
       let updatedMember = {
         member_id: this.props.member.member_id,
@@ -44,6 +44,17 @@ class NewMember extends Component {
       this.props.editMember(updatedMember)
       this.props.changeStaticState()
     }
+
+  }
+
+  clearForm = () => {
+    this.setState({
+      type: 'addMember',
+      name: '',
+      role: '',
+      pin: '',
+      family_id: localStorage.getItem('family_id')
+    })
   }
 
   handlePin = (e) => {
