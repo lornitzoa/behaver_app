@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import NewMember from './NewMember'
 import ManageAccount from './ManageAccount'
 import ShowMembers from './ShowMembers'
+import AuthService from '../services/user.service'
 
 let api_url = 'http://localhost:3000'
 
@@ -19,11 +20,13 @@ class ManageHousehold extends Component {
   //  Tab Sheet Management
   // =========================
 
+  // change sheet views
   changeTabTo = (tabName) => {
     this.setState({
       showTab: tabName
     })
   }
+
 
   resetTabState = () => {
     this.setState({
@@ -34,13 +37,8 @@ class ManageHousehold extends Component {
     })
   }
 
-  // =========================
-  //  Member Handling
-  // =========================
-
-
   // Create New Member
-  createMember = (member, formID) => {
+  createMember = (member) => {
     fetch(`${api_url}/members`, {
       body: JSON.stringify(member),
       method: 'POST',
@@ -55,9 +53,6 @@ class ManageHousehold extends Component {
     })
     .catch(err => console.log(err))
   }
-
-
-
 
 
   render() {
@@ -84,7 +79,7 @@ class ManageHousehold extends Component {
             this.state.showTab === 'showMembers' ? <ShowMembers
               showTab={this.changeTabTo}
               editMember={this.editMember}
-        
+
 
             /> : ''
           }
@@ -98,6 +93,7 @@ class ManageHousehold extends Component {
           {
             this.state.showTab === 'manageAccount' ? <ManageAccount
               showTab={this.changeTabTo}
+              updateAccount={this.updateAccount}
             /> : ''
           }
         </div>

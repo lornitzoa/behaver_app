@@ -11,10 +11,14 @@ class ShowMembers extends Component {
       editingMember: {},
       members: []
     }
+    // object variable for member info to edit
     this.member = {}
+    // variable for selected member for editing
     this.index = null
   }
 
+
+  // Get all members in all roles
   fetchMembers = () => {
     fetch(`${api_url}/members`)
       .then(data => data.json())
@@ -25,6 +29,7 @@ class ShowMembers extends Component {
       })
   }
 
+  // Create member object to send for editing
   setMember = (member) => {
     this.setState({
       editingMember: {
@@ -37,6 +42,7 @@ class ShowMembers extends Component {
     })
   }
 
+  // Handle Member Updating
   editMember = (member) => {
     fetch(`${api_url}/members/${member.member_id}`,
       {
@@ -56,6 +62,7 @@ class ShowMembers extends Component {
       .then(err => console.log(err))
   }
 
+  // Delete Member
   deleteMember = (memberID, arrayIndex) => {
     fetch(`${api_url}/members/${memberID}`, {
       method: 'DELETE'
@@ -66,6 +73,7 @@ class ShowMembers extends Component {
     .catch(err => console.log(err))
   }
 
+  // Remove Member from Array
   removeFromArr = (index) => {
     this.setState(prevState => {
       prevState['members'].splice(index, 1)
@@ -75,19 +83,22 @@ class ShowMembers extends Component {
     })
   }
 
-
+  // Assign values to member and index variables for sending for editing
   setMemberInfo = (member, index) => {
     this.member = member
     this.index = index
   }
 
+  // Toggles sheet view between ShowMembers and NewMember
   changeStaticState = () => {
     this.setState({
       staticState: !this.state.staticState
     })
   }
 
+
   componentDidMount() {
+    // Get all members
     this.fetchMembers()
   }
 
@@ -105,7 +116,9 @@ class ShowMembers extends Component {
                       {member.name}
                       {member.id}
                       <button onClick={() => {
+                        {/*Assign this member object to member variable and object index to index variable*/}
                         this.setMemberInfo(member, index);
+                        {/*Change static state to render NewMember component*/}
                         this.changeStaticState()
                       }}>Edit</button>
                       <button onClick={() => {
