@@ -21,16 +21,16 @@ class Header extends Component {
   }
 
   // Get family name from local storge to display in header
-  getFamilyName = () => {
-    let familyName = localStorage.username
-    this.setState({
-      familyName: familyName.charAt(0).toUpperCase() + familyName.slice(1)
-    })
-
-  }
+  // getFamilyName = () => {
+  //   let familyName = localStorage.username
+  //   this.setState({
+  //     familyName: familyName.charAt(0).toUpperCase() + familyName.slice(1)
+  //   })
+  //
+  // }
 
   componentDidMount() {
-    this.getFamilyName()
+    // this.getFamilyName()
   }
 
   render() {

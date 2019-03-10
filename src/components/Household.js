@@ -4,9 +4,9 @@ import NewMember from './NewMember'
 import ManageAccount from './ManageAccount'
 import ShowMembers from './ShowMembers'
 
+let api_url = 'http://localhost:3000'
 
-
-// Manages Household
+// Components for Managing Basic Household Infos
 class ManageHousehold extends Component {
   constructor(props) {
     super(props)
@@ -15,8 +15,11 @@ class ManageHousehold extends Component {
     }
   }
 
-  changeTabTo = (tabName) => {
+  // =========================
+  //  Tab Sheet Management
+  // =========================
 
+  changeTabTo = (tabName) => {
     this.setState({
       showTab: tabName
     })
@@ -31,18 +34,31 @@ class ManageHousehold extends Component {
     })
   }
 
+  // =========================
+  //  Member Handling
+  // =========================
 
-  setMember = (member) => {
-    this.setState({
-      editingMember: {
-        id: member.id,
-        name: member.name,
-        role: member.role,
-        pin: member.role,
-        family_id: member.family_id
+
+  // Create New Member
+  createMember = (member) => {
+    console.log(member)
+    fetch(`${api_url}/members`, {
+      body: JSON.stringify(member),
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json, text/plain, */*',
+        'Content-Type': 'application/json'
       }
     })
+    .then(createdMember => {
+      console.log(createdMember);
+      // this.state.showTab('showMembers')
+    })
+    .catch(err => console.log(err))
   }
+
+
+
 
   render() {
     return (
@@ -67,12 +83,14 @@ class ManageHousehold extends Component {
           {
             this.state.showTab === 'showMembers' ? <ShowMembers
               showTab={this.changeTabTo}
+              handleEditMember={this.handleEditMember}
 
             /> : ''
           }
           {
             this.state.showTab === 'newMember' ? <NewMember
               showTab={this.changeTabTo}
+              createMember={this.createMember}
 
             /> : ''
           }

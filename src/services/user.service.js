@@ -17,9 +17,10 @@ export default class AuthService {
               password
           })
       }).then(res => {
-          this.setToken(res.token) // Setting the token in localStorage
-          this.setUser(res.user.username)
+          console.log(res)
+          this.setLocalStorage(res.token, res.user.username, res.user.id) // Setting the token in localStorage
           return Promise.resolve(res)
+          console.log(res);
       })
     }
 
@@ -53,14 +54,16 @@ export default class AuthService {
         }
     }
 
-    setToken(idToken) {
-        // Saves user token to localStorage
+    setLocalStorage(idToken, username, userID) {
+        // Saves user token to localStorage for authorization
         localStorage.setItem('id_token', idToken)
+        // Saves username to LocalStorage for display in header
+        localStorage.setItem('username', username)
+        // Saves UserID to LocalStorage as family ID
+        localStorage.setItem('family_id', userID)
     }
 
-    setUser(username) {
-      localStorage.setItem('username', username)
-    }
+
 
     getToken() {
         // Retrieves the user token from localStorage

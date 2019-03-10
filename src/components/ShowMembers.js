@@ -12,6 +12,7 @@ class ShowMembers extends Component {
       members: []
     }
     this.member = {}
+    this.index = null
   }
 
   fetchMembers = () => {
@@ -22,6 +23,18 @@ class ShowMembers extends Component {
           members: jData
         })
       })
+  }
+
+  setMember = (member) => {
+    this.setState({
+      editingMember: {
+        id: member.id,
+        name: member.name,
+        role: member.role,
+        pin: member.role,
+        family_id: member.family_id
+      }
+    })
   }
 
   deleteMember = (memberID, arrayIndex) => {
@@ -45,8 +58,9 @@ class ShowMembers extends Component {
   }
 
 
-  setMember = (member) => {
+  setMemberInfo = (member, index) => {
     this.member = member
+    this.index = index
   }
 
   changeStaticState = () => {
@@ -73,7 +87,7 @@ class ShowMembers extends Component {
                       {member.name}
                       {member.id}
                       <button onClick={() => {
-                        this.setMember(member);
+                        this.setMemberInfo(member, index);
                         this.changeStaticState()
                       }}>Edit</button>
                       <button onClick={() => {
@@ -86,7 +100,10 @@ class ShowMembers extends Component {
               :
               <NewMember
                 member={this.member}
+                index={this.index}
                 changeStaticState={this.changeStaticState}
+
+
                 />
             }
           </div>
