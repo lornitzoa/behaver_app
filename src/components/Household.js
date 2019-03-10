@@ -57,6 +57,7 @@ class ManageHousehold extends Component {
     .catch(err => console.log(err))
   }
 
+  
 
 
 
@@ -83,12 +84,13 @@ class ManageHousehold extends Component {
           {
             this.state.showTab === 'showMembers' ? <ShowMembers
               showTab={this.changeTabTo}
-              handleEditMember={this.handleEditMember}
+              editMember={this.editMember}
 
             /> : ''
           }
           {
-            this.state.showTab === 'newMember' ? <NewMember
+            this.state.showTab === 'newMember' ?
+            <NewMember
               showTab={this.changeTabTo}
               createMember={this.createMember}
 

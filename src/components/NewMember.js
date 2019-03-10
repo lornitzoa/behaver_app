@@ -11,7 +11,7 @@ class NewMember extends Component {
       name: '',
       role: '',
       pin: '',
-      family_id: localStorage.getItem('family_id') //will need to get family id from current account, maybe this should be stored in local storage as part of authentication process?
+      family_id: localStorage.getItem('family_id')
     }
   }
 
@@ -25,15 +25,24 @@ class NewMember extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    let member = {
-      name: this.state.name,
-      role: this.state.role,
-      pin: this.state.pin,
-      family_id: this.state.family_id
-    }
-    console.log(this.state)
     if(this.state.type === 'addMember') {
+      let member = {
+        name: this.state.name,
+        role: this.state.role,
+        pin: this.state.pin,
+        family_id: this.state.family_id
+      }
       this.props.createMember(member)
+    } else if(this.state.type === 'editMember') {
+      let updatedMember = {
+        member_id: this.props.member.member_id,
+        name: this.state.name,
+        role: this.state.role,
+        pin: this.state.pin,
+        family_id: this.state.family_id
+      }
+      this.props.editMember(updatedMember)
+      this.props.changeStaticState()
     }
   }
 
@@ -48,14 +57,9 @@ class NewMember extends Component {
     if(this.props.member) {
       this.setState({
         type: 'editMember',
-        member: {
-          member_id: this.props.member.member_id,
-          name: this.props.member.name,
-          role: this.props.member.role,
-          pin: this.props.member.pin,
-          family_id: this.props.member.family_id
-
-        }
+        name: this.props.member.name,
+        role: this.props.member.role,
+        pin: this.props.member.pin,
       })
     }
   }
@@ -73,15 +77,13 @@ class NewMember extends Component {
           <label htmlFor='name'>Name</label>
           <input
             type='text'
-
-
+            placeholder={this.state.name}
             onChange={this.handleChange}
             id='name'/>
           <label htmlFor='name'>role</label>
           <input
             type='text'
-
-
+            placeholder={this.state.role}
             onChange={this.handleChange}
             id='role'/>
           <label htmlFor='parent_pin'>Pin (4 digit number)</label>
@@ -99,7 +101,6 @@ class NewMember extends Component {
           } else {
             this.props.changeStaticState()
           }
-
         }}>Done</button>
       </div>
 

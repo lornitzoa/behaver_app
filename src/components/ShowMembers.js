@@ -37,6 +37,26 @@ class ShowMembers extends Component {
     })
   }
 
+  editMember = (member) => {
+    console.log(member);
+    fetch(`${api_url}/members/${member.member_id}`,
+      {
+        body: JSON.stringify(member),
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(updatedMember => {
+        return updatedMember.json()
+      })
+      .then(jData => {
+        this.fetchMembers()
+      })
+      .then(err => console.log(err))
+  }
+
   deleteMember = (memberID, arrayIndex) => {
     console.log(memberID);
     fetch(`${api_url}/members/${memberID}`, {
@@ -102,7 +122,7 @@ class ShowMembers extends Component {
                 member={this.member}
                 index={this.index}
                 changeStaticState={this.changeStaticState}
-
+                editMember={this.editMember}
 
                 />
             }
