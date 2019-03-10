@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import TasksBehaviors from './TasksBehaviors'
 import CashIns from './CashIns'
+import ManageTBs from './ManageTBs'
+import ManageCashins from './ManageCashins'
 
 class ChildDashboard extends Component {
   constructor(props) {
@@ -40,19 +42,45 @@ class ChildDashboard extends Component {
             }}>
             Cash Ins
           </button>
+          <button
+            onClick={() => {
+            this.changeSheetTo('manage-tbs')
+            }}>
+            Manage Tasks & Behaviors
+          </button>
+          <button
+            onClick={() => {
+            this.changeSheetTo('manage-cashins')
+            }}>
+            Manage Cash Ins
+          </button>
         </div>
         <div className='sheets'>
-          {this.state.sheet === 'tasks-behaviors' ?
-            <TasksBehaviors/>
-            :
-            ''
+          {
+            this.state.sheet === 'tasks-behaviors' ?
+              <TasksBehaviors/>
+              :
+              ''
           }
           {
             this.state.sheet === 'cash-ins' ?
-            <CashIns/>
-            :
-            ''
+              <CashIns/>
+              :
+              ''
           }
+          {
+            this.state.sheet === 'manage-tbs' ?
+              <ManageTBs/>
+              :
+              ''
+          }
+          {
+            this.state.sheet === 'manage-cashins' ?
+              <ManageCashins/>
+              :
+              ''
+          }
+
         </div>
 
       </div>
