@@ -4,6 +4,7 @@ import AuthService from '../services/user.service'
 import ManageHousehold from './Household'
 import ChildOverview from './ChildOverview'
 import Header from './Header'
+import ChildDashboard from './ChildDashboard'
 
 let api_url = 'http://localhost:3000'
 
@@ -12,7 +13,8 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       children: [],
-      manageHousehold: false
+      manageHousehold: false,
+      childDetails: false
     }
 
     this.Auth = new AuthService()
@@ -21,7 +23,7 @@ class Dashboard extends Component {
   // Open/Close Household Management Dashboard to manage members and account info. Will need to to limit access to parents only.
   toggleManageHousehold = () => {
     this.setState({
-      manageHousehold: !this.state.manageHousehold
+      manageHousehold: !this.state.manageHousehold,
     })
   }
 
@@ -34,7 +36,14 @@ class Dashboard extends Component {
           children: jData
         })
       })
+  }
 
+  // Change whether dashboard shows overview of children or specific child's dashbaord
+  toggleChildDetails = () => {
+    console.log('clicked');
+    this.setState({
+      childDetails: !this.state.childDetails
+    })
   }
 
 
@@ -60,17 +69,28 @@ class Dashboard extends Component {
             :
             <div>
               {
-                this.state.children ? this.state.children.map((child, index) => {
-                  return (
-                    <ChildOverview child={child.name} key={index}/>
-                  )
-                })
+                this.state.childDetails ?
+                <div>
+                  <ChildDashboard />
+                </div>
                 :
-                ''
+                <div>
+                  {
+                    this.state.children ? this.state.children.map((child, index) => {
+                      return (
+                        <ChildOverview
+                          child={child}
+                          key={index}
+                          childDetails={this.toggleChildDetails}
+                        />
+                      )
+                    })
+                    :
+                    ''
+                  }
+                </div>
               }
-              {/* Show child overviews*/}
             </div>
-
           }
         </div>
       </div>
