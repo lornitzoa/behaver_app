@@ -4,9 +4,19 @@ class AddBehavior extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      type: 'addNew',
-      behavior: 'New Behavior',
-      targeted_for: 'Increase'
+      type: 'new',
+      behavior: 'Add Behavior',
+      targeted_for: 'Placeholder'
+    }
+  }
+
+  checkIfEditing = () => {
+    if(this.props.behavior) {
+      this.setState({
+        type: 'edit',
+        behavior: this.props.behavior.behavior,
+        targeted_for: this.props.behavior.targeted_for
+      })
     }
   }
 
@@ -18,21 +28,36 @@ class AddBehavior extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    let behavior = {
-      behavior: this.state.behavior,
-      targeted_for: this.state.targeted_for
+
+    if(this.state.type === 'new') {
+      let behavior = {
+        behavior: this.state.behavior,
+        targeted_for: this.state.targeted_for
+      }
+      this.props.addBehavior(behavior)
+    } else if (this.state.type === 'edit') {
+      let behavior = {
+        id: this.props.behavior.id,
+        behavior: this.state.behavior,
+        targeted_for: this.state.targeted_for
+      }
+      this.props.editBehavior(behavior)
+      this.props.setBehaviorIndex(null)
     }
-    this.props.addBehavior(behavior)
+
+  }
+
+  componentDidMount() {
+    this.checkIfEditing()
   }
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor='behavior'>Behavior</label>
-          <input type='text' id='behavior' onChange={this.handleChange}/>
-          <label htmlFor='targeted-for'>Targeted For</label>
+          <input type='text' id='behavior' placeholder={this.state.behavior} onChange={this.handleChange}/>
           <select value={this.state.targeted_for} id='targeted_for' onChange={this.handleChange}>
+            <option value='Placeholder'>Targeted for</option>
             <option value='Increase'>Increase</option>
             <option value='Decrease'>Decrease</option>
           </select>

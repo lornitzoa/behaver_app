@@ -1,3 +1,14 @@
+//// from ManageTBs working on turning behavior list item to edit form
+<li key={index}>
+  {behavior.behavior}
+  <button onClick={}>Edit</button>
+  <button onClick={() => {
+    this.deleteBehavior(behavior.id, index)
+  }}>Delete</button>
+</li>
+
+
+
 
 ///////////
 ////// from Dashboard before rearranging management navigation functionality
