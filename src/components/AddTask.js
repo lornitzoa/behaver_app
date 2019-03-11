@@ -4,10 +4,11 @@ class AddTask extends Component {
   render() {
     return (
       <div>
-        ADD TASK
-        <button onClick={() => {
-          this.props.addToB('view')
-        }}>Cancel</button>
+        <form>
+          <label htmlFor='task'>Task</label>
+          <input type='text'/>
+          <input type='submit' value='Add'/>
+        </form>
       </div>
     )
   }

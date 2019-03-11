@@ -1,41 +1,23 @@
 
-// from Dashboard before rearranging management navigation functionality
-{this.state.manageHousehold ?
-  <div>
-    <Header
-      auth={this.Auth}
-      history={this.props.history}
-      handleManagementOpts={this.handleManagementOpts}
-    />
-    <ManageHousehold
-      handleManagementOpts={this.handleManagementOpts}
-    />
-  </div>
-  :
-  <div>
-    {
-      this.state.childDetails ?
-      <div>
-        <ChildDashboard
-          childName={this.childName}
-          childDetails={this.toggleChildDetails}
-        />
-      </div>
-      :
-      <div>
-      <Header
-        auth={this.Auth}
-        history={this.props.history}
-        handleManagementOpts={this.handleManagementOpts}
-      />
-      <ChildList
-        children={this.state.children}
-        childDetails={this.toggleChildDetails}
-      />
-      </div>
-    }
-  </div>
-}
+///////////
+////// from Dashboard before rearranging management navigation functionality
+// {this.state.manageHousehold ?
+//
+//   :
+//   <div>
+//     {
+//       this.state.childDetails ?
+//       <div>
+//         <ChildDashboard
+//           childName={this.childName}
+//           childDetails={this.toggleChildDetails}
+//         />
+//       </div>
+//       :
+//
+//     }
+//   </div>
+// }
 
 
 

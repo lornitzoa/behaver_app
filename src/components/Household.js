@@ -47,10 +47,6 @@ class ManageHousehold extends Component {
         'Content-Type': 'application/json'
       }
     })
-    .then(createdMember => {
-      // console.log(createdMember);
-      // this.state.showTab('showMembers')
-    })
     .catch(err => console.log(err))
   }
 

@@ -3,87 +3,103 @@ import React, { Component } from 'react'
 import AddTask from './AddTask'
 import AddBehavior from './AddBehavior'
 
+let api_url = 'http://localhost:3000'
+
 class ManageTBs extends Component {
   constructor(props) {
     super(props)
     this.state = {
       tasks: ['pack bag', 'feed dog', 'brush teeth'],
-      behaviors: ['clean up after self', 'sharing', 'patience', 'asking without whinning'],
-      type: 'view'
+      behaviors: []
     }
   }
 
-  // get all tasks
-  getTasks = () => {
-
+  // get all behaviors
+  getBehaviors = (behavior) => {
+    fetch(`${api_url}/behaviors`)
+      .then(data => data.json())
+      .then(jData => {
+        this.setState({
+          behaviors: jData
+        })
+      })
   }
 
   // and behaviors and display as list.
+  addBehavior = (behavior) => {
+    fetch(`${api_url}/behaviors`,
+      {
+        body: JSON.stringify(behavior),
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json, text/plain, */*',
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(createdBehavior => {
+        return createdBehavior.json()
+        }
+      )
+      .then(jData => {
+        this.updateArray(jData, 'behaviors')
+      })
+      .then(err => console.log(err))
+  }
 
-  // navigate to/from add task/behavior components
-  addToB = (type) => {
-    this.setState({
-      type: type
+  updateArray = (item, array) => {
+    this.setState( prevState => {
+      prevState[array].push(item)
+      return {
+        [array]: prevState[array]
+      }
     })
   }
+
+
+
+  componentDidMount() {
+    this.getBehaviors()
+  }
+
 
   render() {
     return (
       <div>
-        {this.state.type === 'view' ?
         <div>
           <h2>Manage Tasks and Behaviors</h2>
-          {/*
-            list of behaviors;
-            button to add new behavior > new component;
-            list of tasks;
-            button to add new task > new component
-          */}
           <div>
             <div>
               <h3>Tasks</h3>
-              <button onClick={() => {
-                this.addToB('task')
-              }}>Add Task</button>
+            </div>
+            <div>
+              <AddTask
+
+                />
             </div>
             <ul>
               {this.state.tasks.map((task, index) => {
                 return (
-                  <li>{task}</li>
+                  <li key={index}>{task}</li>
                 )})
               }
             </ul>
             <div>
               <h3>Behaviors</h3>
-              <button onClick={() => {
-                this.addToB('behavior')
-              }}>Add Behavior</button>
+            </div>
+            <div>
+              <AddBehavior
+                addBehavior={this.addBehavior}
+              />
             </div>
             <ul>
-              {this.state.behaviors.map((behavior, index) => {
-                return (
-                  <li>{behavior}</li>
-                )})
-              }
+            {this.state.behaviors.map((behavior, index) => {
+              return (
+                <li key={index}>{behavior.behavior}</li>
+              )})
+            }
             </ul>
           </div>
         </div>
-        : ""
-        }
-        {this.state.type === 'task' ?
-          <AddTask
-            addToB={this.addToB}
-          />
-          : ""
-        }
-        {this.state.type === 'behavior' ?
-          <AddBehavior
-            addToB={this.addToB}
-          />
-          : ""
-        }
-
-
       </div>
 
     )
