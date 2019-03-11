@@ -20,7 +20,7 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       children: [],
-      manage: 'family-dashboard',
+      manage: 'tasks-behaviors',
       childDetails: false
     }
     this.Auth = new AuthService()
@@ -53,7 +53,6 @@ class Dashboard extends Component {
     })
   }
 
-
   componentDidMount() {
     this.fetchChildren()
   }
@@ -61,45 +60,43 @@ class Dashboard extends Component {
   render() {
     return (
       <div>
-
+        <Header
+          auth={this.Auth}
+          history={this.props.history}
+          handleManagementOpts={this.handleManagementOpts}
+        />
         <div>
+          {this.state.manage === 'family-dashboard' ?
+            <div>
 
-          {this.state.manageHousehold ?
-            <div>
-              <Header
-                auth={this.Auth}
-                history={this.props.history}
-                handleManagementOpts={this.handleManagementOpts}
-              />
-              <ManageHousehold
-                handleManagementOpts={this.handleManagementOpts}
-              />
+            <ChildList
+              children={this.state.children}
+              childDetails={this.toggleChildDetails}
+            />
             </div>
-            :
-            <div>
-              {
-                this.state.childDetails ?
-                <div>
-                  <ChildDashboard
-                    childName={this.childName}
-                    childDetails={this.toggleChildDetails}
-                  />
-                </div>
-                :
-                <div>
-                <Header
-                  auth={this.Auth}
-                  history={this.props.history}
-                  handleManagementOpts={this.handleManagementOpts}
-                />
-                <ChildList
-                  children={this.state.children}
-                  childDetails={this.toggleChildDetails}
-                />
-                </div>
-              }
-            </div>
+            : ""
           }
+          {this.state.manage === 'household' ?
+          <div>
+            <ManageHousehold
+              handleManagementOpts={this.handleManagementOpts}
+            />
+          </div>
+          : ""
+          }
+          {this.state.manage === 'tasks-behaviors' ?
+            <div>
+              <ManageTBs/>
+            </div>
+            : ""
+          }
+          {this.state.manage === 'cash-ins' ?
+            <div>
+              <ManageCashins/>
+            </div>
+            :""
+          }
+
         </div>
       </div>
 

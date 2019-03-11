@@ -44,11 +44,17 @@ class Header extends Component {
         </div>
         <div className='nav-management'>
           <button onClick={() => {
+            this.props.handleManagementOpts('family-dashboard')
+            }}>Family Dashboard</button>
+
+          <button onClick={() => {
             this.props.handleManagementOpts('household')
           }}>Manage Household</button>
+
           <button onClick={() => {
             this.props.handleManagementOpts('tasks-behaviors')
           }}>Manage Tasks & Behaviors</button>
+
           <button onClick={() => {
             this.props.handleManagementOpts('cash-ins')
           }}>Manage Cash Ins</button>
