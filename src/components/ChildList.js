@@ -21,6 +21,7 @@ class ChildList extends Component {
               <ChildOverview
                 child={child}
                 key={index}
+                index={index}
                 childDetails={this.props.childDetails}
               />
             )

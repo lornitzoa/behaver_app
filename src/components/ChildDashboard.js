@@ -2,14 +2,43 @@ import React, {Component} from 'react'
 import TasksBehaviors from './TasksBehaviors'
 import CashIns from './CashIns'
 
+let api_url = 'http://localhost:3000'
 
 class ChildDashboard extends Component {
   constructor(props) {
     super(props)
     this.state ={
-      sheet: 'manage-tbs'
+      sheet: 'manage-tbs',
+      childID: null || this.props.child.member_id,
+      taskAssignments: []
     }
   }
+
+  // Get Task Assignments
+  getTaskAssignments = () => {
+    fetch(`${api_url}/tasks/assignments/${this.state.childID}`)
+      .then(data => data.json())
+      .then(jData => {
+        this.setState({
+          taskAssignments: jData
+        })
+      })
+      .then(err => console.log(err))
+  }
+
+
+  // Add Task Assignment
+  addTaskAssignment = (task) => {
+
+  }
+
+
+
+
+  // Delete Task Assignment
+
+  // Update Task Assignment
+
 
   changeSheetTo = (sheet) => {
     this.setState({
@@ -17,11 +46,17 @@ class ChildDashboard extends Component {
     })
   }
 
+  componentDidMount() {
+    this.getTaskAssignments()
+    console.log(this.state.childID);
+  }
+
+
   render() {
     return (
       <div>
         <div className='header'>
-          <h1 id='h1-header'>{this.props.childName}'s Dashboard</h1>
+          <h1 id='h1-header'>{this.props.child.name}'s Dashboard</h1>
           <div>
             <button onClick={() => {
               this.props.childDetails('')
@@ -29,19 +64,19 @@ class ChildDashboard extends Component {
           </div>
         </div>
         <div className='score-board'>
-          <div class='data'>
+          <div className='data'>
             <h2>Behavior Points</h2>
             <h3>50</h3>
           </div>
-          <div class='data'>
+          <div className='data'>
             <h2>Tasks Completed</h2>
             <h3>3/5</h3>
           </div>
-          <div class='data'>
+          <div className='data'>
             <h2>Todays Points</h2>
             <h3>3/5</h3>
           </div>
-          <div class='data'>
+          <div className='data'>
             <h2>Stashed Points</h2>
             <h3>3/5</h3>
           </div>
@@ -63,7 +98,9 @@ class ChildDashboard extends Component {
         <div className='sheets'>
           {
             this.state.sheet === 'tasks-behaviors' ?
-              <TasksBehaviors/>
+              <TasksBehaviors
+                tasks={this.state.taskAssignments}
+              />
               :
               ''
           }

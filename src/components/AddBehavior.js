@@ -41,14 +41,24 @@ class AddBehavior extends Component {
         behavior: this.state.behavior,
         targeted_for: this.state.targeted_for
       }
+
+      if(behavior.targeted_for === 'Increase') {
+        this.props.setEditParams(null, 'behaviorINIndex')
+      } else if(behavior.targeted_for === 'Decrease') {
+        this.props.setEditParams(null, 'behaviorDEIndex')
+      }
+      console.log(this.props.behaviorINIndex)
+      console.log(this.props.behaviorDEIndex)
       this.props.editBehavior(behavior)
-      this.props.setBehaviorIndex(null)
+
     }
 
   }
 
   componentDidMount() {
     this.checkIfEditing()
+    console.log(this.props.behaviorINIndex)
+    console.log(this.props.behaviorDEIndex)
   }
 
   render() {

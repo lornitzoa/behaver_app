@@ -8,7 +8,7 @@ class ChildOverview extends Component {
       <tbody>
         <tr
           onClick={() => {
-          this.props.childDetails(this.props.child.name)
+          this.props.childDetails(this.props.index)
           }}>
           <td className='childNameCol childName'>{this.props.child.name}</td>
           <td className='data'>50</td>

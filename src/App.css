@@ -109,6 +109,23 @@ td {
   width: 70%;
   padding-left: 20px;
 }
+/*
+=====================
+=   T & B Dashboard
+=====================
+*/
+
+.TBDashboard {
+  display: flex;
+  justify-content: center;
+
+}
+
+ul {
+  padding: none;
+}
+
+
 
 /*
 =====================

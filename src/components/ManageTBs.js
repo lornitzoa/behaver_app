@@ -12,6 +12,7 @@ class ManageTBs extends Component {
       tasks: [],
       behaviors: [],
       behaviorIndex: null
+
     }
   }
 
@@ -151,7 +152,6 @@ class ManageTBs extends Component {
         return updatedTask.json()
       })
       .then(jData => {
-        console.log(jData)
         this.getTasks()
       })
       .then(err => console.log(err))
@@ -189,9 +189,6 @@ class ManageTBs extends Component {
   }
 
 
-
-
-
   componentDidMount() {
     this.getBehaviors()
     this.getTasks()
@@ -203,79 +200,83 @@ class ManageTBs extends Component {
       <div>
         <div>
           <h2>Manage Tasks and Behaviors</h2>
-          <div>
+          <div className='TBDashboard'>
             <div>
-              <h3>Tasks</h3>
+              <div>
+                <h3>Tasks</h3>
+              </div>
+              <div>
+                <AddTask
+                    addTask={this.addTask}
+                />
+              </div>
+              <ul>
+                {this.state.tasks.map((task, index) => {
+                  return (
+                    <div key={index}>
+                      {this.state.behaviorIndex === index ?
+                        <li >
+                          <AddTask
+                            index={index}
+                            task={task}
+                            editTask={this.editTask}
+                            setTaskIndex={this.setTaskIndex}
+                          />
+                        </li>
+                        :
+                        <li key={index}>
+                          {task.task}
+                          <button onClick={() => {
+                            this.setTaskIndex(index)
+                          }}>Edit</button>
+                          <button onClick={() => {
+                            this.deleteTask(task.id, index)
+                          }}>Delete</button>
+                        </li>
+                      }
+                    </div>
+                  )})
+                }
+              </ul>
             </div>
             <div>
-              <AddTask
-                  addTask={this.addTask}
-              />
-            </div>
-            <ul>
-              {this.state.tasks.map((task, index) => {
+              <div>
+                <h3>Behaviors</h3>
+              </div>
+              <div>
+                <AddBehavior
+                  addBehavior={this.addBehavior}
+                />
+              </div>
+              <ul>
+              {this.state.behaviors.map((behavior, index) => {
                 return (
                   <div key={index}>
                     {this.state.behaviorIndex === index ?
                       <li >
-                        <AddTask
+                        <AddBehavior
                           index={index}
-                          task={task}
-                          editTask={this.editTask}
-                          setTaskIndex={this.setTaskIndex}
+                          behavior={behavior}
+                          editBehavior={this.editBehavior}
+                          setBehaviorIndex={this.setBehaviorIndex}
                         />
                       </li>
                       :
                       <li key={index}>
-                        {task.task}
+                        {behavior.behavior}
                         <button onClick={() => {
-                          this.setTaskIndex(index)
+                          this.setBehaviorIndex(index)
                         }}>Edit</button>
                         <button onClick={() => {
-                          this.deleteTask(task.id, index)
+                          this.deleteBehavior(behavior.id, index)
                         }}>Delete</button>
                       </li>
                     }
                   </div>
                 )})
               }
-            </ul>
-            <div>
-              <h3>Behaviors</h3>
+              </ul>
             </div>
-            <div>
-              <AddBehavior
-                addBehavior={this.addBehavior}
-              />
-            </div>
-            <ul>
-            {this.state.behaviors.map((behavior, index) => {
-              return (
-                <div key={index}>
-                  {this.state.behaviorIndex === index ?
-                    <li >
-                      <AddBehavior
-                        index={index}
-                        behavior={behavior}
-                        editBehavior={this.editBehavior}
-                        setBehaviorIndex={this.setBehaviorIndex}
-                      />
-                    </li>
-                    :
-                    <li key={index}>
-                      {behavior.behavior}
-                      <button onClick={() => {
-                        this.setBehaviorIndex(index)
-                      }}>Edit</button>
-                      <button onClick={() => {
-                        this.deleteBehavior(behavior.id, index)
-                      }}>Delete</button>
-                    </li>
-                  }
-                </div>
-              )})
-            }
-            </ul>
           </div>
         </div>
       </div>
