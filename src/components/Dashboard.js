@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import AuthService from '../services/user.service'
 
@@ -19,14 +20,19 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      children: [],
+      members: [],
+      tasks: [],
+      behaviors: [],
       manage: 'family-dashboard',
       childDetails: false
     }
     this.Auth = new AuthService()
-    this.childName = ''
     this.child = {}
   }
+
+  //////////////////////////////////////////////
+  //               PAGE COMPONENT HANDLING
+  //////////////////////////////////////////////
 
   // handles navigation of management pages
   handleManagementOpts = (category) => {
@@ -35,27 +41,89 @@ class Dashboard extends Component {
     })
   }
 
+  // Change whether dashboard shows overview of children or specific child's dashbaord
+  // toggleChildDetails = (index) => {
+  //   this.child = this.state.children[index]
+  //   this.setState({
+  //     childDetails: !this.state.childDetails
+  //   })
+  // }
+
+  //////////////////////////////////////////////
+  //               GET DATA
+  //////////////////////////////////////////////
+
   // get children from db and display Children in Children Overview component
-  fetchChildren = () => {
-    fetch(`${api_url}/members/child`)
-      .then(data => data.json())
-      .then(jData => {
+  getData = (dataType) => {
+    axios.get(`${api_url}/${dataType}`)
+      .then(json => json.data)
+      .then(data => {
         this.setState({
-          children: jData
+          [dataType]: data
         })
       })
   }
 
-  // Change whether dashboard shows overview of children or specific child's dashbaord
-  toggleChildDetails = (index) => {
-    this.child = this.state.children[index]
-    this.setState({
-      childDetails: !this.state.childDetails
+  //////////////////////////////////////////////
+  //               DELETE DATA
+  //////////////////////////////////////////////
+  deleteData = (dataType, id, arrIndex) => {
+    axios.delete(`${api_url}/${dataType}/${id}`)
+      .then(data => {
+        this.removeFromArr(dataType, arrIndex)
+      })
+  }
+
+  removeFromArr = (arr, index) => {
+    this.setState(prevState => {
+      prevState[arr].splice(index, 1)
+      return {
+        [arr]: prevState[arr]
+      }
     })
   }
 
+  //////////////////////////////////////////////
+  //               ADD DATA
+  //////////////////////////////////////////////
+  addData = (dataType, data) => {
+    axios.post(`${api_url}/${dataType}`, data)
+      .then(newData => {
+        return newData.data
+      })
+      .then(resData => {
+        this.updateArr(dataType, resData)
+      })
+      .then(err => console.log(err))
+  }
+
+  updateArr = (arr, data) => {
+    this.setState(prevState => {
+      prevState[arr].push(data)
+      return {
+        [arr]: prevState[arr]
+      }
+    })
+  }
+
+  //////////////////////////////////////////////
+  //               EDIT DATA
+  //////////////////////////////////////////////
+  updateData = (dataType, data) => {
+    axios.put(`${api_url}/${dataType}/${data.id}`, data)
+      .then(updatedData => {
+        return updatedData.data
+      })
+      .then(resData => {
+        this.getData(dataType)
+      })
+      .then(err => console.log(err))
+  }
+
   componentDidMount() {
-    this.fetchChildren()
+    this.getData('members')
+    this.getData('tasks')
+    this.getData('behaviors')
   }
 
   render() {
@@ -77,7 +145,7 @@ class Dashboard extends Component {
                 <div>
 
                 <ChildList
-                  children={this.state.children}
+                  children={this.state.members.filter(member => member.role.includes('child'))}
                   childDetails={this.toggleChildDetails}
                 />
                 </div>
@@ -93,7 +161,13 @@ class Dashboard extends Component {
               }
               {this.state.manage === 'tasks-behaviors' ?
                 <div>
-                  <ManageTBs/>
+                  <ManageTBs
+                    tasks={this.state.tasks}
+                    behaviors={this.state.behaviors}
+                    delete={this.deleteData}
+                    add={this.addData}
+                    update={this.updateData}
+                  />
                 </div>
                 : ""
               }
