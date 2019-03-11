@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import AuthService from '../services/user.service'
-import ManageHousehold from './Household'
-import ChildOverview from './ChildOverview'
+
 import Header from './Header'
+
+import ManageHousehold from './Household'
+import ManageTBs from './ManageTBs'
+import ManageCashins from './ManageCashins'
+
+import ChildList from './ChildList'
+
 import ChildDashboard from './ChildDashboard'
+
 
 let api_url = 'http://localhost:3000'
 
@@ -13,17 +20,17 @@ class Dashboard extends Component {
     super(props)
     this.state = {
       children: [],
-      manageHousehold: false,
+      manage: 'family-dashboard',
       childDetails: false
     }
     this.Auth = new AuthService()
-    this.childName = ''
+    this.childName = 'Gus'
   }
 
-  // Open/Close Household Management Dashboard to manage members and account info. Will need to to limit access to parents only.
-  toggleManageHousehold = () => {
+  // handles navigation of management pages
+  handleManagementOpts = (category) => {
     this.setState({
-      manageHousehold: !this.state.manageHousehold,
+      manage: category
     })
   }
 
@@ -62,10 +69,10 @@ class Dashboard extends Component {
               <Header
                 auth={this.Auth}
                 history={this.props.history}
-                toggleManageHousehold={this.toggleManageHousehold}
+                handleManagementOpts={this.handleManagementOpts}
               />
               <ManageHousehold
-                toggleManageHousehold={this.toggleManageHousehold}
+                handleManagementOpts={this.handleManagementOpts}
               />
             </div>
             :
@@ -83,34 +90,12 @@ class Dashboard extends Component {
                 <Header
                   auth={this.Auth}
                   history={this.props.history}
-                  toggleManageHousehold={this.toggleManageHousehold}
+                  handleManagementOpts={this.handleManagementOpts}
                 />
-                <table>
-                  <thead>
-                    <tr>
-                      <th className='childNameCol'>CHILD</th>
-                      <th className='data'>BEHAVIOR POINTS</th>
-                      <th className='data'>TASKS COMPLETED</th>
-                      <th className='data'>DAILY SCORE</th>
-                      <th className='data'>WEEKLY SCORE</th>
-                    </tr>
-                  </thead>
-                  {
-                    this.state.children ? this.state.children.map((child, index) => {
-                      return (
-
-                        <ChildOverview
-                          child={child}
-                          key={index}
-                          childDetails={this.toggleChildDetails}
-                        />
-                      )
-                    })
-                    :
-                    ''
-                  }
-                </table>
-
+                <ChildList
+                  children={this.state.children}
+                  childDetails={this.toggleChildDetails}
+                />
                 </div>
               }
             </div>

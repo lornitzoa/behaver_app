@@ -1,14 +1,13 @@
 import React, {Component} from 'react'
 import TasksBehaviors from './TasksBehaviors'
 import CashIns from './CashIns'
-import ManageTBs from './ManageTBs'
-import ManageCashins from './ManageCashins'
+
 
 class ChildDashboard extends Component {
   constructor(props) {
     super(props)
     this.state ={
-      sheet: 'tasks-behaviors'
+      sheet: 'manage-tbs'
     }
   }
 
@@ -29,6 +28,24 @@ class ChildDashboard extends Component {
             }}>Back to Main Dashboard</button>
           </div>
         </div>
+        <div className='score-board'>
+          <div class='data'>
+            <h2>Behavior Points</h2>
+            <h3>50</h3>
+          </div>
+          <div class='data'>
+            <h2>Tasks Completed</h2>
+            <h3>3/5</h3>
+          </div>
+          <div class='data'>
+            <h2>Todays Points</h2>
+            <h3>3/5</h3>
+          </div>
+          <div class='data'>
+            <h2>Stashed Points</h2>
+            <h3>3/5</h3>
+          </div>
+        </div>
         <div className='sheets-nav'>
           <button
             onClick={() => {
@@ -41,18 +58,6 @@ class ChildDashboard extends Component {
             this.changeSheetTo('cash-ins')
             }}>
             Cash Ins
-          </button>
-          <button
-            onClick={() => {
-            this.changeSheetTo('manage-tbs')
-            }}>
-            Manage Tasks & Behaviors
-          </button>
-          <button
-            onClick={() => {
-            this.changeSheetTo('manage-cashins')
-            }}>
-            Manage Cash Ins
           </button>
         </div>
         <div className='sheets'>
@@ -68,19 +73,6 @@ class ChildDashboard extends Component {
               :
               ''
           }
-          {
-            this.state.sheet === 'manage-tbs' ?
-              <ManageTBs/>
-              :
-              ''
-          }
-          {
-            this.state.sheet === 'manage-cashins' ?
-              <ManageCashins/>
-              :
-              ''
-          }
-
         </div>
 
       </div>

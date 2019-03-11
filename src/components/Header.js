@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 // import {Link } from 'react-router-dom'
 
 
+
+
 // Header and General Navigations
 class Header extends Component {
   constructor(props) {
@@ -26,7 +28,6 @@ class Header extends Component {
     this.setState({
       familyName: familyName.charAt(0).toUpperCase() + familyName.slice(1)
     })
-
   }
 
   componentDidMount() {
@@ -37,10 +38,21 @@ class Header extends Component {
 
     return (
       <div className='header'>
-        <h1 id='h1-header'>{this.state.familyName} Family Dashboard</h1>
-        <div>
-          <button onClick={this.props.toggleManageHousehold}>Manage Household</button>
+        <div className='header-titles'>
+          <h1 id='h1-header'>{this.state.familyName} Family Dashboard</h1>
           <button onClick={this.handleLogout}>Log Out</button>
+        </div>
+        <div className='nav-management'>
+          <button onClick={() => {
+            this.props.handleManagementOpts('household')
+          }}>Manage Household</button>
+          <button onClick={() => {
+            this.props.handleManagementOpts('tasks-behaviors')
+          }}>Manage Tasks & Behaviors</button>
+          <button onClick={() => {
+            this.props.handleManagementOpts('cash-ins')
+          }}>Manage Cash Ins</button>
+
         </div>
 
 
