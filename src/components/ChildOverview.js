@@ -3,12 +3,14 @@ import React, {Component} from 'react'
 class ChildOverview extends Component {
 
 
+
+
   render() {
     return(
       <tbody>
         <tr
           onClick={() => {
-          this.props.childDetails(this.props.index)
+            this.props.goToChildDashboard(this.props.child.member_id)
           }}>
           <td className='childNameCol childName'>{this.props.child.name}</td>
           <td className='data'>50</td>

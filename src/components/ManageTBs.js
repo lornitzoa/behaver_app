@@ -36,7 +36,7 @@ class ManageTBs extends Component {
               </div>
               <div>
                 <AddTask
-                    addTask={this.props.add}
+                    addData={this.props.addData}
                 />
               </div>
               <ul>
@@ -48,7 +48,7 @@ class ManageTBs extends Component {
                           <AddTask
                             index={index}
                             task={task}
-                            update={this.props.update}
+                            updateData={this.props.updateData}
                             setEditParams={this.setEditParams}
                           />
                         </li>
@@ -59,7 +59,7 @@ class ManageTBs extends Component {
                             this.setEditParams(index, 'task')
                           }}>Edit</button>
                           <button onClick={() => {
-                            this.props.delete('tasks',task.id, index)
+                            this.props.deleteData('tasks',task.id, index)
                           }}>Delete</button>
                         </li>
                       }
@@ -74,7 +74,7 @@ class ManageTBs extends Component {
               </div>
               <div>
                 <AddBehavior
-                  addBehavior={this.props.add}
+                  addData={this.props.addData}
                 />
               </div>
               <ul>
@@ -86,7 +86,7 @@ class ManageTBs extends Component {
                         <AddBehavior
                           index={index}
                           behavior={behavior}
-                          update={this.props.update}
+                          updateData={this.props.updateData}
                           setEditParams={this.setEditParams}
                         />
                       </li>
@@ -97,7 +97,7 @@ class ManageTBs extends Component {
                           this.setEditParams(index, 'behavior')
                         }}>Edit</button>
                         <button onClick={() => {
-                          this.props.delete('behaviors',behavior.id, index)
+                          this.props.deleteData('behaviors',behavior.id, index)
                         }}>Delete</button>
                       </li>
                     }

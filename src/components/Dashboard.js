@@ -23,11 +23,12 @@ class Dashboard extends Component {
       members: [],
       tasks: [],
       behaviors: [],
+      tasksassignments: [],
       manage: 'family-dashboard',
       childDetails: false
     }
     this.Auth = new AuthService()
-    this.child = {}
+    this.childID = null
   }
 
   //////////////////////////////////////////////
@@ -41,13 +42,13 @@ class Dashboard extends Component {
     })
   }
 
-  // Change whether dashboard shows overview of children or specific child's dashbaord
-  // toggleChildDetails = (index) => {
-  //   this.child = this.state.children[index]
-  //   this.setState({
-  //     childDetails: !this.state.childDetails
-  //   })
-  // }
+  goToChildDashboard = (member_id) => {
+    this.childID = member_id
+    this.setState({
+      childDetails: !this.state.childDetails
+    })
+    // this.child = this.state.members[memberIndex]
+  }
 
   //////////////////////////////////////////////
   //               GET DATA
@@ -58,9 +59,13 @@ class Dashboard extends Component {
     axios.get(`${api_url}/${dataType}`)
       .then(json => json.data)
       .then(data => {
-        this.setState({
-          [dataType]: data
-        })
+          let array = dataType.replace('/', '')
+          console.log(array);
+          this.setState({
+            [array]: data
+          })
+
+
       })
   }
 
@@ -92,7 +97,10 @@ class Dashboard extends Component {
         return newData.data
       })
       .then(resData => {
-        this.updateArr(dataType, resData)
+
+          this.updateArr(dataType, resData)
+
+
       })
       .then(err => console.log(err))
   }
@@ -110,6 +118,7 @@ class Dashboard extends Component {
   //               EDIT DATA
   //////////////////////////////////////////////
   updateData = (dataType, data) => {
+    console.log(data)
     axios.put(`${api_url}/${dataType}/${data.id}`, data)
       .then(updatedData => {
         return updatedData.data
@@ -124,6 +133,8 @@ class Dashboard extends Component {
     this.getData('members')
     this.getData('tasks')
     this.getData('behaviors')
+    this.getData('tasks/assignments')
+
   }
 
   render() {
@@ -131,7 +142,15 @@ class Dashboard extends Component {
       <div>
         {this.state.childDetails ?
           <ChildDashboard
-            child={this.child}
+            child={this.state.members.filter(member => member.member_id === this.childID)}
+            getData={this.getData}
+            addData={this.addData}
+            deleteData={this.deleteData}
+            updateData={this.updateData}
+            tasks={this.state.tasks}
+            behaviors={this.state.behaviors}
+            tasksassignments={this.state.tasksassignments.filter(task => task.child_id === this.childID)}
+            goToChildDashboard={this.goToChildDashboard}
           />
           :
           <div>
@@ -146,7 +165,7 @@ class Dashboard extends Component {
 
                 <ChildList
                   children={this.state.members.filter(member => member.role.includes('child'))}
-                  childDetails={this.toggleChildDetails}
+                  goToChildDashboard={this.goToChildDashboard}
                 />
                 </div>
                 : ""
@@ -164,9 +183,9 @@ class Dashboard extends Component {
                   <ManageTBs
                     tasks={this.state.tasks}
                     behaviors={this.state.behaviors}
-                    delete={this.deleteData}
-                    add={this.addData}
-                    update={this.updateData}
+                    addData={this.addData}
+                    deleteData={this.deleteData}
+                    updateData={this.updateData}
                   />
                 </div>
                 : ""

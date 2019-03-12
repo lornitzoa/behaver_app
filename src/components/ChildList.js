@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import ChildOverview from './ChildOverview'
 
 class ChildList extends Component {
+
+
   render() {
     return(
       <table>
@@ -22,7 +24,7 @@ class ChildList extends Component {
                 child={child}
                 key={index}
                 index={index}
-                childDetails={this.props.childDetails}
+                goToChildDashboard={this.props.goToChildDashboard}
               />
             )
           })

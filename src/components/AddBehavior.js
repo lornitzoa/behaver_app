@@ -29,23 +29,23 @@ class AddBehavior extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-
+    console.log(this.state.type);
     if(this.state.type === 'new') {
       let behavior = {
         behavior: this.state.behavior,
         targeted_for: this.state.targeted_for
       }
       console.log(behavior)
-      this.props.addBehavior('behaviors', behavior)
+      this.props.addData('behaviors', behavior)
     } else if (this.state.type === 'edit') {
       let behavior = {
         id: this.props.behavior.id,
         behavior: this.state.behavior,
         targeted_for: this.state.targeted_for
       }
-
+      console.log(behavior)
       this.props.setEditParams(null, 'behavior')
-      this.props.update('behaviors', behavior)
+      this.props.updateData('behaviors', behavior)
 
     }
 

@@ -31,14 +31,14 @@ import React, { Component } from 'react'
         let task = {
           task: this.state.task
         }
-        this.props.addTask('tasks', task)
+        this.props.addData('tasks', task)
       } else if(this.state.type === 'edit') {
         let task = {
           id: this.props.task.id,
           task: this.state.task
         }
         this.props.setEditParams(null, 'task')
-        this.props.update('tasks', task)
+        this.props.updateData('tasks', task)
 
       }
     }

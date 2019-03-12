@@ -15,46 +15,41 @@ class ChildDashboard extends Component {
       taskAssignments: []
     }
   }
+  //
+  // // Get Task Assignments
+  // getTaskAssignments = () => {
+  //   fetch(`${api_url}/tasks/assignments/${this.state.childID}`)
+  //     .then(data => data.json())
+  //     .then(jData => {
+  //       this.setState({
+  //         taskAssignments: jData
+  //       })
+  //     })
+  //     .then(err => console.log(err))
+  // }
+  //
+  //
+  // // Add Task Assignment
+  // addTaskAssignment = (task) => {
+  //   fetch(`${api_url}/tasks/assignments`,
+  //     {
+  //       body: JSON.stringify(task),
+  //       method: 'POST',
+  //       headers: {
+  //         'Accept': 'application/json, text/plain, */*',
+  //         'Content-Type': 'application/json'
+  //       }
+  //     })
+  //     .then(addedTask => {
+  //       return addedTask.json()
+  //     })
+  //     .then(jData => {
+  //       console.log(jData)
+  //     })
+  //     .then(err => console.log(err))
+  // }
+  //
 
-  // Get Task Assignments
-  getTaskAssignments = () => {
-    fetch(`${api_url}/tasks/assignments/${this.state.childID}`)
-      .then(data => data.json())
-      .then(jData => {
-        this.setState({
-          taskAssignments: jData
-        })
-      })
-      .then(err => console.log(err))
-  }
-
-
-  // Add Task Assignment
-  addTaskAssignment = (task) => {
-    fetch(`${api_url}/tasks/assignments`,
-      {
-        body: JSON.stringify(task),
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json, text/plain, */*',
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(addedTask => {
-        return addedTask.json()
-      })
-      .then(jData => {
-        console.log(jData)
-      })
-      .then(err => console.log(err))
-  }
-
-
-
-
-  // Delete Task Assignment
-
-  // Update Task Assignment
 
 
   changeSheetTo = (sheet) => {
@@ -64,7 +59,8 @@ class ChildDashboard extends Component {
   }
 
   componentDidMount() {
-    this.getTaskAssignments()
+    // console.log(this.props.tasksassignments);
+
   }
 
 
@@ -72,10 +68,10 @@ class ChildDashboard extends Component {
     return (
       <div>
         <div className='header'>
-          <h1 id='h1-header'>{this.props.child.name}'s Dashboard</h1>
+          <h1 id='h1-header'>{this.props.child[0].name}'s Dashboard</h1>
           <div>
             <button onClick={() => {
-              this.props.childDetails('')
+              this.props.goToChildDashboard(null)
             }}>Back to Main Dashboard</button>
           </div>
         </div>
@@ -115,8 +111,10 @@ class ChildDashboard extends Component {
           {
             this.state.sheet === 'tasks-behaviors' ?
               <TasksBehaviors
-                tasks={this.state.taskAssignments}
+                tasks={this.props.tasks}
+                tasksassignments={this.props.tasksassignments}
                 changeSheetTo={this.changeSheetTo}
+                child={this.props.child}
               />
               :
               ''
@@ -131,7 +129,9 @@ class ChildDashboard extends Component {
             this.state.sheet == 'assign-task' ?
             <AddTaskAssignment
               changeSheetTo={this.changeSheetTo}
-              addTask={this.addTask}
+              addData={this.props.addData}
+              tasks={this.props.tasks}
+              childID={this.props.child[0].member_id}
             />
             :
             ''

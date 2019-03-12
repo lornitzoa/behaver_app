@@ -5,6 +5,7 @@ class TasksBehaviors extends Component {
 
   componentDidMount() {
     console.log(this.props.tasks);
+    console.log(this.props.tasksassignments);
   }
 
   render() {
@@ -26,7 +27,7 @@ class TasksBehaviors extends Component {
               </tr>
             </thead>
             <tbody>
-            {this.props.tasks.map((task, index) => {
+            {this.props.tasksassignments.map((task, index) => {
               return (
                 <tr key={index}>
                   <td>{task.task_name}</td>
