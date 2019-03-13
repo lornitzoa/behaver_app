@@ -146,8 +146,8 @@ class Dashboard extends Component {
     this.getData('behaviors')
     this.getData('tasks/assignments')
     this.getData('behaviors/assignments')
-    // this.getData('reinforcements')
-    // this.getData('reinforcements/assignments')
+    this.getData('reinforcements')
+    this.getData('reinforcements/assignments')
     this.getData('scores')
   }
 
@@ -168,7 +168,7 @@ class Dashboard extends Component {
                 tasksassignments={this.state.tasksassignments.filter(task => task.child_id === this.childID)}
                 behaviorsassignments={this.state.behaviorsassignments.filter(task => task.child_id === this.childID)}
                 goToChildDashboard={this.goToChildDashboard}
-                scores={this.state.scores.filter(score => score.member_id === this.childiD)}
+                score={this.state.scores.filter(score => score.member_id === this.childID)}
               />
               :
               <div>

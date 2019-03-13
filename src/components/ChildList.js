@@ -4,7 +4,7 @@ import ChildOverview from './ChildOverview'
 class ChildList extends Component {
 
   componentDidMount() {
-
+    console.log(this.props.scores);
   }
 
   render() {

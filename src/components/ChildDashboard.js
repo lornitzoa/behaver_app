@@ -12,7 +12,8 @@ class ChildDashboard extends Component {
     super(props)
     this.state ={
       sheet: 'tasks-behaviors',
-      childID: null || this.props.child.member_id
+      childID: null || this.props.child.member_id,
+      todaysPoints: parseInt(this.props.score[0].behavior_points) + parseInt(this.props.score[0].task_points)
     }
   }
 
@@ -24,9 +25,7 @@ class ChildDashboard extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.tasksassignments);
-    console.log(this.props.behaviors);
-    console.log(this.props.behaviorsassignments);
+    console.log(this.props.child);
     console.log(this.props.tasksassignments);
   }
 
@@ -45,19 +44,19 @@ class ChildDashboard extends Component {
         <div className='score-board'>
           <div className='data'>
             <h2>Behavior Points</h2>
-            <h3>50</h3>
+            <h3>{this.props.score[0].behavior_points}</h3>
           </div>
           <div className='data'>
             <h2>Tasks Completed</h2>
-            <h3>3/5</h3>
+            <h3>{this.props.score[0].tasks_completed}</h3>
           </div>
           <div className='data'>
             <h2>Todays Points</h2>
-            <h3>3/5</h3>
+            <h3>{this.state.todaysPoints}</h3>
           </div>
           <div className='data'>
             <h2>Stashed Points</h2>
-            <h3>3/5</h3>
+            <h3>{this.props.score[0].stashed_cash}</h3>
           </div>
         </div>
         <div className='sheets-nav'>
