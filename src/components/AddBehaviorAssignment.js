@@ -6,17 +6,21 @@ class AddBehaviorAssignment extends Component {
     this.state= {
       child_id: this.props.childID,
       behavior_id: 0,
-      points: 0
+      points: 0,
+      editing: false,
+      btnDone: 'Done'
     }
   }
 
   checkIfEditing = () => {
 
     if(this.props.behavior) {
-      this.getBehaviorID(this.props.behaviors, this.props.behavior)
+      let behavior = this.props.behavior
+      this.getBehaviorID(this.props.behaviors, behavior)
       this.setState({
-        child_id: this.props.behavior.child_id,
-        points: this.props.behavior.points
+        child_id: behavior.child_id,
+        points: behavior.points,
+        editing: true
       })
     }
 
@@ -40,8 +44,30 @@ class AddBehaviorAssignment extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state);
-    this.props.addData('behaviors/assignments', this.state)
+    if(this.state.editing) {
+      let updatedAssignment = {
+        id: this.props.behavior.id,
+        child_id: this.state.child_id,
+        behavior_id: parseInt(this.state.behavior_id),
+        points: parseInt(this.state.points)
+      }
+      this.props.updateData('behaviors/assignments', updatedAssignment)
+      this.props.cancel(null)
+    } else {
+      let newAssignment = {
+        child_id: this.state.child_id,
+        behavior_id: parseInt(this.state.behavior_id),
+        points: parseInt(this.state.points)
+      }
+      this.props.addData('behaviors/assignments', newAssignment)
+      this.setState({
+        child_id: this.props.childID,
+        behavior_id: 0,
+        points: 0,
+        editing: false
+      })
+    }
+
   }
 
 
@@ -65,8 +91,13 @@ class AddBehaviorAssignment extends Component {
           <input type='submit'/>
         </form>
         <button onClick={() => {
-          this.props.cancel(null)
-        }}>Cancel</button>
+          if(this.state.editing) {
+            this.props.cancel(null)
+          } else {
+            this.props.changeSheetTo('tasks-behaviors')
+          }
+
+        }}>{this.state.btnDone}</button>
       </div>
     )
   }

@@ -16,6 +16,9 @@ class BehaviorList extends Component {
     })
   }
 
+  componentDidMount() {
+    console.log(this.props.behaviorsassignments);
+  }
 
   render() {
     return (

@@ -1,7 +1,20 @@
 import React, { Component } from 'react'
-
+import AddTaskAssignment from './AddTaskAssignment'
 
 class TaskList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      editIndex: null
+    }
+  }
+
+  goToEdit = (index) => {
+    this.setState({
+      editIndex: index
+    })
+  }
+
   render() {
     return (
       <div>
@@ -9,36 +22,47 @@ class TaskList extends Component {
         <button onClick={() => {
           this.props.changeSheetTo('assign-task')
         }}>Assign Task</button>
-        <table>
-          <thead>
-            <tr>
-              <th>Task</th>
-              <th>Points</th>
-              <th>Required</th>
-              <th>When</th>
-              <th>Completed Today</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.props.tasksassignments.map((task, index) => {
-              return (
-                <tr key={index}>
-                  <td>{task.id}</td>
-                  <td>{task.task_name}</td>
-                  <td>{task.points}</td>
-                  <td>{task.required}</td>
-                  <td>{task.frequency}</td>
-                  <td>{task.completed}</td>
-                  <td><button>Completed</button>
-                  <button>Edit</button>
+        <div className='list-headers'>
+          <h3>Task</h3>
+          <h3>Points</h3>
+          <h3>Required</h3>
+          <h3>When</h3>
+          <h3>Completed Today</h3>
+        </div>
+          {this.props.tasksassignments.map((task, index) => {
+            return (
+              <div key={index}>
+              {this.state.editIndex === index ?
+                <div>
+                  <AddTaskAssignment
+                    index={index}
+                    task={task}
+                    updateData={this.props.updateData}
+                    tasks={this.props.tasks}
+                    cancel={this.goToEdit}
+                  />
+                </div>
+                :
+                <div className='items'>
+                  <p>{task.id}</p>
+                  <p>{task.task_name}</p>
+                  <p>{task.points}</p>
+                  <p>{task.required}</p>
+                  <p>{task.frequency}</p>
+                  <p>{task.completed}</p>
+                  <button>Completed</button>
                   <button onClick={() => {
-                    this.props.deleteData('tasks/assignments', task.id, index)
-                  }}>Delete</button></td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
+                    this.goToEdit(index)
+                  }}>Edit</button>
+                  <button onClick={() => {
+                    this.props.deleteData('tasks/assignments', task.id)
+                  }}>Delete</button>
+                </div>
+              }
+              </div>
+            )
+          })}
+
       </div>
 
     )

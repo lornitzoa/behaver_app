@@ -126,9 +126,12 @@ class Dashboard extends Component {
   //               EDIT DATA
   //////////////////////////////////////////////
   updateData = (dataType, data) => {
-
+    console.log(dataType)
+    console.log(data)
+    console.log(data.id);
     axios.put(`${api_url}/${dataType}/${data.id}`, data)
       .then(updatedData => {
+        console.log(updatedData);
         return updatedData.data
       })
       .then(resData => {
@@ -143,8 +146,8 @@ class Dashboard extends Component {
     this.getData('behaviors')
     this.getData('tasks/assignments')
     this.getData('behaviors/assignments')
-    this.getData('reinforcements')
-    this.getData('reinforcements/assignments')
+    // this.getData('reinforcements')
+    // this.getData('reinforcements/assignments')
     this.getData('scores')
   }
 

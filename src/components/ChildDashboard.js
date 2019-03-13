@@ -25,6 +25,7 @@ class ChildDashboard extends Component {
 
   componentDidMount() {
     // console.log(this.props.tasksassignments);
+    console.log(this.props.behaviors);
     console.log(this.props.behaviorsassignments);
     console.log(this.props.tasksassignments);
   }
