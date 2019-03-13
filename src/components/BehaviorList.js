@@ -39,6 +39,7 @@ class BehaviorList extends Component {
                       behavior={behavior}
                       updateData={this.props.updateData}
                       behaviors={this.props.behaviors}
+                      cancel={this.goToEdit}
                     />
                   </div>
 

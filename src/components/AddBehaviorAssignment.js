@@ -64,6 +64,9 @@ class AddBehaviorAssignment extends Component {
           <input type='number' id='points' value={this.state.points} onChange={this.handleChange}/>
           <input type='submit'/>
         </form>
+        <button onClick={() => {
+          this.props.cancel(null)
+        }}>Cancel</button>
       </div>
     )
   }
