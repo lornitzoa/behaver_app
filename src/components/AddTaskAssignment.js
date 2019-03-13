@@ -23,6 +23,7 @@ class AddTaskAssignment extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    console.log(this.state);
     this.props.addData('tasks/assignments', this.state)
   }
 

@@ -99,11 +99,13 @@ class Dashboard extends Component {
   //               ADD DATA
   //////////////////////////////////////////////
   addData = (dataType, data) => {
+    console.log(data);
     axios.post(`${api_url}/${dataType}`, data)
       .then(newData => {
         return newData.data
       })
       .then(resData => {
+        console.log(resData);
         this.getData(dataType)
       })
       .then(err => console.log(err))

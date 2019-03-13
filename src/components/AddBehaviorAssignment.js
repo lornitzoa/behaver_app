@@ -5,8 +5,8 @@ class AddBehaviorAssignment extends Component {
     super(props)
     this.state= {
       child_id: this.props.childID,
-      behavior: null,
-      points: null
+      behavior_id: '',
+      points: 0
     }
   }
 
@@ -32,7 +32,7 @@ class AddBehaviorAssignment extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <select onChange={this.handleChange} id='behavior'>
+          <select onChange={this.handleChange} id='behavior_id'>
             <option>---Choose Behavior---</option>
               {this.props.behaviors.map((behavior, index) => {
                 return (
@@ -40,7 +40,7 @@ class AddBehaviorAssignment extends Component {
                 )
               })}
           </select>
-          <input type='number' id='points'/>
+          <input type='number' id='points' onChange={this.handleChange}/>
           <input type='submit'/>
         </form>
       </div>
