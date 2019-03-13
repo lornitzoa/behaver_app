@@ -25,7 +25,8 @@ class ChildDashboard extends Component {
 
   componentDidMount() {
     // console.log(this.props.tasksassignments);
-    console.log(this.props.behaviors);
+    console.log(this.props.behaviorsassignments);
+    console.log(this.props.tasksassignments);
   }
 
 
@@ -78,9 +79,12 @@ class ChildDashboard extends Component {
               <TasksBehaviors
                 tasks={this.props.tasks}
                 tasksassignments={this.props.tasksassignments}
+                behaviors={this.props.behaviors}
                 behaviorsassignments={this.props.behaviorsassignments}
                 changeSheetTo={this.changeSheetTo}
                 child={this.props.child}
+                deleteData={this.props.deleteData}
+                updateData={this.props.updateData}
               />
               :
               ''

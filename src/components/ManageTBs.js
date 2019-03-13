@@ -59,7 +59,7 @@ class ManageTBs extends Component {
                             this.setEditParams(index, 'task')
                           }}>Edit</button>
                           <button onClick={() => {
-                            this.props.deleteData('tasks',task.id, index)
+                            this.props.deleteData('tasks',task.id)
                           }}>Delete</button>
                         </li>
                       }
@@ -97,7 +97,7 @@ class ManageTBs extends Component {
                           this.setEditParams(index, 'behavior')
                         }}>Edit</button>
                         <button onClick={() => {
-                          this.props.deleteData('behaviors',behavior.id, index)
+                          this.props.deleteData('behaviors',behavior.id)
                         }}>Delete</button>
                       </li>
                     }

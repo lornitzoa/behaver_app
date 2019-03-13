@@ -1,79 +1,41 @@
 import React, { Component } from 'react'
 
-class TasksBehaviors extends Component {
+import TaskList from './TaskList'
+import BehaviorList from './BehaviorList'
 
+// import AddBehaviorAssignment from './behaviorsassignments'
+
+
+class TasksBehaviors extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+
+    }
+  }
 
   componentDidMount() {
-    console.log(this.props.behaviorsassignments);
+
   }
 
   render() {
     return (
       <div>
-        <div>
-          TASKS
-          <button onClick={() => {
-            this.props.changeSheetTo('assign-task')
-          }}>Assign Task</button>
-          <table>
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Points</th>
-                <th>Required</th>
-                <th>When</th>
-                <th>Completed Today</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.props.tasksassignments.map((task, index) => {
-              return (
-                <tr key={index}>
-                  <td>{task.task_name}</td>
-                  <td>{task.points}</td>
-                  <td>{task.required}</td>
-                  <td>{task.frequency}</td>
-                  <td>{task.completed}</td>
-                  <td><button>Completed</button>
-                  <button>Edit</button>
-                  <button>Delete</button></td>
-                </tr>
-              )
-            })}
-            </tbody>
-          </table>
-        </div>
-        <div>
-          Behaviors
-          <button onClick={() => {
-            this.props.changeSheetTo('assign-behavior')
-          }}>Assign Behavior</button>
-          <table>
-            <thead>
-              <tr>
-                <th>Task</th>
-                <th>Points</th>
-                <th>Required</th>
-                <th>When</th>
-                <th>Completed Today</th>
-              </tr>
-            </thead>
-            <tbody>
-            {this.props.behaviorsassignments.map((behavior, index) => {
-              return (
-                <tr key={index}>
-                  <td>{behavior.behavior}</td>
-                  <td>{behavior.targeted_for}</td>
-                  <td>{behavior.points}</td>
-                  <td><button>+</button>
-                  <button>Edit</button>
-                  <button>Delete</button></td>
-                </tr>
-              )
-            })}
-            </tbody>
-          </table>
-        </div>
+        <TaskList
+          deleteData={this.props.deleteData}
+          updateData={this.props.updateData}
+          tasks={this.props.tasks}
+          tasksassignments={this.props.tasksassignments}
+          changeSheetTo={this.props.changeSheetTo}
+        />
+        <BehaviorList
+
+          deleteData={this.props.deleteData}
+          updateData={this.props.updateData}
+          behaviors={this.props.behaviors}
+          behaviorsassignments={this.props.behaviorsassignments}
+          changeSheetTo={this.props.changeSheetTo}
+        />
       </div>
     )
   }

@@ -138,3 +138,18 @@ ul {
   display: flex;
   justify-content: center;
 }
+
+/*
+=====================
+=   LISTS Dashboard
+=====================
+*/
+.list-headers {
+  display: flex;
+  justify-content: space-between;
+}
+
+.items {
+  display: flex;
+  justify-content: space-between;
+}

@@ -5,8 +5,30 @@ class AddBehaviorAssignment extends Component {
     super(props)
     this.state= {
       child_id: this.props.childID,
-      behavior_id: '',
+      behavior_id: 0,
       points: 0
+    }
+  }
+
+  checkIfEditing = () => {
+
+    if(this.props.behavior) {
+      this.getBehaviorID(this.props.behaviors, this.props.behavior)
+      this.setState({
+        child_id: this.props.behavior.child_id,
+        points: this.props.behavior.points
+      })
+    }
+
+  }
+
+  getBehaviorID = (list, item) => {
+    for(let i = 0; i < list.length; i++) {
+      if(list[i].behavior === item.behavior) {
+        this.setState({
+          behavior_id: list[i].id
+        })
+      }
     }
   }
 
@@ -24,23 +46,22 @@ class AddBehaviorAssignment extends Component {
 
 
   componentDidMount() {
-    console.log(this.props.behaviors);
-    console.log(this.props.childID);
+    this.checkIfEditing()
   }
 
   render() {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-          <select onChange={this.handleChange} id='behavior_id'>
-            <option>---Choose Behavior---</option>
+          <select onChange={this.handleChange} id='behavior_id' value={this.state.behavior_id}>
+            <option value='0'>---Choose Behavior---</option>
               {this.props.behaviors.map((behavior, index) => {
                 return (
                   <option key={index} value={behavior.id}>{behavior.behavior}</option>
                 )
               })}
           </select>
-          <input type='number' id='points' onChange={this.handleChange}/>
+          <input type='number' id='points' value={this.state.points} onChange={this.handleChange}/>
           <input type='submit'/>
         </form>
       </div>

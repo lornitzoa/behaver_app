@@ -79,10 +79,12 @@ class Dashboard extends Component {
   //////////////////////////////////////////////
   //               DELETE DATA
   //////////////////////////////////////////////
-  deleteData = (dataType, id, arrIndex) => {
+  deleteData = (dataType, id) => {
+    console.log(dataType);
+    console.log(id);
     axios.delete(`${api_url}/${dataType}/${id}`)
       .then(data => {
-        this.removeFromArr(dataType, arrIndex)
+        this.getData(dataType)
       })
   }
 
@@ -124,7 +126,7 @@ class Dashboard extends Component {
   //               EDIT DATA
   //////////////////////////////////////////////
   updateData = (dataType, data) => {
-    console.log(data)
+
     axios.put(`${api_url}/${dataType}/${data.id}`, data)
       .then(updatedData => {
         return updatedData.data
