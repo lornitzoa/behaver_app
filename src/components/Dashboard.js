@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+// import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import AuthService from '../services/user.service'
 
 import Header from './Header'
@@ -20,10 +20,15 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      loaded: false,
       members: [],
       tasks: [],
       behaviors: [],
       tasksassignments: [],
+      behaviorsassignments:[],
+      reinforcements: [],
+      reinforcementsassignments: [],
+      scores: [],
       manage: 'family-dashboard',
       childDetails: false
     }
@@ -60,12 +65,14 @@ class Dashboard extends Component {
       .then(json => json.data)
       .then(data => {
           let array = dataType.replace('/', '')
-          console.log(array);
           this.setState({
             [array]: data
           })
-
-
+          if(dataType === 'scores') {
+            this.setState({
+              loaded: true
+            })
+          }
       })
   }
 
@@ -97,10 +104,7 @@ class Dashboard extends Component {
         return newData.data
       })
       .then(resData => {
-
-          this.updateArr(dataType, resData)
-
-
+        this.getData(dataType)
       })
       .then(err => console.log(err))
   }
@@ -134,72 +138,84 @@ class Dashboard extends Component {
     this.getData('tasks')
     this.getData('behaviors')
     this.getData('tasks/assignments')
-
+    this.getData('behaviors/assignments')
+    this.getData('reinforcements')
+    this.getData('reinforcements/assignments')
+    this.getData('scores')
   }
 
   render() {
     return (
       <div>
-        {this.state.childDetails ?
-          <ChildDashboard
-            child={this.state.members.filter(member => member.member_id === this.childID)}
-            getData={this.getData}
-            addData={this.addData}
-            deleteData={this.deleteData}
-            updateData={this.updateData}
-            tasks={this.state.tasks}
-            behaviors={this.state.behaviors}
-            tasksassignments={this.state.tasksassignments.filter(task => task.child_id === this.childID)}
-            goToChildDashboard={this.goToChildDashboard}
-          />
-          :
+        {this.state.loaded ?
           <div>
-            <Header
-              auth={this.Auth}
-              history={this.props.history}
-              handleManagementOpts={this.handleManagementOpts}
-            />
-            <div>
-              {this.state.manage === 'family-dashboard' ?
-                <div>
-
-                <ChildList
-                  children={this.state.members.filter(member => member.role.includes('child'))}
-                  goToChildDashboard={this.goToChildDashboard}
-                />
-                </div>
-                : ""
-              }
-              {this.state.manage === 'household' ?
+            {this.state.childDetails ?
+              <ChildDashboard
+                child={this.state.members.filter(member => member.member_id === this.childID)}
+                getData={this.getData}
+                addData={this.addData}
+                deleteData={this.deleteData}
+                updateData={this.updateData}
+                tasks={this.state.tasks}
+                behaviors={this.state.behaviors}
+                tasksassignments={this.state.tasksassignments.filter(task => task.child_id === this.childID)}
+                behaviorsassignments={this.state.behaviorsassignments.filter(task => task.child_id === this.childID)}
+                goToChildDashboard={this.goToChildDashboard}
+                scores={this.state.scores.filter(score => score.member_id === this.childiD)}
+              />
+              :
               <div>
-                <ManageHousehold
+                <Header
+                  auth={this.Auth}
+                  history={this.props.history}
                   handleManagementOpts={this.handleManagementOpts}
                 />
-              </div>
-              : ""
-              }
-              {this.state.manage === 'tasks-behaviors' ?
                 <div>
-                  <ManageTBs
-                    tasks={this.state.tasks}
-                    behaviors={this.state.behaviors}
-                    addData={this.addData}
-                    deleteData={this.deleteData}
-                    updateData={this.updateData}
-                  />
-                </div>
-                : ""
-              }
-              {this.state.manage === 'cash-ins' ?
-                <div>
-                  <ManageCashins/>
-                </div>
-                :""
-              }
+                  {this.state.manage === 'family-dashboard' ?
+                    <div>
 
-            </div>
+                    <ChildList
+                      children={this.state.members.filter(member => member.role.includes('child'))}
+                      goToChildDashboard={this.goToChildDashboard}
+                      scores={this.state.scores}
+                    />
+                    </div>
+                    : ""
+                  }
+                  {this.state.manage === 'household' ?
+                  <div>
+                    <ManageHousehold
+                      handleManagementOpts={this.handleManagementOpts}
+                    />
+                  </div>
+                  : ""
+                  }
+                  {this.state.manage === 'tasks-behaviors' ?
+                    <div>
+                      <ManageTBs
+                        tasks={this.state.tasks}
+                        behaviors={this.state.behaviors}
+                        addData={this.addData}
+                        deleteData={this.deleteData}
+                        updateData={this.updateData}
+                      />
+                    </div>
+                    : ""
+                  }
+                  {this.state.manage === 'cash-ins' ?
+                    <div>
+                      <ManageCashins/>
+                    </div>
+                    :""
+                  }
+
+                </div>
+              </div>
+            }
           </div>
-        }
+          :
+          <div>Not Loaded</div>}
+
 
       </div>
 

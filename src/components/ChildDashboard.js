@@ -3,53 +3,18 @@ import TasksBehaviors from './TasksBehaviors'
 import CashIns from './CashIns'
 
 import AddTaskAssignment from './AddTaskAssignment'
+import AddBehaviorAssignment from './AddBehaviorAssignment'
 
-let api_url = 'http://localhost:3000'
+
 
 class ChildDashboard extends Component {
   constructor(props) {
     super(props)
     this.state ={
       sheet: 'tasks-behaviors',
-      childID: null || this.props.child.member_id,
-      taskAssignments: []
+      childID: null || this.props.child.member_id
     }
   }
-  //
-  // // Get Task Assignments
-  // getTaskAssignments = () => {
-  //   fetch(`${api_url}/tasks/assignments/${this.state.childID}`)
-  //     .then(data => data.json())
-  //     .then(jData => {
-  //       this.setState({
-  //         taskAssignments: jData
-  //       })
-  //     })
-  //     .then(err => console.log(err))
-  // }
-  //
-  //
-  // // Add Task Assignment
-  // addTaskAssignment = (task) => {
-  //   fetch(`${api_url}/tasks/assignments`,
-  //     {
-  //       body: JSON.stringify(task),
-  //       method: 'POST',
-  //       headers: {
-  //         'Accept': 'application/json, text/plain, */*',
-  //         'Content-Type': 'application/json'
-  //       }
-  //     })
-  //     .then(addedTask => {
-  //       return addedTask.json()
-  //     })
-  //     .then(jData => {
-  //       console.log(jData)
-  //     })
-  //     .then(err => console.log(err))
-  // }
-  //
-
 
 
   changeSheetTo = (sheet) => {
@@ -60,7 +25,7 @@ class ChildDashboard extends Component {
 
   componentDidMount() {
     // console.log(this.props.tasksassignments);
-
+    console.log(this.props.behaviors);
   }
 
 
@@ -113,6 +78,7 @@ class ChildDashboard extends Component {
               <TasksBehaviors
                 tasks={this.props.tasks}
                 tasksassignments={this.props.tasksassignments}
+                behaviorsassignments={this.props.behaviorsassignments}
                 changeSheetTo={this.changeSheetTo}
                 child={this.props.child}
               />
@@ -126,11 +92,22 @@ class ChildDashboard extends Component {
               ''
           }
           {
-            this.state.sheet == 'assign-task' ?
+            this.state.sheet ==='assign-task' ?
             <AddTaskAssignment
               changeSheetTo={this.changeSheetTo}
               addData={this.props.addData}
               tasks={this.props.tasks}
+              childID={this.props.child[0].member_id}
+            />
+            :
+            ''
+          }
+          {
+            this.state.sheet === 'assign-behavior' ?
+            <AddBehaviorAssignment
+              changeSheetTo={this.changeSheetTo}
+              addData={this.props.addData}
+              behaviors={this.props.behaviors}
               childID={this.props.child[0].member_id}
             />
             :

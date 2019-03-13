@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import AddTask from './AddTask'
 import AddBehavior from './AddBehavior'
 
-let api_url = 'http://localhost:3000'
+// let api_url = 'http://localhost:3000'
 
 class ManageTBs extends Component {
   constructor(props) {

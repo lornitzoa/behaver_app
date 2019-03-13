@@ -3,6 +3,9 @@ import ChildOverview from './ChildOverview'
 
 class ChildList extends Component {
 
+  componentDidMount() {
+    console.log(this.props.scores);
+  }
 
   render() {
     return(
@@ -13,7 +16,7 @@ class ChildList extends Component {
             <th className='data'>BEHAVIOR POINTS</th>
             <th className='data'>TASKS COMPLETED</th>
             <th className='data'>DAILY SCORE</th>
-            <th className='data'>WEEKLY SCORE</th>
+            <th className='data'>STASHED CASH</th>
           </tr>
         </thead>
         {
@@ -22,6 +25,7 @@ class ChildList extends Component {
 
               <ChildOverview
                 child={child}
+                scores={this.props.scores.filter(score => score.member_id === child.member_id)}
                 key={index}
                 index={index}
                 goToChildDashboard={this.props.goToChildDashboard}

@@ -116,9 +116,9 @@ class ShowMembers extends Component {
                       {member.name}
                       {member.id}
                       <button onClick={() => {
-                        {/*Assign this member object to member variable and object index to index variable*/}
+                    
                         this.setMemberInfo(member, index);
-                        {/*Change static state to render NewMember component*/}
+
                         this.changeStaticState()
                       }}>Edit</button>
                       <button onClick={() => {

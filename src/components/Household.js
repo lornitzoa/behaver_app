@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
+// import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import NewMember from './NewMember'
 import ManageAccount from './ManageAccount'
 import ShowMembers from './ShowMembers'
-import AuthService from '../services/user.service'
+// import AuthService from '../services/user.service'
 
 let api_url = 'http://localhost:3000'
 

@@ -4,8 +4,7 @@ class TasksBehaviors extends Component {
 
 
   componentDidMount() {
-    console.log(this.props.tasks);
-    console.log(this.props.tasksassignments);
+    console.log(this.props.behaviorsassignments);
   }
 
   render() {
@@ -36,6 +35,37 @@ class TasksBehaviors extends Component {
                   <td>{task.frequency}</td>
                   <td>{task.completed}</td>
                   <td><button>Completed</button>
+                  <button>Edit</button>
+                  <button>Delete</button></td>
+                </tr>
+              )
+            })}
+            </tbody>
+          </table>
+        </div>
+        <div>
+          Behaviors
+          <button onClick={() => {
+            this.props.changeSheetTo('assign-behavior')
+          }}>Assign Behavior</button>
+          <table>
+            <thead>
+              <tr>
+                <th>Task</th>
+                <th>Points</th>
+                <th>Required</th>
+                <th>When</th>
+                <th>Completed Today</th>
+              </tr>
+            </thead>
+            <tbody>
+            {this.props.behaviorsassignments.map((behavior, index) => {
+              return (
+                <tr key={index}>
+                  <td>{behavior.behavior}</td>
+                  <td>{behavior.targeted_for}</td>
+                  <td>{behavior.points}</td>
+                  <td><button>+</button>
                   <button>Edit</button>
                   <button>Delete</button></td>
                 </tr>

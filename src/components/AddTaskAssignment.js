@@ -26,9 +26,9 @@ class AddTaskAssignment extends Component {
     this.props.addData('tasks/assignments', this.state)
   }
 
-  componentWillMount() {
-    console.log(this.props.childID);
-  }
+  // componentWillMount() {
+  //   console.log(this.props.childID);
+  // }
 
   render() {
     return (

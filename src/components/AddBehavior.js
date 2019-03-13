@@ -6,16 +6,19 @@ class AddBehavior extends Component {
     this.state = {
       type: 'new',
       behavior: 'Add Behavior',
-      targeted_for: 'Placeholder'
+      targeted_for: 'Placeholder',
+      family_id: localStorage.getItem('family_id')
     }
   }
 
   checkIfEditing = () => {
+    console.log(this.state.family_id);
     if(this.props.behavior) {
       this.setState({
         type: 'edit',
         behavior: this.props.behavior.behavior,
-        targeted_for: this.props.behavior.targeted_for
+        targeted_for: this.props.behavior.targeted_for,
+        family_id: this.props.behavior.family_id
       })
     }
   }
@@ -33,7 +36,8 @@ class AddBehavior extends Component {
     if(this.state.type === 'new') {
       let behavior = {
         behavior: this.state.behavior,
-        targeted_for: this.state.targeted_for
+        targeted_for: this.state.targeted_for,
+        family_id: this.state.family_id
       }
       console.log(behavior)
       this.props.addData('behaviors', behavior)
@@ -41,7 +45,8 @@ class AddBehavior extends Component {
       let behavior = {
         id: this.props.behavior.id,
         behavior: this.state.behavior,
-        targeted_for: this.state.targeted_for
+        targeted_for: this.state.targeted_for,
+        family_id: this.state.family_id
       }
       console.log(behavior)
       this.props.setEditParams(null, 'behavior')

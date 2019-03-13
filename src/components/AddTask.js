@@ -6,7 +6,8 @@ import React, { Component } from 'react'
       super(props)
       this.state = {
         type: 'new',
-        task: 'Add Task'
+        task: 'Add Task',
+        family_id: localStorage.getItem('family_id')
       }
     }
 
@@ -14,7 +15,8 @@ import React, { Component } from 'react'
       if(this.props.task) {
         this.setState({
           type: 'edit',
-          task: this.props.task.task
+          task: this.props.task.task,
+          family_id: this.props.task.family_id
         })
       }
     }
@@ -29,14 +31,18 @@ import React, { Component } from 'react'
       e.preventDefault()
       if(this.state.type === 'new') {
         let task = {
-          task: this.state.task
+          task: this.state.task,
+          family_id: this.state.family_id
         }
+        console.log(task);
         this.props.addData('tasks', task)
       } else if(this.state.type === 'edit') {
         let task = {
           id: this.props.task.id,
-          task: this.state.task
+          task: this.state.task,
+          family_id: this.state.family_id
         }
+        console.log(task);
         this.props.setEditParams(null, 'task')
         this.props.updateData('tasks', task)
 
