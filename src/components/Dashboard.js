@@ -20,7 +20,9 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      // wait for data to come in
       loaded: false,
+      // arrays for app data
       members: [],
       tasks: [],
       behaviors: [],
@@ -29,7 +31,9 @@ class Dashboard extends Component {
       reinforcements: [],
       reinforcementsassignments: [],
       scores: [],
+      // set component to be viewed
       manage: 'family-dashboard',
+      // toggles family vs child dashboard
       childDetails: false
     }
     this.Auth = new AuthService()
@@ -93,22 +97,22 @@ class Dashboard extends Component {
   //               DELETE DATA
   //////////////////////////////////////////////
   deleteData = (dataType, id) => {
-    console.log(dataType);
-    console.log(id);
+    // console.log(dataType);
+    // console.log(id);
     axios.delete(`${api_url}/${dataType}/${id}`)
       .then(data => {
         this.getData(dataType)
       })
   }
 
-  removeFromArr = (arr, index) => {
-    this.setState(prevState => {
-      prevState[arr].splice(index, 1)
-      return {
-        [arr]: prevState[arr]
-      }
-    })
-  }
+  // removeFromArr = (arr, index) => {
+  //   this.setState(prevState => {
+  //     prevState[arr].splice(index, 1)
+  //     return {
+  //       [arr]: prevState[arr]
+  //     }
+  //   })
+  // }
 
   //////////////////////////////////////////////
   //               ADD DATA
@@ -126,15 +130,15 @@ class Dashboard extends Component {
       .then(err => console.log(err))
   }
 
-  updateArr = (arr, data) => {
-    console.log(data);
-    this.setState(prevState => {
-      prevState[arr].push(data)
-      return {
-        [arr]: prevState[arr]
-      }
-    })
-  }
+  // updateArr = (arr, data) => {
+  //   console.log(data);
+  //   this.setState(prevState => {
+  //     prevState[arr].push(data)
+  //     return {
+  //       [arr]: prevState[arr]
+  //     }
+  //   })
+  // }
 
   //////////////////////////////////////////////
   //               EDIT DATA

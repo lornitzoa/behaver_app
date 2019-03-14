@@ -13,17 +13,19 @@ class ChildDashboard extends Component {
     this.state ={
       sheet: 'tasks-behaviors',
       childID: null || this.props.child.member_id,
+      // evaluate daily score
       todaysPoints: parseInt(this.props.score[0].behavior_points) + parseInt(this.props.score[0].task_points)
     }
   }
 
-
+  // handle what component the page is showing
   changeSheetTo = (sheet) => {
     this.setState({
       sheet: sheet
     })
   }
 
+  // update score on task completion of behavior points rewards
   updateScore = (type, points) => {
     this.setState({
       todaysPoints: this.state.todaysPoints + parseInt(points)
@@ -33,7 +35,7 @@ class ChildDashboard extends Component {
   componentDidMount() {
     // console.log(this.props.child);
     // console.log(this.props.reinforcements);
-
+    //// get data required for this component and its children
     this.props.getData('tasks/assignments')
     this.props.getData('reinforcements/assignments')
     this.props.getData('behaviors/assignments')

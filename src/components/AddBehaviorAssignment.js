@@ -12,8 +12,8 @@ class AddBehaviorAssignment extends Component {
     }
   }
 
+  
   checkIfEditing = () => {
-
     if(this.props.behavior) {
       let behavior = this.props.behavior
       this.getBehaviorID(this.props.behaviors, behavior)

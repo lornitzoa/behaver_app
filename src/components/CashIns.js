@@ -10,6 +10,7 @@ class CashIns extends Component {
     }
   }
 
+  // handle which component is being used
   changeView = () => {
     this.setState({
       listView: !this.state.listView

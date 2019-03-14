@@ -9,15 +9,16 @@ class TaskList extends Component {
     }
   }
 
+  //  change whether task item is in view or edit mode
   goToEdit = (index) => {
     this.setState({
       editIndex: index
     })
   }
 
-  componentDidMount() {
-    // console.log(this.props.tasksassignments);
-  }
+  // componentDidMount() {
+  //   // console.log(this.props.tasksassignments);
+  // }
 
   render() {
     return (

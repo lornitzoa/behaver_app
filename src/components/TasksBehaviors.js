@@ -3,15 +3,13 @@ import React, { Component } from 'react'
 import TaskList from './TaskList'
 import BehaviorList from './BehaviorList'
 
-// import AddBehaviorAssignment from './behaviorsassignments'
-
 
 class TasksBehaviors extends Component {
-  
 
-  componentDidMount() {
-    // console.log(this.props.tasksassignments);
-  }
+
+  // componentDidMount() {
+  //   // console.log(this.props.tasksassignments);
+  // }
 
   render() {
     return (

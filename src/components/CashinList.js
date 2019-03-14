@@ -9,6 +9,7 @@ class CashinList extends Component {
     }
   }
 
+  // handle whether item is in view or edit state
   gotToEdit = (index) => {
     console.log(index);
     this.setState({
@@ -16,9 +17,9 @@ class CashinList extends Component {
     })
   }
 
-  componentDidMount() {
-    // console.log(this.props.availableCashIns);
-  }
+  // componentDidMount() {
+  //   // console.log(this.props.availableCashIns);
+  // }
 
   render() {
     return (

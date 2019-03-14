@@ -11,9 +11,12 @@ class AddBehavior extends Component {
     }
   }
 
+  // check if user is editing existing or adding new data
   checkIfEditing = () => {
-    console.log(this.state.family_id);
+    // console.log(this.state.family_id);
+    // if data is being sent for editing
     if(this.props.behavior) {
+      // set data to fill form
       this.setState({
         type: 'edit',
         behavior: this.props.behavior.behavior,
@@ -23,6 +26,7 @@ class AddBehavior extends Component {
     }
   }
 
+  // handles form input changes
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -30,26 +34,33 @@ class AddBehavior extends Component {
 
   }
 
+  // handles form submission
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.type);
+    // console.log(this.state.type);
+    // if new data is being entered
     if(this.state.type === 'new') {
+      // create object to send to addData function, no id
       let behavior = {
         behavior: this.state.behavior,
         targeted_for: this.state.targeted_for,
         family_id: this.state.family_id
       }
-      console.log(behavior)
+      // console.log(behavior)
+      // send object to addData function with route string
       this.props.addData('behaviors', behavior)
     } else if (this.state.type === 'edit') {
+      // if editing data, create object to send to updateData function, with id
       let behavior = {
         id: this.props.behavior.id,
         behavior: this.state.behavior,
         targeted_for: this.state.targeted_for,
         family_id: this.state.family_id
       }
-      console.log(behavior)
+      // console.log(behavior)
+      // return to list view
       this.props.setEditParams(null, 'behavior')
+      // send data to updateData function
       this.props.updateData('behaviors', behavior)
 
     }
@@ -57,6 +68,7 @@ class AddBehavior extends Component {
   }
 
   componentDidMount() {
+    // check if data is being sent in for editing
     this.checkIfEditing()
   }
 

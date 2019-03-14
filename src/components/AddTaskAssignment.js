@@ -18,6 +18,7 @@ class AddTaskAssignment extends Component {
     }
   }
 
+  // Set data depending on whether user is intending to add new data or edit existing data.
   checkIfEditing = () => {
     if(this.props.task) {
       let task = this.props.task
@@ -34,6 +35,7 @@ class AddTaskAssignment extends Component {
     }
   }
 
+  // get task id from incoming edit data to update db with
   getTaskID = (list, item) => {
     for(let i = 0; i < list.length; i++) {
       if(list[i].task === item.task_name) {
@@ -44,15 +46,19 @@ class AddTaskAssignment extends Component {
     }
   }
 
+  // handle form input changes
   handleChange = (e) => {
       this.setState({
         [e.target.id]: e.target.value
       })
   }
 
+  // handle form submission
   handleSubmit = (e) => {
     e.preventDefault()
+    // if user is editing
     if(this.state.editing) {
+      // create object to send to updateData function, includes task.id
       let updatedAssignment = {
         id: this.props.task.id,
         child_id: this.state.child_id,
@@ -63,10 +69,13 @@ class AddTaskAssignment extends Component {
         required: Boolean(this.state.required),
         completed: Boolean(this.state.completed)
       }
-      console.log(updatedAssignment);
+      // console.log(updatedAssignment);
+      // send object to updateData with route string
       this.props.updateData('tasks/assignments', updatedAssignment)
+      // return to list view
       this.props.cancel(null)
     } else {
+      // create object to send to addData function, does not include task.id
       let newAssignment = {
         child_id: this.state.child_id,
         task_id: parseInt(this.state.task_id),
@@ -76,8 +85,10 @@ class AddTaskAssignment extends Component {
         required: Boolean(this.state.required),
         completed: Boolean(this.state.completed)
       }
-      console.log(newAssignment);
+      // console.log(newAssignment);
+      // send object to addData with route string
       this.props.addData('tasks/assignments', newAssignment)
+      // reset state to clear form for more new data
       this.setState({
         child_id: this.props.childID,
         task_id: 0,
@@ -93,8 +104,9 @@ class AddTaskAssignment extends Component {
   }
 
   componentDidMount() {
+    // check if user is editing
     this.checkIfEditing()
-    console.log(this.props.task);
+    // console.log(this.props.task);
   }
 
   render() {
