@@ -93,8 +93,8 @@ class Dashboard extends Component {
   //               DELETE DATA
   //////////////////////////////////////////////
   deleteData = (dataType, id) => {
-    console.log(dataType);
-    console.log(id);
+    // console.log(dataType);
+    // console.log(id);
     axios.delete(`${api_url}/${dataType}/${id}`)
       .then(data => {
         this.getData(dataType)
@@ -120,13 +120,14 @@ class Dashboard extends Component {
         return newData.data
       })
       .then(resData => {
-        console.log(resData);
+        // console.log(resData);
         this.getData(dataType)
       })
       .then(err => console.log(err))
   }
 
   updateArr = (arr, data) => {
+    console.log(data);
     this.setState(prevState => {
       prevState[arr].push(data)
       return {
@@ -175,8 +176,10 @@ class Dashboard extends Component {
                 updateData={this.updateData}
                 tasks={this.state.tasks}
                 behaviors={this.state.behaviors}
+                reinforcements={this.state.reinforcements}
                 tasksassignments={this.state.tasksassignments.filter(task => task.child_id === this.childID)}
                 behaviorsassignments={this.state.behaviorsassignments.filter(task => task.child_id === this.childID)}
+                reinforcementsassignments={this.state.reinforcementsassignments}
                 goToChildDashboard={this.goToChildDashboard}
                 score={this.state.scores.filter(score => score.member_id === this.childID)}
               />

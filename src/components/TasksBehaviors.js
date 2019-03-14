@@ -7,15 +7,10 @@ import BehaviorList from './BehaviorList'
 
 
 class TasksBehaviors extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-
-    }
-  }
+  
 
   componentDidMount() {
-    console.log(this.props.tasksassignments);
+    // console.log(this.props.tasksassignments);
   }
 
   render() {
@@ -30,7 +25,6 @@ class TasksBehaviors extends Component {
           updateScore={this.props.updateScore}
         />
         <BehaviorList
-
           deleteData={this.props.deleteData}
           updateData={this.props.updateData}
           behaviors={this.props.behaviors}
