@@ -1,3 +1,44 @@
+
+
+// Holding for task list testing
+// 
+// {this.props.tasksassignments.map((task, index) => {
+//   return (
+//     <div key={index}>
+//     {this.state.editIndex === index ?
+//       <div>
+//         <AddTaskAssignment
+//           index={index}
+//           task={task}
+//           updateData={this.props.updateData}
+//           tasks={this.props.tasks}
+//           cancel={this.goToEdit}
+//         />
+//       </div>
+//       :
+//       <div className='items'>
+//         <p>{task.id}</p>
+//         <p>{task.task_name}</p>
+//         <p>{task.points}</p>
+//         <p>{task.required}</p>
+//         <p>{task.frequency}</p>
+//         <p>{task.completed}</p>
+//         <button>Completed</button>
+//         <button onClick={() => {
+//           this.goToEdit(index)
+//         }}>Edit</button>
+//         <button onClick={() => {
+//           this.props.deleteData('tasks/assignments', task.id)
+//         }}>Delete</button>
+//       </div>
+//     }
+//     </div>
+//   )
+// })}
+
+
+
+
 /// from Manage TBs Routes removed when moving to axios routes
 
 // //////////////////////////////////////////

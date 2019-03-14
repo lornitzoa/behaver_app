@@ -9,16 +9,21 @@ class ManageAccount extends Component {
     }
   }
 
+  // handle form submission
   handleSubmit = (e) => {
     e.preventDefault()
+    // create object for updated data
     let accountInfo = {
       familyname: this.state.familyname,
       password: this.state.password
     }
+    // send object to updateAccount function
     this.props.updateAccount(accountInfo)
+    // change tab view
     this.props.showTab('showMembers')
   }
 
+  // handle form input changes
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value

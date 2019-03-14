@@ -11,12 +11,14 @@ class Login extends Component {
     this.Auth = new AuthService()
   }
 
-
+  // handle form submission
   handleSubmit = (e) => {
     e.preventDefault()
+    // send entered username and password to user.service login function
     this.Auth.login(this.state.username, this.state.password)
       .then(
         res => {
+          // if successful redirect to dashboard
           this.props.history.replace('/dashboard')
         },
         error =>
@@ -25,6 +27,7 @@ class Login extends Component {
       )
   }
 
+  // handle form input changes
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value
@@ -32,6 +35,7 @@ class Login extends Component {
   }
 
   componentDidMount() {
+    // check if user is already logged in, if so redirect to dashboard
     if(this.Auth.loggedIn()) {
       this.props.history.replace('/dashboard')
     }

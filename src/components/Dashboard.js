@@ -20,7 +20,9 @@ class Dashboard extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      // wait for data to come in
       loaded: false,
+      // arrays for app data
       members: [],
       tasks: [],
       behaviors: [],
@@ -29,7 +31,9 @@ class Dashboard extends Component {
       reinforcements: [],
       reinforcementsassignments: [],
       scores: [],
+      // set component to be viewed
       manage: 'family-dashboard',
+      // toggles family vs child dashboard
       childDetails: false
     }
     this.Auth = new AuthService()
@@ -64,6 +68,7 @@ class Dashboard extends Component {
     axios.get(`${api_url}/${dataType}`)
       .then(json => json.data)
       .then(data => {
+          let dataWONulls = this.removeNulls(data)
           let array = dataType.replace('/', '')
           this.setState({
             [array]: data
@@ -73,29 +78,41 @@ class Dashboard extends Component {
               loaded: true
             })
           }
+          // console.log(dataType);
+          // console.log(data);
+
       })
+  }
+
+  removeNulls = (array) => {
+    for(let i = 0; i < array.length; i++) {
+      if(array[i] === null) {
+        array.splice(i, 1)
+      }
+    }
+    // console.log(array);
   }
 
   //////////////////////////////////////////////
   //               DELETE DATA
   //////////////////////////////////////////////
   deleteData = (dataType, id) => {
-    console.log(dataType);
-    console.log(id);
+    // console.log(dataType);
+    // console.log(id);
     axios.delete(`${api_url}/${dataType}/${id}`)
       .then(data => {
         this.getData(dataType)
       })
   }
 
-  removeFromArr = (arr, index) => {
-    this.setState(prevState => {
-      prevState[arr].splice(index, 1)
-      return {
-        [arr]: prevState[arr]
-      }
-    })
-  }
+  // removeFromArr = (arr, index) => {
+  //   this.setState(prevState => {
+  //     prevState[arr].splice(index, 1)
+  //     return {
+  //       [arr]: prevState[arr]
+  //     }
+  //   })
+  // }
 
   //////////////////////////////////////////////
   //               ADD DATA
@@ -107,20 +124,21 @@ class Dashboard extends Component {
         return newData.data
       })
       .then(resData => {
-        console.log(resData);
+        // console.log(resData);
         this.getData(dataType)
       })
       .then(err => console.log(err))
   }
 
-  updateArr = (arr, data) => {
-    this.setState(prevState => {
-      prevState[arr].push(data)
-      return {
-        [arr]: prevState[arr]
-      }
-    })
-  }
+  // updateArr = (arr, data) => {
+  //   console.log(data);
+  //   this.setState(prevState => {
+  //     prevState[arr].push(data)
+  //     return {
+  //       [arr]: prevState[arr]
+  //     }
+  //   })
+  // }
 
   //////////////////////////////////////////////
   //               EDIT DATA
@@ -128,10 +146,10 @@ class Dashboard extends Component {
   updateData = (dataType, data) => {
     console.log(dataType)
     console.log(data)
-    console.log(data.id);
+    console.log(data.id)
     axios.put(`${api_url}/${dataType}/${data.id}`, data)
       .then(updatedData => {
-        console.log(updatedData);
+        // console.log(updatedData);
         return updatedData.data
       })
       .then(resData => {
@@ -144,10 +162,7 @@ class Dashboard extends Component {
     this.getData('members')
     this.getData('tasks')
     this.getData('behaviors')
-    this.getData('tasks/assignments')
-    this.getData('behaviors/assignments')
-    // this.getData('reinforcements')
-    // this.getData('reinforcements/assignments')
+    this.getData('reinforcements')
     this.getData('scores')
   }
 
@@ -165,10 +180,12 @@ class Dashboard extends Component {
                 updateData={this.updateData}
                 tasks={this.state.tasks}
                 behaviors={this.state.behaviors}
+                reinforcements={this.state.reinforcements}
                 tasksassignments={this.state.tasksassignments.filter(task => task.child_id === this.childID)}
                 behaviorsassignments={this.state.behaviorsassignments.filter(task => task.child_id === this.childID)}
+                reinforcementsassignments={this.state.reinforcementsassignments}
                 goToChildDashboard={this.goToChildDashboard}
-                scores={this.state.scores.filter(score => score.member_id === this.childiD)}
+                score={this.state.scores.filter(score => score.member_id === this.childID)}
               />
               :
               <div>
@@ -211,7 +228,12 @@ class Dashboard extends Component {
                   }
                   {this.state.manage === 'cash-ins' ?
                     <div>
-                      <ManageCashins/>
+                      <ManageCashins
+                        reinforcements={this.state.reinforcements}
+                        addData={this.addData}
+                        deleteData={this.deleteData}
+                        updateData={this.updateData}
+                      />
                     </div>
                     :""
                   }

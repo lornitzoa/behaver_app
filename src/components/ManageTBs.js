@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import AddTask from './AddTask'
 import AddBehavior from './AddBehavior'
 
-// let api_url = 'http://localhost:3000'
 
 class ManageTBs extends Component {
   constructor(props) {
@@ -15,7 +14,7 @@ class ManageTBs extends Component {
     }
   }
 
-
+  // set index to item selected for editing to change view
   setEditParams = (index, dataType) => {
     this.setState({
       [dataType + 'Index']: index

@@ -9,16 +9,16 @@ class BehaviorList extends Component {
     }
   }
 
+  // set index of item selected for editing
   goToEdit = (index) => {
-
     this.setState({
       editIndex: index
     })
   }
 
-  componentDidMount() {
-    console.log(this.props.behaviorsassignments);
-  }
+  // componentDidMount() {
+  //   // console.log(this.props.behaviorsassignments);
+  // }
 
   render() {
     return (
@@ -51,7 +51,9 @@ class BehaviorList extends Component {
                     <p>{behavior.behavior}</p>
                     <p>{behavior.targeted_for}</p>
                     <p>{behavior.points}</p>
-                    <button>+</button>
+                    <button onClick={() => {
+                      this.props.updateScore('behavior_points', behavior.points)
+                    }}>+</button>
                     <button onClick={() => {
                       this.goToEdit(index)
                     }}>Edit</button>

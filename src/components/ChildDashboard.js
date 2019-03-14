@@ -12,22 +12,34 @@ class ChildDashboard extends Component {
     super(props)
     this.state ={
       sheet: 'tasks-behaviors',
-      childID: null || this.props.child.member_id
+      childID: null || this.props.child.member_id,
+      // evaluate daily score
+      todaysPoints: parseInt(this.props.score[0].behavior_points) + parseInt(this.props.score[0].task_points)
     }
   }
 
-
+  // handle what component the page is showing
   changeSheetTo = (sheet) => {
     this.setState({
       sheet: sheet
     })
   }
 
+  // update score on task completion of behavior points rewards
+  updateScore = (type, points) => {
+    this.setState({
+      todaysPoints: this.state.todaysPoints + parseInt(points)
+    })
+  }
+
   componentDidMount() {
-    // console.log(this.props.tasksassignments);
-    console.log(this.props.behaviors);
-    console.log(this.props.behaviorsassignments);
-    console.log(this.props.tasksassignments);
+    // console.log(this.props.child);
+    // console.log(this.props.reinforcements);
+    //// get data required for this component and its children
+    this.props.getData('tasks/assignments')
+    this.props.getData('reinforcements/assignments')
+    this.props.getData('behaviors/assignments')
+    // console.log(this.props.reinforcementsassignments);
   }
 
 
@@ -45,19 +57,19 @@ class ChildDashboard extends Component {
         <div className='score-board'>
           <div className='data'>
             <h2>Behavior Points</h2>
-            <h3>50</h3>
+            <h3>{this.props.score[0].behavior_points}</h3>
           </div>
           <div className='data'>
             <h2>Tasks Completed</h2>
-            <h3>3/5</h3>
+            <h3>{this.props.score[0].tasks_completed}</h3>
           </div>
           <div className='data'>
             <h2>Todays Points</h2>
-            <h3>3/5</h3>
+            <h3>{this.state.todaysPoints}</h3>
           </div>
           <div className='data'>
             <h2>Stashed Points</h2>
-            <h3>3/5</h3>
+            <h3>{this.props.score[0].stashed_cash}</h3>
           </div>
         </div>
         <div className='sheets-nav'>
@@ -86,13 +98,23 @@ class ChildDashboard extends Component {
                 child={this.props.child}
                 deleteData={this.props.deleteData}
                 updateData={this.props.updateData}
+                updateScore={this.updateScore}
               />
               :
               ''
           }
           {
             this.state.sheet === 'cash-ins' ?
-              <CashIns/>
+              <CashIns
+                child={this.props.child}
+                cashIns={this.props.reinforcements}
+                availableCashIns={this.props.reinforcementsassignments}
+                updateScore={this.updateScore}
+                child={this.props.child}
+                deleteData={this.props.deleteData}
+                updateData={this.props.updateData}
+                addData={this.props.addData}
+              />
               :
               ''
           }
