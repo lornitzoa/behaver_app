@@ -9,16 +9,16 @@ class BehaviorList extends Component {
     }
   }
 
+  // set index of item selected for editing
   goToEdit = (index) => {
-
     this.setState({
       editIndex: index
     })
   }
 
-  componentDidMount() {
-    console.log(this.props.behaviorsassignments);
-  }
+  // componentDidMount() {
+  //   // console.log(this.props.behaviorsassignments);
+  // }
 
   render() {
     return (

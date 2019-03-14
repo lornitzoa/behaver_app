@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AddCashin from './AddCashin'
+import AddCashinAssignment from './AddCashinAssignment'
 
 class CashinList extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class CashinList extends Component {
             return(
               <div key={index}>
                 {this.state.editIndex === index ?
-                  <AddCashin
+                  <AddCashinAssignment
                     index={index}
                     cashin={cashin}
                     updateData={this.props.updateData}

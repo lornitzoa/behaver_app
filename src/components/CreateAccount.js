@@ -13,28 +13,35 @@ class CreateAccount extends Component {
     this.Auth = new AuthService()
   }
 
+  // handle form submission
   handleSubmit = (e) => {
     e.preventDefault()
+    // if username and password states have value
     if(this.state.username && this.state.password) {
+      // create user object
       let user = {
         username: this.state.username,
         password: this.state.password
       }
+      // send user to user.service register function to create new user
       this.Auth.register(user)
         .then(
           res => {
+            // redirect to login page
             this.props.history.replace('/login')
           }
         )
     }
   }
 
+  // handles form pin input
   handlePin = (e) => {
     this.setState({
       parent_pin: e
     })
   }
 
+  // handles form input changes
   handleChange = (e) => {
     this.setState({
       [e.target.id]: e.target.value

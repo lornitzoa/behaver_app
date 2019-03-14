@@ -16,10 +16,6 @@ class ManageHousehold extends Component {
     }
   }
 
-  // =========================
-  //  Tab Sheet Management
-  // =========================
-
   // change sheet views
   changeTabTo = (tabName) => {
     this.setState({
@@ -27,7 +23,7 @@ class ManageHousehold extends Component {
     })
   }
 
-
+  // reset view state
   resetTabState = () => {
     this.setState({
       addMember: false,

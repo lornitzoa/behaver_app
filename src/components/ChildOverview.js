@@ -12,6 +12,7 @@ class ChildOverview extends Component {
     }
   }
 
+  // get and set data to display on score board
   setData = () => {
     let scores = this.props.scores
     if(scores.length > 0) {
@@ -30,6 +31,7 @@ class ChildOverview extends Component {
   }
 
   componentDidMount() {
+    // send incoming data to scoreboard
     this.setData()
 
   }
