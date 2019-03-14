@@ -15,7 +15,7 @@ class TasksBehaviors extends Component {
   }
 
   componentDidMount() {
-
+    console.log(this.props.tasksassignments);
   }
 
   render() {
@@ -27,6 +27,7 @@ class TasksBehaviors extends Component {
           tasks={this.props.tasks}
           tasksassignments={this.props.tasksassignments}
           changeSheetTo={this.props.changeSheetTo}
+          updateScore={this.props.updateScore}
         />
         <BehaviorList
 
@@ -35,6 +36,7 @@ class TasksBehaviors extends Component {
           behaviors={this.props.behaviors}
           behaviorsassignments={this.props.behaviorsassignments}
           changeSheetTo={this.props.changeSheetTo}
+          updateScore={this.props.updateScore}
         />
       </div>
     )

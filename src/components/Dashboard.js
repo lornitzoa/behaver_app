@@ -64,6 +64,7 @@ class Dashboard extends Component {
     axios.get(`${api_url}/${dataType}`)
       .then(json => json.data)
       .then(data => {
+          let dataWONulls = this.removeNulls(data)
           let array = dataType.replace('/', '')
           this.setState({
             [array]: data
@@ -73,7 +74,19 @@ class Dashboard extends Component {
               loaded: true
             })
           }
+          // console.log(dataType);
+          // console.log(data);
+
       })
+  }
+
+  removeNulls = (array) => {
+    for(let i = 0; i < array.length; i++) {
+      if(array[i] === null) {
+        array.splice(i, 1)
+      }
+    }
+    // console.log(array);
   }
 
   //////////////////////////////////////////////
@@ -101,7 +114,7 @@ class Dashboard extends Component {
   //               ADD DATA
   //////////////////////////////////////////////
   addData = (dataType, data) => {
-    console.log(data);
+    // console.log(data);
     axios.post(`${api_url}/${dataType}`, data)
       .then(newData => {
         return newData.data
@@ -126,12 +139,12 @@ class Dashboard extends Component {
   //               EDIT DATA
   //////////////////////////////////////////////
   updateData = (dataType, data) => {
-    console.log(dataType)
-    console.log(data)
-    console.log(data.id);
+    // console.log(dataType)
+    // console.log(data)
+    // console.log(data.id);
     axios.put(`${api_url}/${dataType}/${data.id}`, data)
       .then(updatedData => {
-        console.log(updatedData);
+        // console.log(updatedData);
         return updatedData.data
       })
       .then(resData => {
@@ -144,10 +157,7 @@ class Dashboard extends Component {
     this.getData('members')
     this.getData('tasks')
     this.getData('behaviors')
-    this.getData('tasks/assignments')
-    this.getData('behaviors/assignments')
     this.getData('reinforcements')
-    this.getData('reinforcements/assignments')
     this.getData('scores')
   }
 

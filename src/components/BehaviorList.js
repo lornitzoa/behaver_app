@@ -51,7 +51,9 @@ class BehaviorList extends Component {
                     <p>{behavior.behavior}</p>
                     <p>{behavior.targeted_for}</p>
                     <p>{behavior.points}</p>
-                    <button>+</button>
+                    <button onClick={() => {
+                      this.props.updateScore('behavior_points', behavior.points)
+                    }}>+</button>
                     <button onClick={() => {
                       this.goToEdit(index)
                     }}>Edit</button>

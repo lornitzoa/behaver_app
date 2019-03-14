@@ -11,6 +11,7 @@ class AddTaskAssignment extends Component {
       points: 0,
       required: true,
       completed: false,
+
       editing: false,
       btnDone: 'Done'
 
@@ -28,7 +29,7 @@ class AddTaskAssignment extends Component {
         points: task.points,
         required: task.required,
         editing: true,
-        btnDone: 'Edit'
+        btnDone: 'Cancel'
       })
     }
   }
@@ -112,7 +113,8 @@ class AddTaskAssignment extends Component {
           <select onChange={this.handleChange} id='frequency' value={this.state.frequency}>
             <option>---Choose Frequency---</option>
             <option value='daily'>Daily</option>
-            <option value='weekly'>Weekly</option>
+            <option value='weekdays'>Weekdays</option>
+            <option value='weekends'>Weekends</option>
           </select>
           <select onChange={this.handleChange} id='time_of_day' value={this.state.time_of_day}>
             <option>--Choose Time of Day---</option>

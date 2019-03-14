@@ -24,9 +24,18 @@ class ChildDashboard extends Component {
     })
   }
 
+  updateScore = (type, points) => {
+    this.setState({
+      todaysPoints: this.state.todaysPoints + parseInt(points)
+    })
+  }
+
   componentDidMount() {
     console.log(this.props.child);
-    console.log(this.props.tasksassignments);
+    console.log(this.props.score);
+    this.props.getData('tasks/assignments')
+    this.props.getData('reinforcements/assignments')
+    this.props.getData('behaviors/assignments')
   }
 
 
@@ -85,6 +94,7 @@ class ChildDashboard extends Component {
                 child={this.props.child}
                 deleteData={this.props.deleteData}
                 updateData={this.props.updateData}
+                updateScore={this.updateScore}
               />
               :
               ''
