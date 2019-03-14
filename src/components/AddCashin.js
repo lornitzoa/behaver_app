@@ -4,13 +4,12 @@ class AddCashin extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      child_id: this.props.childID,
+      child_id: this.props.child[0].member_id,
       reinforcement_id: 0,
       reinforcement: '',
       points: 0,
-      availablity_freq: 0,
+      daily_allotment: 0,
       no_available: 0,
-      available: Boolean,
       editing: false,
       btnDone: 'Done'
     }
@@ -18,12 +17,14 @@ class AddCashin extends Component {
 
   checkIfEditing = () => {
     if(this.props.cashin) {
+
       let cashin = this.props.cashin
+      console.log(cashin);
       this.setState({
         reinforcement_id: cashin.reinforcement_id,
         reinforcement: cashin.reinforcement,
         points: cashin.points,
-        availablity_freq: cashin.availablity_freq,
+        daily_allotment: cashin.daily_allotment,
         no_available: cashin.no_available,
         editing: true,
         btnDone: 'Cancel'
@@ -42,22 +43,21 @@ class AddCashin extends Component {
     if(this.state.editing) {
       let updatedAssignment = {
         id: this.props.cashin.id,
-        child_id: this.state.childID,
+        child_id: this.state.child_id,
         reinforcement_id: parseInt(this.state.reinforcement_id),
-        reinforcement: this.state.reinforcement,
         points: parseInt(this.state.points),
-        availablity_freq: parseInt(this.state.availablity_freq),
+        daily_allotment: parseInt(this.state.daily_allotment),
         no_available: parseInt(this.state.no_available),
       }
+      console.log(updatedAssignment);
       this.props.updateData('reinforcements/assignments', updatedAssignment)
       this.props.cancel(null)
     } else {
       let updatedAssignment = {
-        child_id: this.state.childID,
+        child_id: this.state.child_id,
         reinforcement_id: parseInt(this.state.reinforcement_id),
-        reinforcement: this.state.reinforcement,
         points: parseInt(this.state.points),
-        availablity_freq: parseInt(this.state.availablity_freq),
+        daily_allotment: parseInt(this.state.daily_allotment),
         no_available: parseInt(this.state.no_available),
       }
       this.props.addData('reinforcement/assignments', updatedAssignment)
@@ -67,7 +67,7 @@ class AddCashin extends Component {
         reinforcement_id: 0,
         reinforcement: '',
         points: 0,
-        availablity_freq: 0,
+        daily_allotment: 0,
         no_available: 0,
         available: Boolean,
         editing: false,
@@ -80,6 +80,8 @@ class AddCashin extends Component {
   componentDidMount() {
     this.checkIfEditing()
     console.log(this.props.cashIns);
+    console.log(this.props.child);
+
   }
 
   render() {
@@ -98,14 +100,14 @@ class AddCashin extends Component {
           <label>Value</label>
           <input type='number' id='points' value={this.state.points} onChange={this.handleChange}/>
           <label>Daily Allotment</label>
-          <input type='number' onChange={this.handleChange} id='availablity_freq' value={this.state.availablity_freq}/>
+          <input type='number' onChange={this.handleChange} id='no_available' value={this.state.no_available}/>
           <input type="submit"/>
         </form>
         <button onClick={() => {
           if(this.state.editing) {
-            this.props.changeView()
-          } else {
             this.props.cancel(null)
+          } else {
+            this.props.changeView()
           }
         }}>{this.state.btnDone}</button>
       </div>

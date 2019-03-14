@@ -25,17 +25,18 @@ class CashIns extends Component {
           <CashinList
             changeView={this.changeView}
             updateScore={this.updateScore}
-            availableCashIns={this.props.reinforcementsassignments}
-            childID={this.props.childID}
+            availableCashIns={this.props.availableCashIns}
+            child={this.props.child}
             deleteData={this.props.deleteData}
             updateData={this.props.updateData}
-
+            cashIns={this.props.cashIns}
           />
           :
           <AddCashin
             cashIns={this.props.cashIns}
             addData={this.props.addData}
             changeView={this.changeView}
+            child={this.props.child}
           />
         }
 

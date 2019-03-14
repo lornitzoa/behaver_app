@@ -31,11 +31,13 @@ class ChildDashboard extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.child);
-    console.log(this.props.reinforcements);
+    // console.log(this.props.child);
+    // console.log(this.props.reinforcements);
+
     this.props.getData('tasks/assignments')
     this.props.getData('reinforcements/assignments')
     this.props.getData('behaviors/assignments')
+    // console.log(this.props.reinforcementsassignments);
   }
 
 
@@ -102,6 +104,7 @@ class ChildDashboard extends Component {
           {
             this.state.sheet === 'cash-ins' ?
               <CashIns
+                child={this.props.child}
                 cashIns={this.props.reinforcements}
                 availableCashIns={this.props.reinforcementsassignments}
                 updateScore={this.updateScore}

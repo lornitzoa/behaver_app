@@ -16,7 +16,7 @@ class TaskList extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.tasksassignments);
+    // console.log(this.props.tasksassignments);
   }
 
   render() {
@@ -57,7 +57,7 @@ class TaskList extends Component {
                   this.props.updateScore('task_points', task.points)
                 }}>Completed</button>
                 <button onClick={() => {
-                  this.goToEdit()
+                  this.goToEdit(index)
                 }}>Edit</button>
                 <button onClick={() => {
                   this.props.deleteData('tasks/assignments', task.id)

@@ -93,8 +93,8 @@ class Dashboard extends Component {
   //               DELETE DATA
   //////////////////////////////////////////////
   deleteData = (dataType, id) => {
-    // console.log(dataType);
-    // console.log(id);
+    console.log(dataType);
+    console.log(id);
     axios.delete(`${api_url}/${dataType}/${id}`)
       .then(data => {
         this.getData(dataType)
@@ -142,7 +142,7 @@ class Dashboard extends Component {
   updateData = (dataType, data) => {
     // console.log(dataType)
     // console.log(data)
-    // console.log(data.id);
+    // console.log(data.id)
     axios.put(`${api_url}/${dataType}/${data.id}`, data)
       .then(updatedData => {
         // console.log(updatedData);
