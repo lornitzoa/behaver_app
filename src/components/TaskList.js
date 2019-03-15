@@ -5,7 +5,8 @@ class TaskList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      editIndex: null
+      editIndex: null,
+      no_tasks: this.props.tasksassignments.length
     }
   }
 
@@ -16,9 +17,10 @@ class TaskList extends Component {
     })
   }
 
-  // componentDidMount() {
-  //   // console.log(this.props.tasksassignments);
-  // }
+  componentDidMount() {
+    // console.log(this.props.tasksassignments);
+    console.log(this.props.tasksassignments);
+  }
 
   render() {
     return (
@@ -34,6 +36,7 @@ class TaskList extends Component {
           <h3>When</h3>
           <h3>Completed Today</h3>
         </div>
+        
         {this.props.tasksassignments.map((task, index) => {
           return (
             <div key={index}>

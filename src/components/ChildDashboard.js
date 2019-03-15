@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import TasksBehaviors from './TasksBehaviors'
 import CashIns from './CashIns'
 
+import ScoreBoard from './ScoreBoard'
+
 import AddTaskAssignment from './AddTaskAssignment'
 import AddBehaviorAssignment from './AddBehaviorAssignment'
 
@@ -14,7 +16,8 @@ class ChildDashboard extends Component {
       sheet: 'tasks-behaviors',
       childID: null || this.props.child.member_id,
       // evaluate daily score
-      todaysPoints: parseInt(this.props.score[0].behavior_points) + parseInt(this.props.score[0].task_points)
+
+
     }
   }
 
@@ -32,6 +35,8 @@ class ChildDashboard extends Component {
     })
   }
 
+
+
   componentDidMount() {
     // console.log(this.props.child);
     // console.log(this.props.reinforcements);
@@ -39,6 +44,8 @@ class ChildDashboard extends Component {
     this.props.getData('tasks/assignments')
     this.props.getData('reinforcements/assignments')
     this.props.getData('behaviors/assignments')
+    console.log(this.props.score);
+
     // console.log(this.props.reinforcementsassignments);
   }
 
@@ -48,30 +55,17 @@ class ChildDashboard extends Component {
       <div>
         <div className='header'>
           <h1 id='h1-header'>{this.props.child[0].name}'s Dashboard</h1>
+          <ScoreBoard
+            tasksassignments={this.props.tasksassignments}
+            score={this.props.score}
+          />
           <div>
             <button onClick={() => {
               this.props.goToChildDashboard(null)
             }}>Back to Main Dashboard</button>
           </div>
         </div>
-        <div className='score-board'>
-          <div className='data'>
-            <h2>Behavior Points</h2>
-            <h3>{this.props.score[0].behavior_points}</h3>
-          </div>
-          <div className='data'>
-            <h2>Tasks Completed</h2>
-            <h3>{this.props.score[0].tasks_completed}</h3>
-          </div>
-          <div className='data'>
-            <h2>Todays Points</h2>
-            <h3>{this.state.todaysPoints}</h3>
-          </div>
-          <div className='data'>
-            <h2>Stashed Points</h2>
-            <h3>{this.props.score[0].stashed_cash}</h3>
-          </div>
-        </div>
+
         <div className='sheets-nav'>
           <button
             onClick={() => {
@@ -110,7 +104,6 @@ class ChildDashboard extends Component {
                 cashIns={this.props.reinforcements}
                 availableCashIns={this.props.reinforcementsassignments}
                 updateScore={this.updateScore}
-                child={this.props.child}
                 deleteData={this.props.deleteData}
                 updateData={this.props.updateData}
                 addData={this.props.addData}
