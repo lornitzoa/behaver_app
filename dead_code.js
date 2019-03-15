@@ -1,7 +1,19 @@
-
+// scores object
+date: this.score.date,
+member_id: this.score.member_id,
+bx_points_earned: this.score.bx_points_earned,
+req_tasks_complete: this.score.req_tasks_complete,
+req_tasks_assigned: this.score.req_tasks_assigned,
+bonus_tasks_complete: this.score.bonus_tasks_complete,
+bonus_tasks_assigned: this.score.bonus_tasks_assigned,
+task_points_earned: this.score.task_points_earned,
+total_points_earned: this.score.total_points_earned,
+points_used: this.score.points_used,
+points_available: this.score.points_available,
+stashed_cash: this.score.stashed_cash,
 
 // Holding for task list testing
-// 
+//
 // {this.props.tasksassignments.map((task, index) => {
 //   return (
 //     <div key={index}>

@@ -6,7 +6,7 @@ class TaskList extends Component {
     super(props)
     this.state = {
       editIndex: null,
-      no_tasks: this.props.tasksassignments.length
+
     }
   }
 
@@ -36,7 +36,7 @@ class TaskList extends Component {
           <h3>When</h3>
           <h3>Completed Today</h3>
         </div>
-        
+
         {this.props.tasksassignments.map((task, index) => {
           return (
             <div key={index}>
@@ -58,7 +58,7 @@ class TaskList extends Component {
                 <p>{task.frequency}</p>
                 <p>{task.completed}</p>
                 <button onClick={() => {
-                  this.props.updateScore('task_points', task.points)
+                  this.props.updateScore('task_points_earned', task.points)
                 }}>Completed</button>
                 <button onClick={() => {
                   this.goToEdit(index)

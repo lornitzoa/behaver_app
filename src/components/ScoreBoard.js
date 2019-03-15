@@ -4,8 +4,7 @@ class ScoreBoard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      todaysPoints: parseInt(this.props.score[0].bx_points_earned) + parseInt(this.props.score[0].task_points_earned),
-      req_tasks: this.props.tasks
+      
     }
   }
 
@@ -29,14 +28,14 @@ class ScoreBoard extends Component {
         <div className='data'>
           <h2>Required Tasks Completed</h2>
           <h3>
-            {this.props.score[0].req_tasks_completed}/
+            {this.props.score[0].req_tasks_complete}/
             {this.props.tasksassignments.filter(task => task.required === 't').length}
            </h3>
         </div>
         <div className='data'>
           <h2>Bonus Tasks Completed</h2>
           <h3>
-            {this.props.score[0].req_tasks_completed}/
+            {this.props.score[0].bonus_tasks_complete}/
             {this.props.tasksassignments.filter(task => task.required === 'f').length}
           </h3>
         </div>
@@ -46,7 +45,7 @@ class ScoreBoard extends Component {
         </div>
         <div className='data'>
           <h2>Todays Earned Points</h2>
-          <h3>{this.state.todaysPoints}</h3>
+          <h3>{this.props.total_points_earned}</h3>
         </div>
         <div className='data'>
           <h2>Points Used</h2>

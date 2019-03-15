@@ -30,9 +30,7 @@ class ChildDashboard extends Component {
 
   // update score on task completion of behavior points rewards
   updateScore = (type, points) => {
-    this.setState({
-      todaysPoints: this.state.todaysPoints + parseInt(points)
-    })
+    
   }
 
 
