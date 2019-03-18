@@ -11,7 +11,6 @@ class CashinList extends Component {
 
   // handle whether item is in view or edit state
   gotToEdit = (index) => {
-    console.log(index);
     this.setState({
       editIndex: index
     })
@@ -22,6 +21,7 @@ class CashinList extends Component {
     let updateData = {
       points_used: cashin.points
     }
+    console.log(cashin);
     this.props.updateScore(cashin.child_id, updateData)
     let updateNoAvailable = {
       id: cashin.id,
@@ -29,13 +29,13 @@ class CashinList extends Component {
       reinforcement_id: parseInt(cashin.reinforcement_id),
       points: parseInt(cashin.points),
       daily_allotment: parseInt(cashin.daily_allotment),
-      no_available: parseInt(cashin.daily_allotment) - 1,
+      no_available: parseInt(cashin.no_available) - 1,
     }
     this.props.updateData('reinforcements/assignments', updateNoAvailable)
   }
 
   componentDidMount() {
-    console.log(this.props.availablePoints);
+    // console.log(this.props.availablePoints);
   }
 
   render() {

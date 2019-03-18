@@ -31,6 +31,15 @@ class TaskList extends Component {
     }
   }
 
+  // prepare boolean values for data entry
+  checkBooleans = (string) => {
+    if(string === 'true') {
+      return true
+    } else {
+      return false
+    }
+  }
+
   // handle completion of task
   handleCompleted = (task) => {
     // check if task is required or bonus to update correct columns of score table
@@ -55,6 +64,7 @@ class TaskList extends Component {
     // create variable to hold taskID, retrieved from getTaskID function
     // using the task list and the completed task
     let taskID = this.getTaskID(this.props.tasks, task)
+    let required = this.checkBooleans(task.required)
     // create data object to update assigned task table
     let updateComplete = {
       id: task.id,
@@ -63,7 +73,7 @@ class TaskList extends Component {
       frequency: task.frequency,
       time_of_day: task.time_of_day,
       points: parseInt(task.points),
-      required: Boolean(task.required),
+      required: required,
       completed: true
     }
     // send data objec to updateData function with route

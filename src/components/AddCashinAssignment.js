@@ -5,7 +5,7 @@ class AddCashinAssignment extends Component {
     super(props)
     this.state = {
       // data for db
-      child_id: this.props.child[0].member_id,
+      child_id: null,
       reinforcement_id: 0,
       reinforcement: '',
       points: 0,
@@ -46,6 +46,7 @@ class AddCashinAssignment extends Component {
   // handle form submission
   handleSubmit = (e) => {
     e.preventDefault()
+    console.log(this.state.child_id);
     // if user is editing data
     if(this.state.editing) {
       // create an object to send to updateData function with id
@@ -95,7 +96,10 @@ class AddCashinAssignment extends Component {
     // check if object data is being sent for editing.
     this.checkIfEditing()
     // console.log(this.props.cashIns);
-    // console.log(this.props.child);
+    // console.log(this.props.child[0].member_id);
+    this.setState({
+      child_id: this.props.child[0].member_id
+    })
 
   }
 

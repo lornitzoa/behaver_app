@@ -38,7 +38,8 @@ class ChildDashboard extends Component {
       .then(updatedData => {
         return updatedData.data
       })
-      .then(resDat => {
+      .then(resData => {
+        console.log(resData);
         this.props.getData('scores')
       })
       .then(err => console.log(err))
