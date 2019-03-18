@@ -16,6 +16,16 @@ class BehaviorList extends Component {
     })
   }
 
+  // prepare data to send to update scoreboard
+  handleAddBxPoints = (id, points) => {
+    // create data object
+    let updateData = {
+      bx_points_earned: points
+    }
+    // send to updateScore
+    this.props.updateScore(id, updateData)
+  }
+
   // componentDidMount() {
   //   // console.log(this.props.behaviorsassignments);
   // }
@@ -56,7 +66,7 @@ class BehaviorList extends Component {
                     </div>
                     <div className='list-buttons'>
                       <i className="fas fa-plus-circle fa-2x"  onClick={() => {
-                        console.log('clicked');
+                        this.handleAddBxPoints(behavior.child_id, behavior.points)
                       }}></i>
                       <button onClick={() => {
                         this.goToEdit(index)

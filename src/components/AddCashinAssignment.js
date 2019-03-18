@@ -12,7 +12,7 @@ class AddCashinAssignment extends Component {
       daily_allotment: 0,
       no_available: 0,
       // view state of form
-      editing: false,
+      editing: false
 
     }
   }
@@ -55,7 +55,7 @@ class AddCashinAssignment extends Component {
         reinforcement_id: parseInt(this.state.reinforcement_id),
         points: parseInt(this.state.points),
         daily_allotment: parseInt(this.state.daily_allotment),
-        no_available: parseInt(this.state.no_available),
+        no_available: parseInt(this.state.daily_allotment),
       }
       // console.log(updatedAssignment);
       // send object to updateData with route string
@@ -70,7 +70,7 @@ class AddCashinAssignment extends Component {
         reinforcement_id: parseInt(this.state.reinforcement_id),
         points: parseInt(this.state.points),
         daily_allotment: parseInt(this.state.daily_allotment),
-        no_available: parseInt(this.state.no_available),
+        no_available: parseInt(this.state.daily_allotment),
       }
       // send objec to addData with route string
       this.props.addData('reinforcements/assignments', newAssignment)
@@ -115,7 +115,7 @@ class AddCashinAssignment extends Component {
           <label>Value</label>
           <input type='number' id='points' value={this.state.points} onChange={this.handleChange}/>
           <label>Daily Allotment</label>
-          <input type='number' onChange={this.handleChange} id='no_available' value={this.state.no_available}/>
+          <input type='number' onChange={this.handleChange} id='daily_allotment' value={this.state.daily_allotment}/>
           <input type="submit"/>
         </form>
         {this.state.editing ?
@@ -123,7 +123,9 @@ class AddCashinAssignment extends Component {
               this.props.cancel(null)
           }}>Cancel</button>
           :
-          ""
+          <button onClick={() => {
+              this.props.changeView()
+          }}>Cancel</button>
         }
 
       </div>

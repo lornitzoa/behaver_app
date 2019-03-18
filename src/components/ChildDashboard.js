@@ -16,8 +16,7 @@ class ChildDashboard extends Component {
     super(props)
     this.state ={
       sheet: 'tasks-behaviors',
-      childID: this.props.child.member_id || null
-      // evaluate daily score
+
 
 
     }
@@ -117,6 +116,8 @@ class ChildDashboard extends Component {
                 deleteData={this.props.deleteData}
                 updateData={this.props.updateData}
                 addData={this.props.addData}
+                updateScore={this.updateScore}
+                availablePoints={this.props.score[0].points_available}
               />
               :
               ''

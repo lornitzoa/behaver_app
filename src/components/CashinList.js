@@ -17,15 +17,31 @@ class CashinList extends Component {
     })
   }
 
-  // componentDidMount() {
-  //   // console.log(this.props.availableCashIns);
-  // }
+  handleCashIn = (cashin) => {
+    console.log(cashin)
+    let updateData = {
+      points_used: cashin.points
+    }
+    this.props.updateScore(cashin.child_id, updateData)
+    let updateNoAvailable = {
+      id: cashin.id,
+      child_id: cashin.child_id,
+      reinforcement_id: parseInt(cashin.reinforcement_id),
+      points: parseInt(cashin.points),
+      daily_allotment: parseInt(cashin.daily_allotment),
+      no_available: parseInt(cashin.daily_allotment) - 1,
+    }
+    this.props.updateData('reinforcements/assignments', updateNoAvailable)
+  }
+
+  componentDidMount() {
+    console.log(this.props.availablePoints);
+  }
 
   render() {
     return (
       <div>
-        Available Cashins
-        <button onClick={this.props.changeView}>Make Cashin Available</button>
+
         <div>
           {this.props.availableCashIns.map((cashin, index) => {
             return(
@@ -41,17 +57,23 @@ class CashinList extends Component {
                   />
                   :
                   <div className='items' >
-                    <p>{cashin.reinforcement}</p>
-                    <p>{cashin.points}</p>
-                    <p>{cashin.daily_allotment}</p>
-                    <p>{cashin.no_available}</p>
-                    <button>Use</button>
-                    <button onClick={() => {
-                      this.gotToEdit(index)
-                    }}>Edit</button>
-                    <button onClick={() => {
-                      this.props.deleteData('reinforcements/assignments', cashin.id)
-                    }}>Delete</button>
+                    <div className='data'>
+                      <p>{cashin.reinforcement}</p>
+                      <p>{cashin.points}</p>
+                      <p>{cashin.daily_allotment}</p>
+                      <p>{cashin.no_available}</p>
+                    </div>
+                    <div className='list-buttons'>
+                      <button onClick={() => {
+                        this.handleCashIn(cashin)
+                      }}>Use</button>
+                      <button onClick={() => {
+                        this.gotToEdit(index)
+                      }}>Edit</button>
+                      <button onClick={() => {
+                        this.props.deleteData('reinforcements/assignments', cashin.id)
+                      }}>Delete</button>
+                    </div>
                   </div>
                 }
               </div>
