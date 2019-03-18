@@ -17,29 +17,62 @@ class TaskList extends Component {
     })
   }
 
-  handleCompleted = (id, points, req) => {
-    // console.log(id)
-    // console.log(points)
-    if(req === 't') {
+  // get task id from incoming edit data to update db with
+  getTaskID = (list, item) => {
+    console.log(list);
+    console.log(item);
+    for(let i = 0; i < list.length; i++) {
+      if(list[i].task === item.task_name) {
+        return list[i].id
+        // this.setState({
+        //   task_id: list[i].id
+        // })
+      }
+    }
+  }
+
+  // handle completion of task
+  handleCompleted = (task) => {
+    // check if task is required or bonus to update correct columns of score table
+    if(task.required === 't') {
+      // create data object
       let updateData = {
         req_tasks_complete: 1,
-        task_points_earned: points
+        task_points_earned: task.points
       }
-      this.props.updateScore(id, updateData)
+      // send child_id and data object to updateScore function
+      this.props.updateScore(task.child_id, updateData)
       // console.log('req_tasks_complete')
     } else {
+      //create data object
       let updateData = {
         bonus_tasks_complete: 1,
-        task_points_earned: points
+        task_points_earned: task.points
       }
-      this.props.updateScore(id, updateData)
-      // console.log('bonus_tasks_complete')
+      // send child_id and data object to updateScore function
+      this.props.updateScore(task.child_id, updateData)
     }
+    // create variable to hold taskID, retrieved from getTaskID function
+    // using the task list and the completed task
+    let taskID = this.getTaskID(this.props.tasks, task)
+    // create data object to update assigned task table
+    let updateComplete = {
+      id: task.id,
+      child_id: task.child_id,
+      task_id: taskID,
+      frequency: task.frequency,
+      time_of_day: task.time_of_day,
+      points: parseInt(task.points),
+      required: Boolean(task.required),
+      completed: true
+    }
+    // send data objec to updateData function with route
+    this.props.updateData('tasks/assignments', updateComplete)
   }
 
   componentDidMount() {
     // console.log(this.props.tasksassignments);
-    console.log(this.props.score);
+    // console.log(this.props.score);
   }
 
   render() {
@@ -81,10 +114,11 @@ class TaskList extends Component {
                     <p>Bonus</p>
                   }
                   <p>{task.time_of_day}</p>
+                  <p>{task.task_id}</p>
                 </div>
                 <div className='list-buttons'>
                   <i className="fas fa-check-circle fa-2x" onClick={() => {
-                    this.handleCompleted(task.child_id, task.points, task.required)
+                    this.handleCompleted(task)
                     // this.props.updateScore('task_points_earned', task.points)
                   }}></i>
                   <button onClick={() => {

@@ -53,9 +53,21 @@ class AddTaskAssignment extends Component {
       })
   }
 
+  // prepare boolean values for data entry
+  checkBooleans = (string) => {
+    if(string === 'true') {
+      return true
+    } else {
+      return false
+    }
+  }
+
   // handle form submission
   handleSubmit = (e) => {
     e.preventDefault()
+    let required = this.checkBooleans(this.state.required)
+    let complete = this.checkBooleans(this.state.complete)
+    console.log(typeof this.state.required);
     // if user is editing
     if(this.state.editing) {
       // create object to send to updateData function, includes task.id
@@ -66,10 +78,10 @@ class AddTaskAssignment extends Component {
         frequency: this.state.frequency,
         time_of_day: this.state.time_of_day,
         points: parseInt(this.state.points),
-        required: Boolean(this.state.required),
-        completed: Boolean(this.state.completed)
+        required: required,
+        completed: complete
       }
-      // console.log(updatedAssignment);
+      console.log(updatedAssignment);
       // send object to updateData with route string
       this.props.updateData('tasks/assignments', updatedAssignment)
       // return to list view
@@ -82,10 +94,10 @@ class AddTaskAssignment extends Component {
         frequency: this.state.frequency,
         time_of_day: this.state.time_of_day,
         points: parseInt(this.state.points),
-        required: Boolean(this.state.required),
-        completed: Boolean(this.state.completed)
+        required: required,
+        completed: complete
       }
-      // console.log(newAssignment);
+      console.log(newAssignment);
       // send object to addData with route string
       this.props.addData('tasks/assignments', newAssignment)
       // reset state to clear form for more new data

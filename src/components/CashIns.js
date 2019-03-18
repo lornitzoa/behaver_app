@@ -18,7 +18,7 @@ class CashIns extends Component {
   }
 
   componentDidMount() {
-
+    console.log(this.props.availablePoints);
   }
 
   render() {

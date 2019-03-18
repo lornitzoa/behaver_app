@@ -94,7 +94,7 @@ class ChildDashboard extends Component {
             this.state.sheet === 'tasks-behaviors' ?
               <TasksBehaviors
                 tasks={this.props.tasks}
-                tasksassignments={this.props.tasksassignments}
+                tasksassignments={this.props.tasksassignments.filter(task => task.completed === 'f')}
                 behaviors={this.props.behaviors}
                 behaviorsassignments={this.props.behaviorsassignments}
                 changeSheetTo={this.changeSheetTo}
@@ -117,7 +117,8 @@ class ChildDashboard extends Component {
                 updateData={this.props.updateData}
                 addData={this.props.addData}
                 updateScore={this.updateScore}
-                availablePoints={this.props.score[0].points_available}
+                availablePoints={this.props.score[0].points_available + this.props.score[0].stashed_cash}
+
               />
               :
               ''
