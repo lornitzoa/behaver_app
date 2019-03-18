@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import axios from 'axios'
+
 import TasksBehaviors from './TasksBehaviors'
 import CashIns from './CashIns'
 
@@ -7,14 +9,14 @@ import ScoreBoard from './ScoreBoard'
 import AddTaskAssignment from './AddTaskAssignment'
 import AddBehaviorAssignment from './AddBehaviorAssignment'
 
-
+let api_url = 'http://localhost:3000'
 
 class ChildDashboard extends Component {
   constructor(props) {
     super(props)
     this.state ={
       sheet: 'tasks-behaviors',
-      childID: null || this.props.child.member_id,
+      childID: this.props.child.member_id || null
       // evaluate daily score
 
 
@@ -29,8 +31,18 @@ class ChildDashboard extends Component {
   }
 
   // update score on task completion of behavior points rewards
-  updateScore = (type, points) => {
-    
+  updateScore = (id, data) => {
+    console.log(id);
+    console.log(data);
+
+    axios.patch(`${api_url}/scores/${id}`, data)
+      .then(updatedData => {
+        return updatedData.data
+      })
+      .then(resDat => {
+        this.props.getData('scores')
+      })
+      .then(err => console.log(err))
   }
 
 

@@ -17,9 +17,29 @@ class TaskList extends Component {
     })
   }
 
+  handleCompleted = (id, points, req) => {
+    // console.log(id)
+    // console.log(points)
+    if(req === 't') {
+      let updateData = {
+        req_tasks_complete: 1,
+        task_points_earned: points
+      }
+      this.props.updateScore(id, updateData)
+      // console.log('req_tasks_complete')
+    } else {
+      let updateData = {
+        bonus_tasks_complete: 1,
+        task_points_earned: points
+      }
+      this.props.updateScore(id, updateData)
+      // console.log('bonus_tasks_complete')
+    }
+  }
+
   componentDidMount() {
     // console.log(this.props.tasksassignments);
-    console.log(this.props.tasksassignments);
+    console.log(this.props.score);
   }
 
   render() {
@@ -30,11 +50,11 @@ class TaskList extends Component {
           this.props.changeSheetTo('assign-task')
         }}>Assign Task</button>
         <div className='list-headers'>
-          <h3>Task</h3>
-          <h3>Points</h3>
-          <h3>Required</h3>
-          <h3>When</h3>
-          <h3>Completed Today</h3>
+          <h3 className='list-title-header'>Task</h3>
+          <h3 className='list-data-header'>Points</h3>
+          <h3 className='list-data-header'>Required</h3>
+          <h3 className='list-data-header'>When</h3>
+
         </div>
 
         {this.props.tasksassignments.map((task, index) => {
@@ -52,20 +72,28 @@ class TaskList extends Component {
               </div>
               :
               <div className='items'>
-                <p>{task.task_name}</p>
-                <p>{task.points}</p>
-                <p>{task.required}</p>
-                <p>{task.frequency}</p>
-                <p>{task.completed}</p>
-                <button onClick={() => {
-                  this.props.updateScore('task_points_earned', task.points)
-                }}>Completed</button>
-                <button onClick={() => {
-                  this.goToEdit(index)
-                }}>Edit</button>
-                <button onClick={() => {
-                  this.props.deleteData('tasks/assignments', task.id)
-                }}>Delete</button>
+                <div className='data'>
+                  <h4>{task.task_name}</h4>
+                  <p>{task.points}</p>
+                  {task.required === 't' ?
+                    <p>Required</p>
+                    :
+                    <p>Bonus</p>
+                  }
+                  <p>{task.time_of_day}</p>
+                </div>
+                <div className='list-buttons'>
+                  <i className="fas fa-check-circle fa-2x" onClick={() => {
+                    this.handleCompleted(task.child_id, task.points, task.required)
+                    // this.props.updateScore('task_points_earned', task.points)
+                  }}></i>
+                  <button onClick={() => {
+                    this.goToEdit(index)
+                  }}>Edit</button>
+                  <button onClick={() => {
+                    this.props.deleteData('tasks/assignments', task.id)
+                  }}>Delete</button>
+                </div>
               </div>
             }
             </div>

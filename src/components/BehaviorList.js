@@ -28,9 +28,10 @@ class BehaviorList extends Component {
           this.props.changeSheetTo('assign-behavior')
         }}>Assign Behavior</button>
         <div className='list-headers'>
-          <h3>Behaviors</h3>
-          <h3>Target</h3>
-          <h3>Points</h3>
+          <h3 className='list-title-header'>Behaviors</h3>
+          <h3 className='list-data-header'>Target</h3>
+          <h3 className='list-data-header'>Points</h3>
+          <span></span>
         </div>
           {this.props.behaviorsassignments.map((behavior, index) => {
             return (
@@ -48,18 +49,22 @@ class BehaviorList extends Component {
 
                   :
                   <div className='items'>
-                    <p>{behavior.behavior}</p>
-                    <p>{behavior.targeted_for}</p>
-                    <p>{behavior.points}</p>
-                    <button onClick={() => {
-                      this.props.updateScore('behavior_points', behavior.points)
-                    }}>+</button>
-                    <button onClick={() => {
-                      this.goToEdit(index)
-                    }}>Edit</button>
-                    <button onClick={() => {
-                      this.props.deleteData('behaviors/assignments', behavior.id)
-                    }}>Delete</button>
+                    <div className='data'>
+                      <h4>{behavior.behavior}</h4>
+                      <p>{behavior.targeted_for}</p>
+                      <p>{behavior.points}</p>
+                    </div>
+                    <div className='list-buttons'>
+                      <i className="fas fa-plus-circle fa-2x"  onClick={() => {
+                        console.log('clicked');
+                      }}></i>
+                      <button onClick={() => {
+                        this.goToEdit(index)
+                      }}>Edit</button>
+                      <button onClick={() => {
+                        this.props.deleteData('behaviors/assignments', behavior.id)
+                      }}>Delete</button>
+                    </div>
                   </div>
                 }
             </div>

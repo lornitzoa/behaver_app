@@ -13,10 +13,10 @@ class ChildList extends Component {
         <thead>
           <tr>
             <th className='childNameCol'>CHILD</th>
-            <th className='data'>BEHAVIOR POINTS</th>
-            <th className='data'>TASKS COMPLETED</th>
-            <th className='data'>DAILY SCORE</th>
-            <th className='data'>STASHED CASH</th>
+            <th>BEHAVIOR POINTS</th>
+            <th>TASKS COMPLETED</th>
+            <th>DAILY SCORE</th>
+            <th>STASHED CASH</th>
           </tr>
         </thead>
         {

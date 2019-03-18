@@ -33,6 +33,7 @@ class ChildOverview extends Component {
   componentDidMount() {
     // send incoming data to scoreboard
     this.setData()
+    console.log(this.props.scores);
 
   }
 
@@ -45,10 +46,10 @@ class ChildOverview extends Component {
                   this.props.goToChildDashboard(this.props.child.member_id)
                 }}>
                 <td className='childNameCol childName'>{this.props.child.name}</td>
-                <td className='data'>{this.state.behavior_points}</td>
-                <td className='data'>{this.state.tasks_completed}</td>
-                <td className='data'>{this.state.task_points}</td>
-                <td className='data'>{this.state.stashed_cash}</td>
+                <td >{this.state.behavior_points}</td>
+                <td >{this.state.tasks_completed}</td>
+                <td >{this.state.task_points}</td>
+                <td >{this.state.stashed_cash}</td>
 
               </tr>
           :
