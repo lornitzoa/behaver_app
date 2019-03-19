@@ -11,7 +11,7 @@ class AddTaskAssignment extends Component {
       points: 0,
       required: true,
       completed: false,
-
+      changed: false,
       editing: false,
       btnDone: 'Done'
 
@@ -48,29 +48,19 @@ class AddTaskAssignment extends Component {
 
   // handle form input changes
   handleChange = (e) => {
-      this.setState({
-        [e.target.id]: e.target.value
-      })
-  }
-
-  updateScoreTasks = (childID, req_boolean) => {
-    // if (req_boolean === true) {
-    //   let updateData = {
-    //     req_tasks_assigned: 1
-    //   }
-    //   this.props.updateScore(childID, updateData)
-    //   console.log('required')
-    // } else if (req_boolean === false) {
-    //   let updateData = {
-    //     bonus_tasks_assigned: 1
-    //   }
-    //   this.props.updateScore(childID, updateData)
-    //   console.log('bonus')
-    // } else {
-    //   console.log('undefined')
-    // }
+      if(e.target.id === 'required') {
+        this.setState({
+          changed: !this.state.changed,
+          [e.target.id]: e.target.value
+        })
+      } else {
+        this.setState({
+          [e.target.id]: e.target.value
+        })
+      }
 
   }
+
 
   // handle form submission
   handleSubmit = (e) => {
@@ -90,8 +80,12 @@ class AddTaskAssignment extends Component {
       }
       // send object to updateData with route string
       this.props.updateData('tasks/assignments', updatedAssignment)
-      // send data to update number of tasks in score table
-      this.updateScoreTasks(this.state.child_id, updatedAssignment.required)
+      // check if required parameter has been changed
+      // if(this.state.changed === true) {
+      //   // send data to update number of tasks in score table
+      //   this.updateScoreTasks(this.state.child_id, updatedAssignment.required, 'update')
+      // }
+
       // return to list view
       this.props.cancel(null)
     } else {
@@ -109,7 +103,7 @@ class AddTaskAssignment extends Component {
       // send object to addData with route string
       this.props.addData('tasks/assignments', newAssignment)
       // send data to update number of tasks in score table
-      this.updateScoreTasks(this.state.child_id, newAssignment.required)
+      // this.updateScoreTasks(this.state.child_id, newAssignment.required, 'new')
       // reset state to clear form for more new data
       // this.setState({
       //   child_id: this.props.childID,

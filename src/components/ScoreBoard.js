@@ -12,7 +12,8 @@ class ScoreBoard extends Component {
 
   componentDidMount() {
     // this.printTasks()
-    console.log(this.props.score);
+    // console.log(this.props.score);
+    // console.log(this.props.tasksassignments);
     // console.log(this.props.tasksassignments);
     // console.log(this.props.score.filter(score => score.date === Date.now()));
   }
@@ -30,14 +31,14 @@ class ScoreBoard extends Component {
             <h2>Required</h2>
             <h3>
               {this.props.score[0].req_tasks_complete}/
-              {this.props.tasksassignments.filter(task => task.required === 't').length}
+              {this.props.score[0].req_tasks_assigned}
             </h3>
           </div>
           <div className='score-data'>
             <h2>Bonus</h2>
             <h3>
               {this.props.score[0].bonus_tasks_complete}/
-              {this.props.tasksassignments.filter(task => task.required === 'f').length}
+              {this.props.score[0].bonus_tasks_assigned}
             </h3>
           </div>
           <div className='score-data'>

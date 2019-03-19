@@ -47,6 +47,7 @@ class ChildDashboard extends Component {
 
 
 
+
   componentDidMount() {
     // console.log(this.props.child);
     // console.log(this.props.reinforcements);
@@ -55,7 +56,7 @@ class ChildDashboard extends Component {
     this.props.getData('reinforcements/assignments')
     this.props.getData('behaviors/assignments')
     // console.log(this.props.score);
-
+    // this.updateScore(this.props.child[0]. this.props.tasksassignments)
     // console.log(this.props.reinforcementsassignments);
   }
 

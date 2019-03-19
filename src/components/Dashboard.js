@@ -102,7 +102,15 @@ class Dashboard extends Component {
     axios.delete(`${api_url}/${dataType}/${id}`)
       .then(data => {
         this.getData(dataType)
-      })
+      }).then(scores => {
+        console.log(dataType);
+        if(dataType === 'tasks/assignments') {
+          this.getData('scores')
+          console.log('getting scores');
+        }
+      }
+
+      )
   }
 
   // removeFromArr = (arr, index) => {
@@ -126,6 +134,10 @@ class Dashboard extends Component {
       .then(resData => {
         // console.log(resData);
         this.getData(dataType)
+        if(dataType === 'tasks/assignments') {
+          this.getData('scores')
+          console.log('getting scores');
+        }
       })
       .then(err => console.log(err))
   }
@@ -154,6 +166,10 @@ class Dashboard extends Component {
       })
       .then(resData => {
         this.getData(dataType)
+        if(dataType === 'tasks/assignments') {
+          this.getData('scores')
+          console.log('getting scores');
+        }
       })
       .then(err => console.log(err))
   }
