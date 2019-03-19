@@ -33,7 +33,7 @@ class ChildOverview extends Component {
   componentDidMount() {
     // send incoming data to scoreboard
     this.setData()
-    console.log(this.props.scores);
+    // console.log(this.props.scores);
 
   }
 

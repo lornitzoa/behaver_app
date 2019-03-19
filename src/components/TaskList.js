@@ -109,6 +109,7 @@ class TaskList extends Component {
                   index={index}
                   task={task}
                   updateData={this.props.updateData}
+                  updateScore={this.props.updateScore}
                   tasks={this.props.tasks}
                   cancel={this.goToEdit}
                 />

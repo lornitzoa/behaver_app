@@ -53,21 +53,28 @@ class AddTaskAssignment extends Component {
       })
   }
 
-  // prepare boolean values for data entry
-  checkBooleans = (string) => {
-    if(string === 'true') {
-      return true
-    } else {
-      return false
-    }
+  updateScoreTasks = (childID, req_boolean) => {
+    // if (req_boolean === true) {
+    //   let updateData = {
+    //     req_tasks_assigned: 1
+    //   }
+    //   this.props.updateScore(childID, updateData)
+    //   console.log('required')
+    // } else if (req_boolean === false) {
+    //   let updateData = {
+    //     bonus_tasks_assigned: 1
+    //   }
+    //   this.props.updateScore(childID, updateData)
+    //   console.log('bonus')
+    // } else {
+    //   console.log('undefined')
+    // }
+
   }
 
   // handle form submission
   handleSubmit = (e) => {
     e.preventDefault()
-    let required = this.checkBooleans(this.state.required)
-    let complete = this.checkBooleans(this.state.complete)
-    console.log(typeof this.state.required);
     // if user is editing
     if(this.state.editing) {
       // create object to send to updateData function, includes task.id
@@ -78,12 +85,13 @@ class AddTaskAssignment extends Component {
         frequency: this.state.frequency,
         time_of_day: this.state.time_of_day,
         points: parseInt(this.state.points),
-        required: required,
-        completed: complete
+        required: JSON.parse(this.state.required),
+        completed: JSON.parse(this.state.completed)
       }
-      console.log(updatedAssignment);
       // send object to updateData with route string
       this.props.updateData('tasks/assignments', updatedAssignment)
+      // send data to update number of tasks in score table
+      this.updateScoreTasks(this.state.child_id, updatedAssignment.required)
       // return to list view
       this.props.cancel(null)
     } else {
@@ -94,24 +102,27 @@ class AddTaskAssignment extends Component {
         frequency: this.state.frequency,
         time_of_day: this.state.time_of_day,
         points: parseInt(this.state.points),
-        required: required,
-        completed: complete
+        required: JSON.parse(this.state.required),
+        completed: JSON.parse(this.state.completed)
       }
-      console.log(newAssignment);
+      // console.log(newAssignment);
       // send object to addData with route string
       this.props.addData('tasks/assignments', newAssignment)
+      // send data to update number of tasks in score table
+      this.updateScoreTasks(this.state.child_id, newAssignment.required)
       // reset state to clear form for more new data
-      this.setState({
-        child_id: this.props.childID,
-        task_id: 0,
-        frequency: '',
-        time_of_day: '',
-        points: 0,
-        required: true,
-        completed: false,
-        editing: false
-      })
+      // this.setState({
+      //   child_id: this.props.childID,
+      //   task_id: 0,
+      //   frequency: '',
+      //   time_of_day: '',
+      //   points: 0,
+      //   required: true,
+      //   completed: false,
+      //   editing: false
+      // })
     }
+
 
   }
 
@@ -148,6 +159,7 @@ class AddTaskAssignment extends Component {
           </select>
           <input type='number' onChange={this.handleChange} id='points' value={this.state.points}/>
           <select onChange={this.handleChange} id='required' value={this.state.required}>
+            <option>--Choose Option--</option>
             <option value='true'>Required</option>
             <option value='false'>Bonus</option>
           </select>

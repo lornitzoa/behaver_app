@@ -118,7 +118,7 @@ class Dashboard extends Component {
   //               ADD DATA
   //////////////////////////////////////////////
   addData = (dataType, data) => {
-    console.log(data);
+    // console.log(data);
     axios.post(`${api_url}/${dataType}`, data)
       .then(newData => {
         return newData.data
@@ -144,9 +144,9 @@ class Dashboard extends Component {
   //               EDIT DATA
   //////////////////////////////////////////////
   updateData = (dataType, data) => {
-    console.log(dataType)
-    console.log(data)
-    console.log(data.id)
+    // console.log(dataType)
+    // console.log(data)
+    // console.log(data.id)
     axios.put(`${api_url}/${dataType}/${data.id}`, data)
       .then(updatedData => {
         // console.log(updatedData);
