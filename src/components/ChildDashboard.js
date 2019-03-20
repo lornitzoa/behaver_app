@@ -17,8 +17,6 @@ class ChildDashboard extends Component {
     this.state ={
       sheet: 'tasks-behaviors',
 
-
-
     }
   }
 
@@ -31,9 +29,6 @@ class ChildDashboard extends Component {
 
   // update score on task completion of behavior points rewards
   updateScore = (id, data) => {
-    // console.log(id);
-    console.log(data);
-
     axios.patch(`${api_url}/scores/${id}`, data)
       .then(updatedData => {
         return updatedData.data
@@ -46,30 +41,15 @@ class ChildDashboard extends Component {
   }
 
 
-
-
-  componentDidMount() {
-    // console.log(this.props.child);
-    // console.log(this.props.reinforcements);
-    //// get data required for this component and its children
-    this.props.getData('tasks/assignments')
-    this.props.getData('reinforcements/assignments')
-    this.props.getData('behaviors/assignments')
-
-    // console.log(this.props.score);
-    // this.updateScore(this.props.child[0]. this.props.tasksassignments)
-    // console.log(this.props.reinforcementsassignments);
-  }
-
-
   render() {
     return (
       <div>
+        {console.log(this.props.child)}
         <div className='header'>
           <h1 id='h1-header'>{this.props.child[0].name}'s Dashboard</h1>
           <ScoreBoard
             tasksassignments={this.props.tasksassignments}
-            score={this.props.score}
+            score={this.props.scores}
           />
           <div>
             <button onClick={() => {
@@ -121,7 +101,7 @@ class ChildDashboard extends Component {
                 deleteData={this.props.deleteData}
                 updateData={this.props.updateData}
                 addData={this.props.addData}
-                availablePoints={this.props.score[0].points_available + this.props.score[0].stashed_cash}
+                availablePoints={this.props.scores[0].points_available + this.props.scores[0].stashed_cash}
 
               />
               :

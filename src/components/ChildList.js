@@ -1,41 +1,58 @@
 import React, { Component } from 'react'
+import { BrowserRouter as Router, Route, Link, Switch, Redirect} from 'react-router-dom'
+
 import ChildOverview from './ChildOverview'
+import ChildDashboard from './ChildDashboard'
 
 class ChildList extends Component {
+  constructor(props) {
+    super(props)
+    this.state ={
+      viewDashboard: true,
+      childID: null
+    }
+  }
 
-  componentDidMount() {
-    // console.log(this.props.scores);
+  changeView = (childID) => {
+    this.setState({
+      viewDashboard: !this.state.viewDashboard
+    })
   }
 
   render() {
     return(
-      <table>
-        <thead>
-          <tr>
-            <th className='childNameCol'>CHILD</th>
-            <th>BEHAVIOR POINTS</th>
-            <th>TASKS COMPLETED</th>
-            <th>DAILY SCORE</th>
-            <th>STASHED CASH</th>
-          </tr>
-        </thead>
-        {
-          this.props.children ? this.props.children.map((child, index) => {
-            return (
+      <Router>
+        <div>
+          {this.state.viewDashboard ?
+            
+            <ChildOverview
+              scores={this.props.scores}
+              children={this.props.children}
+              changeView={this.changeView}
+            />
+            :
+            <ChildDashboard
+              getData={this.props.getData}
+              addData={this.addData}
+              deleteData={this.deleteData}
+              updateData={this.updateData}
+              tasks={this.state.tasks}
+              behaviors={this.state.behaviors}
+              reinforcements={this.state.reinforcements}
+              tasksassignments={this.state.tasksassignments.filter(task =>
+                task.child_id === this.state.childID)}
+              behaviorsassignments={this.state.behaviorsassignments.filter(task =>
+                task.child_id === this.state.childID)}
+              reinforcementsassignments={this.state.reinforcementsassignments}
+              scores={this.props.scores}
+              child={this.state.children.filter(child =>
+                child.member_id === this.state.childID
+              )}
+            />
 
-              <ChildOverview
-                child={child}
-                scores={this.props.scores.filter(score => score.member_id === child.member_id)}
-                key={index}
-                index={index}
-                goToChildDashboard={this.props.goToChildDashboard}
-              />
-            )
-          })
-          :
-          ''
-        }
-      </table>
+          }
+        </div>
+      </Router>
 
     )
   }

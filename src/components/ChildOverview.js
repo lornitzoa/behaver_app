@@ -39,24 +39,44 @@ class ChildOverview extends Component {
 
   render() {
     return(
-        <tbody>
-        {this.state.loaded ?
-              <tr
-                onClick={() => {
-                  this.props.goToChildDashboard(this.props.child.member_id)
-                }}>
-                <td className='childNameCol childName'>{this.props.child.name}</td>
-                <td >{this.props.scores[0].bx_points_earned}</td>
-                <td >{this.props.scores[0].task_points_earned}</td>
-                <td >{this.props.scores[0].total_points_earned}</td>
-                <td >{this.props.scores[0].stashed_cash}</td>
-
-              </tr>
-          :
-          <tr></tr>
-        }
-        </tbody>
-
+      <div>
+        <table>
+          <thead>
+            <tr colSpan='5'>
+              <th>
+                <h2>Main Dashbaord</h2>
+              </th>
+            </tr>
+            <tr>
+              <th className='childNameCol'>CHILD</th>
+              <th>BEHAVIOR POINTS</th>
+              <th>TASKS COMPLETED</th>
+              <th>DAILY SCORE</th>
+              <th>STASHED CASH</th>
+            </tr>
+          </thead>
+          <tbody>
+          {
+            this.props.children ? this.props.children.map((child, index) => {
+              return (
+                <tr key={index} onClick={() =>
+                  this.props.changeView(child.member_id)
+                }>
+                  <td className='childNameCol childName'>{child.name}</td>
+                  <td >{this.props.scores[0].bx_points_earned}</td>
+                  <td >{this.props.scores[0].task_points_earned}</td>
+                  <td >{this.props.scores[0].total_points_earned}</td>
+                  <td >{this.props.scores[0].stashed_cash}</td>
+                </tr>
+              )
+            }
+          )
+            :
+            ''
+          }
+          </tbody>
+        </table>
+      </div>
     )
   }
 }

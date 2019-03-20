@@ -39,9 +39,6 @@ class Main extends Component {
   // logout functionality
   handleLogout = () => {
     this.props.logout()
-    // history.replace('/login')
-    // this.props.authStatus(false)
-    // return <Redirect to='/'/>
   }
 
   // Get family name from local storge to display in header
@@ -62,8 +59,6 @@ class Main extends Component {
     axios.get(`${api_url}/${dataType}`)
       .then(json => json.data)
       .then(data => {
-        // console.log(data);
-          // let dataWONulls = this.removeNulls(data)
           let array = dataType.replace('/', '')
           this.setState({
             [array]: data
@@ -80,15 +75,6 @@ class Main extends Component {
           // console.log(data);
 
       })
-  }
-
-  removeNulls = (array) => {
-    for(let i = 0; i < array.length; i++) {
-      if(array[i] === null) {
-        array.splice(i, 1)
-      }
-    }
-    // console.log(array);
   }
 
   //////////////////////////////////////////////
@@ -159,6 +145,9 @@ class Main extends Component {
     this.getData('tasks')
     this.getData('behaviors')
     this.getData('reinforcements')
+    this.getData('tasks/assignments')
+    this.getData('reinforcements/assignments')
+    this.getData('behaviors/assignments')
     this.getData('scores')
     this.getFamilyName()
   }
@@ -166,63 +155,83 @@ class Main extends Component {
   render() {
     return (
       <Router>
-        <div className='header'>
-          <div className='header-titles'>
-            <h1 id='h1-header'>{this.state.familyName} Family Dashboard</h1>
-            <Link to='/login'><button onClick={this.handleLogout}>Log Out</button></Link>
-          </div>
-          <div className='nav-management'>
-            <NavLink exact to='/dashboard'>
-              <button>Main Dashbaord</button>
-            </NavLink>
-            <NavLink exact to='/household'>
-              <button>Manage Household</button>
-            </NavLink>
+        {this.state.loaded ?
+          <div className='header'>
+            <div className='header-titles'>
+              <h1 id='h1-header'>{this.state.familyName} Family Dashboard</h1>
+              <Link to='/login'><button onClick={this.handleLogout}>Log Out</button></Link>
+            </div>
+            <div className='nav-management'>
+              <NavLink exact to='/dashboard'>
+                <button>Main Dashbaord</button>
+              </NavLink>
+              <NavLink exact to='/household'>
+                <button>Manage Household</button>
+              </NavLink>
 
-            <NavLink exact to='/manage-tbs'>
-              <button>Manage Tasks & Behaviors</button>
-            </NavLink>
-            <NavLink exact to='/manage-cashins'>
-              <button>Manage Cash Ins</button>
-            </NavLink>
-          </div>
-          <Switch>
-            <Route
-              path='/dashboard'
-              component={() =>
-                <Dashboard
-                  children={this.state.members.filter(member => member.role.includes('child'))}
-                  goToChildDashboard={this.goToChildDashboard}
-                  scores={this.state.scores}
-                  child={this.state.members.filter(member => member.member_id === this.childID)}
-                  getData={this.getData}
-                  addData={this.addData}
-                  deleteData={this.deleteData}
-                  updateData={this.updateData}
-                  tasks={this.state.tasks}
-                  behaviors={this.state.behaviors}
-                  reinforcements={this.state.reinforcements}
-                  tasksassignments={this.state.tasksassignments.filter(task => task.child_id === this.childID)}
-                  behaviorsassignments={this.state.behaviorsassignments.filter(task => task.child_id === this.childID)}
-                  reinforcementsassignments={this.state.reinforcementsassignments}
-                />
-              }
-            />
-            <Route
-              path='/household'
-              component={ManageHousehold}
-            />
-            <Route
-              path='/manage-tbs'
-              component={ManageTBs}
-            />
-            <Route
-              path='/manage-cashins'
-              component={ManageCashins}
-            />
-          </Switch>
+              <NavLink exact to='/manage-tbs'>
+                <button>Manage Tasks & Behaviors</button>
+              </NavLink>
+              <NavLink exact to='/manage-cashins'>
+                <button>Manage Cash Ins</button>
+              </NavLink>
+            </div>
+            <Switch>
+              <Route
+                path='/dashboard'
+                component={() =>
+                  <Dashboard
+                    children={this.state.members.filter(member => member.role.includes('child'))}
+                    goToChildDashboard={this.goToChildDashboard}
+                    scores={this.state.scores}
+                    getData={this.getData}
+                    addData={this.addData}
+                    deleteData={this.deleteData}
+                    updateData={this.updateData}
+                    tasks={this.state.tasks}
+                    behaviors={this.state.behaviors}
+                    reinforcements={this.state.reinforcements}
+                    tasksassignments={this.state.tasksassignments}
+                    behaviorsassignments={this.state.behaviorsassignments}
+                    reinforcementsassignments={this.state.reinforcementsassignments}
+                  />
+                }
+              />
+              <Route
+                path='/household'
+                component={ManageHousehold}
+              />
+              <Route
+                path='/manage-tbs'
+                component={() =>
+                  <ManageTBs
+                    addData={this.addData}
+                    deleteData={this.deleteData}
+                    updateData={this.updateData}
+                    tasks={this.state.tasks}
+                    behaviors={this.state.behaviors}
+                  />
+                }
+              />
+              <Route
+                path='/manage-cashins'
+                component={() =>
+                  <ManageCashins
+                    addData={this.addData}
+                    deleteData={this.deleteData}
+                    updateData={this.updateData}
+                    reinforcements={this.state.reinforcements}
+                  />
+                }
+              />
+            </Switch>
 
-        </div>
+          </div>
+          :
+          <h2>Not Loaded</h2>
+
+        }
+
       </Router>
     )
   }
