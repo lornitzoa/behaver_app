@@ -42,7 +42,10 @@ class TaskList extends Component {
 
   // handle completion of task
   handleCompleted = (task) => {
-  
+    let points = {
+      task_points_earned: parseInt(task.points)
+    }
+    this.props.updateScore(task.child_id, points)
     // create variable to hold taskID, retrieved from getTaskID function
     // using the task list and the completed task
     let taskID = this.getTaskID(this.props.tasks, task)
