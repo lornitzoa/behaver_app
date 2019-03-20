@@ -31,7 +31,7 @@ class ChildDashboard extends Component {
 
   // update score on task completion of behavior points rewards
   updateScore = (id, data) => {
-    console.log(id);
+    // console.log(id);
     console.log(data);
 
     axios.patch(`${api_url}/scores/${id}`, data)
@@ -55,6 +55,7 @@ class ChildDashboard extends Component {
     this.props.getData('tasks/assignments')
     this.props.getData('reinforcements/assignments')
     this.props.getData('behaviors/assignments')
+
     // console.log(this.props.score);
     // this.updateScore(this.props.child[0]. this.props.tasksassignments)
     // console.log(this.props.reinforcementsassignments);
@@ -118,7 +119,6 @@ class ChildDashboard extends Component {
                 deleteData={this.props.deleteData}
                 updateData={this.props.updateData}
                 addData={this.props.addData}
-                updateScore={this.updateScore}
                 availablePoints={this.props.score[0].points_available + this.props.score[0].stashed_cash}
 
               />

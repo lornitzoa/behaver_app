@@ -105,16 +105,16 @@ class AddTaskAssignment extends Component {
       // send data to update number of tasks in score table
       // this.updateScoreTasks(this.state.child_id, newAssignment.required, 'new')
       // reset state to clear form for more new data
-      // this.setState({
-      //   child_id: this.props.childID,
-      //   task_id: 0,
-      //   frequency: '',
-      //   time_of_day: '',
-      //   points: 0,
-      //   required: true,
-      //   completed: false,
-      //   editing: false
-      // })
+      this.setState({
+        child_id: this.props.childID,
+        task_id: 0,
+        frequency: '',
+        time_of_day: '',
+        points: 0,
+        required: true,
+        completed: false,
+        editing: false
+      })
     }
 
 

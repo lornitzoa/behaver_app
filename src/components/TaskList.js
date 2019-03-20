@@ -19,8 +19,8 @@ class TaskList extends Component {
 
   // get task id from incoming edit data to update db with
   getTaskID = (list, item) => {
-    console.log(list);
-    console.log(item);
+    // console.log(list);
+    // console.log(item);
     for(let i = 0; i < list.length; i++) {
       if(list[i].task === item.task_name) {
         return list[i].id
@@ -33,39 +33,22 @@ class TaskList extends Component {
 
   // prepare boolean values for data entry
   checkBooleans = (string) => {
-    if(string === 'true') {
+    if(string === 't') {
       return true
-    } else {
+    } else if(string === 'f') {
       return false
     }
   }
 
   // handle completion of task
   handleCompleted = (task) => {
-    // check if task is required or bonus to update correct columns of score table
-    if(task.required === 't') {
-      // create data object
-      let updateData = {
-        req_tasks_complete: 1,
-        task_points_earned: task.points
-      }
-      // send child_id and data object to updateScore function
-      this.props.updateScore(task.child_id, updateData)
-      // console.log('req_tasks_complete')
-    } else {
-      //create data object
-      let updateData = {
-        bonus_tasks_complete: 1,
-        task_points_earned: task.points
-      }
-      // send child_id and data object to updateScore function
-      this.props.updateScore(task.child_id, updateData)
-    }
+  
     // create variable to hold taskID, retrieved from getTaskID function
     // using the task list and the completed task
     let taskID = this.getTaskID(this.props.tasks, task)
     let required = this.checkBooleans(task.required)
     // create data object to update assigned task table
+    // console.log(`required status: ${task.required}`);
     let updateComplete = {
       id: task.id,
       child_id: task.child_id,
@@ -76,13 +59,16 @@ class TaskList extends Component {
       required: required,
       completed: true
     }
+    // console.log(updateComplete);
     // send data objec to updateData function with route
+    console.log('completing');
     this.props.updateData('tasks/assignments', updateComplete)
   }
 
   componentDidMount() {
     // console.log(this.props.tasksassignments);
     // console.log(this.props.score);
+    // console.log(this.props.tasksassignments);
   }
 
   render() {
@@ -101,6 +87,7 @@ class TaskList extends Component {
         </div>
 
         {this.props.tasksassignments.map((task, index) => {
+
           return (
             <div key={index}>
             {this.state.editIndex === index ?
