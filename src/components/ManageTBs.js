@@ -91,7 +91,8 @@ class ManageTBs extends Component {
                       </li>
                       :
                       <li key={index}>
-                        {behavior.behavior}
+                        {behavior.behavior} <br/>
+                        {behavior.targeted_for}
                         <button onClick={() => {
                           this.setEditParams(index, 'behavior')
                         }}>Edit</button>

@@ -40,7 +40,7 @@ class CashIns extends Component {
         <CashinList
           changeView={this.changeView}
           updateScore={this.props.updateScore}
-          availableCashIns={this.props.availableCashIns.filter(cashin => cashin.points <= this.props.availablePoints)}
+          availableCashIns={this.props.availableCashIns}
           child={this.props.child}
           deleteData={this.props.deleteData}
           updateData={this.props.updateData}

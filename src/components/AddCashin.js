@@ -5,7 +5,7 @@ class AddCashin extends Component {
     super(props)
     this.state = {
       editing: false,
-      reinforcement: ''
+      reinforcement: 'Add Cash In'
     }
   }
 
@@ -59,8 +59,8 @@ class AddCashin extends Component {
     return(
       <div>
         <form onSubmit={this.handleSubmit}>
-          <label>Add Cash In Item</label>
-          <input type='text' id='reinforcement' value={this.state.reinforcement} onChange={this.handleChange}/>
+
+          <input type='text' id='reinforcement' placeholder={this.state.reinforcement} value={this.state.reinforcement} onChange={this.handleChange}/>
           <input type='submit'/>
         </form>
         {this.state.editing ?

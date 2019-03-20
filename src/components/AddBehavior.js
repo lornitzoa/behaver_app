@@ -84,6 +84,13 @@ class AddBehavior extends Component {
           </select>
           <input type='submit' value='Add'/>
         </form>
+          {this.state.type === 'edit' ?
+            <button onClick={() => {
+              this.props.setEditParams(null, 'behavior')
+            }}>Cancel</button>
+            :
+            ""
+          }
       </div>
     )
   }

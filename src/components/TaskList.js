@@ -76,11 +76,7 @@ class TaskList extends Component {
 
   render() {
     return (
-      <div>
-        TASKS
-        <button onClick={() => {
-          this.props.changeSheetTo('assign-task')
-        }}>Assign Task</button>
+      <div>      
         <div className='list-headers'>
           <h3 className='list-title-header'>Task</h3>
           <h3 className='list-data-header'>Points</h3>

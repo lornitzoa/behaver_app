@@ -103,15 +103,16 @@ class AddBehaviorAssignment extends Component {
           </select>
           <input type='number' id='points' value={this.state.points} onChange={this.handleChange}/>
           <input type='submit'/>
-        </form>
-        <button onClick={() => {
-          if(this.state.editing) {
-            this.props.cancel(null)
-          } else {
-            this.props.changeSheetTo('tasks-behaviors')
+          {this.state.editing ?
+            <button onClick={() => {
+              this.props.cancel(null)
+            }}>{this.state.btnDone}</button>
+            :
+            ""
           }
 
-        }}>{this.state.btnDone}</button>
+        </form>
+
       </div>
     )
   }

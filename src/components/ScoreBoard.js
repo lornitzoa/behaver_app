@@ -1,4 +1,10 @@
 import React, { Component } from 'react'
+import PieChart from './PieChart'
+
+
+
+
+
 
 class ScoreBoard extends Component {
   constructor(props) {
@@ -6,7 +12,10 @@ class ScoreBoard extends Component {
     this.state = {
 
     }
+    this.req_complete = this.props.score[0].req_tasks_complete
+    this.req_incomplete = this.props.score[0].req_tasks_assigned - this.props.score[0].req_tasks_complete
   }
+
 
 
 
@@ -16,6 +25,7 @@ class ScoreBoard extends Component {
     // console.log(this.props.tasksassignments);
     // console.log(this.props.tasksassignments);
     // console.log(this.props.score.filter(score => score.date === Date.now()));
+
   }
 
   render() {
@@ -29,17 +39,15 @@ class ScoreBoard extends Component {
         <div className='score-data-container'>
           <div className='score-data'>
             <h2>Required</h2>
-            <h3>
-              {this.props.score[0].req_tasks_complete}/
-              {this.props.score[0].req_tasks_assigned}
-            </h3>
+            <PieChart
+              data={[this.props.score[0].req_tasks_complete, (this.props.score[0].req_tasks_assigned - this.props.score[0].req_tasks_complete)]}
+            />
           </div>
           <div className='score-data'>
             <h2>Bonus</h2>
-            <h3>
-              {this.props.score[0].bonus_tasks_complete}/
-              {this.props.score[0].bonus_tasks_assigned}
-            </h3>
+            <PieChart
+              data={[this.props.score[0].bonus_tasks_complete, (this.props.score[0].bonus_tasks_assigned - this.props.score[0].bonus_tasks_complete)]}
+            />
           </div>
           <div className='score-data'>
             <h2>Task</h2>

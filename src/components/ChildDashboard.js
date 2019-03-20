@@ -6,8 +6,8 @@ import CashIns from './CashIns'
 
 import ScoreBoard from './ScoreBoard'
 
-import AddTaskAssignment from './AddTaskAssignment'
-import AddBehaviorAssignment from './AddBehaviorAssignment'
+
+
 
 let api_url = 'http://localhost:3000'
 
@@ -102,6 +102,8 @@ class ChildDashboard extends Component {
                 behaviorsassignments={this.props.behaviorsassignments}
                 changeSheetTo={this.changeSheetTo}
                 child={this.props.child}
+                childID={this.props.child[0].member_id}
+                addData={this.props.addData}
                 deleteData={this.props.deleteData}
                 updateData={this.props.updateData}
                 updateScore={this.updateScore}
@@ -124,29 +126,6 @@ class ChildDashboard extends Component {
               />
               :
               ''
-          }
-          {
-            this.state.sheet ==='assign-task' ?
-            <AddTaskAssignment
-              changeSheetTo={this.changeSheetTo}
-              addData={this.props.addData}
-              tasks={this.props.tasks}
-              childID={this.props.child[0].member_id}
-              updateScore={this.updateScore}
-            />
-            :
-            ''
-          }
-          {
-            this.state.sheet === 'assign-behavior' ?
-            <AddBehaviorAssignment
-              changeSheetTo={this.changeSheetTo}
-              addData={this.props.addData}
-              behaviors={this.props.behaviors}
-              childID={this.props.child[0].member_id}
-            />
-            :
-            ''
           }
         </div>
 

@@ -33,10 +33,6 @@ class BehaviorList extends Component {
   render() {
     return (
       <div>
-        Behaviors
-        <button onClick={() => {
-          this.props.changeSheetTo('assign-behavior')
-        }}>Assign Behavior</button>
         <div className='list-headers'>
           <h3 className='list-title-header'>Behaviors</h3>
           <h3 className='list-data-header'>Target</h3>

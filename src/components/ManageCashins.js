@@ -18,7 +18,7 @@ class ManageCashins extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.reinforcements);
+    // console.log(this.props.reinforcements);
   }
 
   render() {
@@ -29,12 +29,12 @@ class ManageCashins extends Component {
           updateData={this.props.updateData}
           deleteData={this.props.deleteData}
         />
-        <div>
+        <ul>
           {this.props.reinforcements.map((cashin, index) => {
             return (
               <div key={index}>
                 {this.state.editIndex === index ?
-                  <div>
+                  <li>
                     <AddCashin
                       cashIn={cashin}
                       goToEdit={this.goToEdit}
@@ -42,9 +42,9 @@ class ManageCashins extends Component {
                       updateData={this.props.updateData}
                       deleteData={this.props.deleteData}
                     />
-                  </div>
+                  </li>
                   :
-                  <div className='items'>
+                  <li >
                     {cashin.reinforcement}
                     <button onClick={() => {
                       this.goToEdit(index)
@@ -52,12 +52,12 @@ class ManageCashins extends Component {
                     <button onClick={() => {
                       this.props.deleteData('reinforcements', cashin.id)
                     }}>Delete</button>
-                  </div>
+                  </li>
                 }
               </div>
             )
           })}
-        </div>
+        </ul>
       </div>
     )
   }

@@ -46,10 +46,10 @@ class ChildOverview extends Component {
                   this.props.goToChildDashboard(this.props.child.member_id)
                 }}>
                 <td className='childNameCol childName'>{this.props.child.name}</td>
-                <td >{this.state.behavior_points}</td>
-                <td >{this.state.tasks_completed}</td>
-                <td >{this.state.task_points}</td>
-                <td >{this.state.stashed_cash}</td>
+                <td >{this.props.scores[0].bx_points_earned}</td>
+                <td >{this.props.scores[0].task_points_earned}</td>
+                <td >{this.props.scores[0].total_points_earned}</td>
+                <td >{this.props.scores[0].stashed_cash}</td>
 
               </tr>
           :

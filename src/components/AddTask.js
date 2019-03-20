@@ -21,6 +21,8 @@ import React, { Component } from 'react'
       }
     }
 
+
+
     handleChange = (e) => {
       this.setState({
         [e.target.id]: e.target.value
@@ -34,15 +36,16 @@ import React, { Component } from 'react'
           task: this.state.task,
           family_id: this.state.family_id
         }
-        console.log(task);
         this.props.addData('tasks', task)
+        this.setState({
+          task: 'Add Task'
+        })
       } else if(this.state.type === 'edit') {
         let task = {
           id: this.props.task.id,
           task: this.state.task,
           family_id: this.state.family_id
         }
-        console.log(task);
         this.props.setEditParams(null, 'task')
         this.props.updateData('tasks', task)
 
@@ -58,9 +61,15 @@ import React, { Component } from 'react'
       return (
         <div>
           <form onSubmit={this.handleSubmit}>
-            <label htmlFor='task'>Task</label>
             <input type='text' id='task' placeholder={this.state.task} onChange={this.handleChange}/>
             <input type='submit' value='Add'/>
+            {this.state.type === 'edit' ?
+              <button onClick={() => {
+                this.props.setEditParams(null, 'task')
+              }}>Cancel</button>
+              :
+              ""
+            }
           </form>
         </div>
       )

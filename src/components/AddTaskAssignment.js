@@ -130,7 +130,6 @@ class AddTaskAssignment extends Component {
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
-        <label>task id: {this.state.task_id}</label>
           <select onChange={this.handleChange} id='task_id' value={this.state.task_id}>
             <option value='0'>---Choose Task---</option>
             {this.props.tasks.map((task, index) => {
@@ -159,14 +158,14 @@ class AddTaskAssignment extends Component {
           </select>
           <input type='submit'/>
         </form>
-        <button onClick={() => {
-          if(this.state.editing) {
-            this.props.cancel(null)
-          } else {
-            this.props.changeSheetTo('tasks-behaviors')
-          }
+        {this.state.editing ?
+          <button onClick={() => {
+              this.props.cancel(null)
+          }}>Cancel</button>
+          :
+          ""
+        }
 
-        }}>{this.state.btnDone}</button>
       </div>
     )
   }
