@@ -45,11 +45,15 @@ body {
 
 }
 
-button {
-  padding: 15px;
+button, input[type='submit'] {
+  padding: 10px;
   margin: 15px;
   border-radius: 30px;
   font-size: 1.5em;
+}
+
+input[type='submit'] {
+  font-size: 1em;
 }
 
 li {
@@ -106,7 +110,11 @@ td {
   background-color: white;
   color: blue;
 }
-
+/*
+=====================
+=   Header
+=====================
+*/
 
 .header {
   /* display: flex;
@@ -124,6 +132,27 @@ td {
   font-size: 3em;
   margin: 0;
 }
+
+/*
+=====================
+=   Landing & Auth Pages
+=====================
+*/
+
+.landing {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.welcome {
+  font-size: 6em;
+
+}
+
+/* .auth-headers {
+  font-size: 4em;
+} */
+
 /*
 =====================
 =   T & B Dashboard
@@ -149,9 +178,10 @@ ul {
 form {
   text-align: center;
   margin-top: 30px;
+  font-size: 1.75em;
 }
 
-input[type='text'], input[type='number'] {
+input[type='text'], input[type='number'], input[type='password'] {
   padding: 5px;
   font-size: 1em;
   margin: 10px;
@@ -164,6 +194,8 @@ select {
   margin-left: 10px;
   border-radius: 50px;
 }
+
+
 
 /*
 =====================

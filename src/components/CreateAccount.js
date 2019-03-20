@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Redirect} from 'react-router-dom'
 
 import AuthService from '../services/user.service'
 
@@ -8,7 +9,8 @@ class CreateAccount extends Component {
     this.state = {
       username: '',
       password: '',
-      parent_pin: ''
+      parent_pin: '',
+      submitted: false
     }
     this.Auth = new AuthService()
   }
@@ -28,7 +30,9 @@ class CreateAccount extends Component {
         .then(
           res => {
             // redirect to login page
-            this.props.history.replace('/login')
+            this.setState({
+              submitted: true
+            })
           }
         )
     }
@@ -49,15 +53,18 @@ class CreateAccount extends Component {
   }
 
   render() {
+    if(this.state.submitted) return <Redirect to='/login'/>
     return (
-      <form onSubmit={this.handleSubmit}>
-      <h1>Create Your Family</h1>
-        <label htmlFor='username'>Family Name</label>
-        <input type='text' id='username' onChange={this.handleChange}/>
-        <label htmlFor='password'>Password</label>
-        <input type='password' id='password' onChange={this.handleChange}/>
-        <input type='submit'/>
-      </form>
+
+        <form onSubmit={this.handleSubmit}>
+        <h1>Create Your Family</h1>
+          <label htmlFor='username'>Family Name</label>
+          <input type='text' id='username' onChange={this.handleChange}/>
+          <label htmlFor='password'>Password</label>
+          <input type='password' id='password' onChange={this.handleChange}/>
+          <input type='submit'/>
+        </form>
+
     )
   }
 }

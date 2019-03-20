@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
-// import {Link } from 'react-router-dom'
+import {BrowserRouter as Router, Route, NavLink, Link, Switch} from 'react-router-dom'
 
+import Dashboard from './Dashboard'
+import ManageHousehold from './Household'
+import ManageTBs from './ManageTBs'
+import ManageCashins from './ManageCashins'
 
 
 
@@ -17,9 +21,10 @@ class Header extends Component {
 
   // logout functionality
   handleLogout = () => {
-    this.props.auth.logout()
-    this.props.history.replace('/login')
-
+    this.props.logout()
+    // history.replace('/login')
+    // this.props.authStatus(false)
+    // return <Redirect to='/'/>
   }
 
   // Get family name from local storge to display in header
@@ -37,33 +42,48 @@ class Header extends Component {
   render() {
 
     return (
-      <div className='header'>
-        <div className='header-titles'>
-          <h1 id='h1-header'>{this.state.familyName} Family Dashboard</h1>
-          <button onClick={this.handleLogout}>Log Out</button>
+      <Router>
+        <div className='header'>
+          <div className='header-titles'>
+            <h1 id='h1-header'>{this.state.familyName} Family Dashboard</h1>
+            <Link to='/login'><button onClick={this.handleLogout}>Log Out</button></Link>
+          </div>
+          <div className='nav-management'>
+            <NavLink exact to='/dashboard'>
+              <button>Main Dashbaord</button>
+            </NavLink>
+            <NavLink exact to='/household'>
+              <button>Manage Household</button>
+            </NavLink>
+
+            <NavLink exact to='/manage-tbs'>
+              <button>Manage Tasks & Behaviors</button>
+            </NavLink>
+            <NavLink exact to='/manage-cashins'>
+              <button>Manage Cash Ins</button>
+            </NavLink>
+          </div>
+          <Switch>
+            <Route
+              path='/dashboard'
+              component={Dashboard}
+            />
+            <Route
+              path='/household'
+              component={ManageHousehold}
+            />
+            <Route
+              path='/manage-tbs'
+              component={ManageTBs}
+            />
+            <Route
+              path='/manage-cashins'
+              component={ManageCashins}
+            />
+          </Switch>
+
         </div>
-        <div className='nav-management'>
-          <button onClick={() => {
-            this.props.handleManagementOpts('family-dashboard')
-            }}>Family Dashboard</button>
-
-          <button onClick={() => {
-            this.props.handleManagementOpts('household')
-          }}>Manage Household</button>
-
-          <button onClick={() => {
-            this.props.handleManagementOpts('tasks-behaviors')
-          }}>Manage Tasks & Behaviors</button>
-
-          <button onClick={() => {
-            this.props.handleManagementOpts('cash-ins')
-          }}>Manage Cash Ins</button>
-
-        </div>
-
-
-
-      </div>
+      </Router>
     )
   }
 

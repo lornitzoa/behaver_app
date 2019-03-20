@@ -72,7 +72,8 @@ export default class AuthService {
     logout() {
         // Clear user token and profile data from localStorage
         localStorage.removeItem('id_token')
-        // localStorage.removeItem('username')
+        localStorage.removeItem('username')
+        localStorage.removeItem('family_id')
     }
 
     getProfile() {

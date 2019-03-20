@@ -5,31 +5,72 @@ import { BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css';
 
 import Landing from './components/Landing'
-import Dashboard from './components/Dashboard'
-import Login from './components/Login'
-import CreateAccount from './components/CreateAccount'
+import Main from './components/Main'
+// import Dashboard from './components/Dashboard'
+// import Login from './components/Login'
+// import CreateAccount from './components/CreateAccount'
+
+import AuthService from './services/user.service'
 
 
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      auth: false
+    }
+    this.Auth = new AuthService()
+  }
+
+  login = (username, password) => {
+    this.Auth.login(username, password)
+      .then(res => {
+        this.setState({
+          auth: true
+        })
+      },
+      err => console.log(err)
+      )
+  }
+
+  logout = () => {
+    this.Auth.logout()
+    this.setState({
+      auth: false
+    })
+  }
+
+  componentDidMount() {
+    if(localStorage.getItem('id_token')) {
+      this.setState({
+        auth: true
+      })
+    }
+  }
 
   render() {
     return (
       <Router>
         <div>
-          <Route
-            path='/'
-            exact component={Landing}
-          />
-          <Route
-            path='/dashboard'
-            exact component={Dashboard}
-          />
-          <Route
-            path='/login'
-            component={Login}
-          />
-          <Route path='/register' component={CreateAccount}/>
+          {this.state.auth ?
+            <Route
+              to='/home'
+              component={() =>
+                <Main
+                  logout={this.logout}
+                />
+              }
+            />
+            :
+            <Route
+              to='/auth'
+              component={() =>
+                <Landing login={this.login}/>
+              }
+
+            />
+          }
         </div>
       </Router>
     );

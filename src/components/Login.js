@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {BrowserRouter as Router} from 'react-router-dom'
 import AuthService from '../services/user.service'
 
 class Login extends Component {
@@ -6,7 +7,8 @@ class Login extends Component {
     super(props)
     this.state = {
       username: '',
-      password: ''
+      password: '',
+      authorized: false
     }
     this.Auth = new AuthService()
   }
@@ -14,17 +16,21 @@ class Login extends Component {
   // handle form submission
   handleSubmit = (e) => {
     e.preventDefault()
+    this.props.login(this.state.username, this.state.password)
     // send entered username and password to user.service login function
-    this.Auth.login(this.state.username, this.state.password)
-      .then(
-        res => {
-          // if successful redirect to dashboard
-          this.props.history.replace('/dashboard')
-        },
-        error =>
-          console.log(error)
-
-      )
+    // this.Auth.login(this.state.username, this.state.password)
+    //   .then(
+    //     res => {
+    //       // if successful redirect to dashboard
+    //       this.props.auth(true)
+    //       this.setState({
+    //         authorized: true
+    //       })
+    //     },
+    //     error =>
+    //       console.log(error)
+    //
+    //   )
   }
 
   // handle form input changes
@@ -35,22 +41,25 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // check if user is already logged in, if so redirect to dashboard
-    if(this.Auth.loggedIn()) {
-      this.props.history.replace('/dashboard')
-    }
+
   }
 
   render() {
+    // if(this.state.authorized) return <Redirect to='/dashboard'/>
     return (
-      <form onSubmit={this.handleSubmit}>
-      <h1>Log In</h1>
-        <label htmlFor='familyname'>Family Name</label>
-        <input type='text' id='username' onChange={this.handleChange}/>
-        <label htmlFor='password'>Password</label>
-        <input type='password' id='password' onChange={this.handleChange}/>
-        <input type='submit'/>
-      </form>
+      <Router>
+        <div>
+          <form onSubmit={this.handleSubmit}>
+          <h1 className='auth-headers'>Log In</h1>
+            <label htmlFor='familyname'>Family Name</label>
+            <input type='text' id='username' onChange={this.handleChange}/>
+            <label htmlFor='password'>Password</label>
+            <input type='password' id='password' onChange={this.handleChange}/>
+            <input type='submit'/>
+          </form>
+        </div>
+      </Router>
+
     )
   }
 }
