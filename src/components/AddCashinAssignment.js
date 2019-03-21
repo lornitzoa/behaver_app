@@ -8,8 +8,8 @@ class AddCashinAssignment extends Component {
       child_id: null,
       reinforcement_id: 0,
       reinforcement: '',
-      points: 0,
-      daily_allotment: 0,
+      points: 'Value',
+      daily_allotment: 'Daily Allotment',
       no_available: 0,
       // view state of form
       editing: false
@@ -81,8 +81,8 @@ class AddCashinAssignment extends Component {
         child_id: this.props.childID,
         reinforcement_id: 0,
         reinforcement: '',
-        points: 0,
-        daily_allotment: 0,
+        points: 'Value',
+        daily_allotment: 'Daily Allotment',
         no_available: 0,
         available: Boolean,
         editing: false,
@@ -116,10 +116,8 @@ class AddCashinAssignment extends Component {
               )
             })}
           </select>
-          <label>Value</label>
-          <input type='number' id='points' value={this.state.points} onChange={this.handleChange}/>
-          <label>Daily Allotment</label>
-          <input type='number' onChange={this.handleChange} id='daily_allotment' value={this.state.daily_allotment}/>
+          <input type='number' id='points' placeholder={this.state.points} value={this.state.points} onChange={this.handleChange}/>
+          <input type='number' onChange={this.handleChange} placeholder={this.state.daily_allotment} id='daily_allotment' value={this.state.daily_allotment}/>
           <input type="submit"/>
         </form>
         {this.state.editing ?
@@ -127,9 +125,7 @@ class AddCashinAssignment extends Component {
               this.props.cancel(null)
           }}>Cancel</button>
           :
-          <button onClick={() => {
-              this.props.changeView()
-          }}>Cancel</button>
+          ""
         }
 
       </div>

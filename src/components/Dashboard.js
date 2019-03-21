@@ -19,8 +19,6 @@ class Dashboard extends Component {
   }
 
   changeView = (childID) => {
-    console.log(childID);
-    console.log('changing view');
     if (childID === null) {
       this.setState({
         viewDashboard: !this.state.viewDashboard
@@ -48,17 +46,12 @@ class Dashboard extends Component {
     return (
       <Router>
         <div>
-        {console.log(this.state.childID)}
-
           {this.state.viewDashboard ?
             <div>
-              {console.log('going to overview')}
               <Redirect to='/overview'/>
             </div>
-
             :
             <div>
-              {console.log('going to child dashboard')}
               <Redirect to='/child-dashboard'/>
             </div>
 

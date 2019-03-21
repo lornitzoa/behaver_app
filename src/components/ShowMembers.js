@@ -113,17 +113,19 @@ class ShowMembers extends Component {
                 {this.state.members.map((member, index) => {
                   return (
                     <li key={index}>
-                      {member.name}
-                      {member.id}
-                      <button onClick={() => {
-                    
-                        this.setMemberInfo(member, index);
-
-                        this.changeStaticState()
-                      }}>Edit</button>
-                      <button onClick={() => {
-                        this.deleteMember(member.member_id, index)
-                      }}>Delete</button>
+                      <div className='list-details'>
+                        {member.name}
+                        {member.id}
+                      </div>
+                      <div className='list-btns'>
+                        <button onClick={() => {
+                          this.setMemberInfo(member, index);
+                          this.changeStaticState()
+                        }}>Edit</button>
+                        <button onClick={() => {
+                          this.deleteMember(member.member_id, index)
+                        }}>Delete</button>
+                      </div>
                     </li>
                   )
                 })}

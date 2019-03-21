@@ -50,7 +50,7 @@ class ManageHousehold extends Component {
   render() {
     return (
       <div>
-        <h2>Your Family</h2>
+        <h1>Your Household</h1>
         <div>
           <button onClick={() => {
               this.changeTabTo('showMembers')

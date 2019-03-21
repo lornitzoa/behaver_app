@@ -84,7 +84,7 @@ class NewMember extends Component {
   render() {
     return(
       <div>
-        <h3>Add new family member details</h3>
+        <h1>Add New Family Member</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='name'>Name</label>
           <input
@@ -107,13 +107,15 @@ class NewMember extends Component {
           />
           <input type='submit'/>
         </form>
-        <button onClick={() => {
-          if(this.state.type === 'addMember') {
-            this.props.showTab('showMembers')
-          } else {
-            this.props.changeStaticState()
+        {this.state.type === 'editMember' ?
+          <button onClick={() => {
+              this.props.changeStaticState()
+            }
+          }>Cancel</button>
+          :
+          ""
           }
-        }}>Done</button>
+
       </div>
 
     )

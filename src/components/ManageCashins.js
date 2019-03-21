@@ -43,13 +43,17 @@ class ManageCashins extends Component {
                   </li>
                   :
                   <li >
-                    {cashin.reinforcement}
-                    <button onClick={() => {
-                      this.goToEdit(index)
-                    }}>Edit</button>
-                    <button onClick={() => {
-                      this.props.deleteData('reinforcements', cashin.id)
-                    }}>Delete</button>
+                    <div className='list-details'>
+                      {cashin.reinforcement}
+                    </div>
+                    <div className='list-btns'>
+                      <button onClick={() => {
+                        this.goToEdit(index)
+                      }}>Edit</button>
+                      <button onClick={() => {
+                        this.props.deleteData('reinforcements', cashin.id)
+                      }}>Delete</button>
+                    </div>
                   </li>
                 }
               </div>

@@ -48,7 +48,6 @@ class ChildDashboard extends Component {
     return (
       <Router>
         <div>
-        {console.log(this.props.child)}
         {this.props.child ?
           <div>
             <div className='header'>

@@ -8,7 +8,7 @@ class AddTaskAssignment extends Component {
       task_id: 0,
       frequency: '',
       time_of_day: '',
-      points: 0,
+      points: 'Points',
       required: true,
       completed: false,
       changed: false,
@@ -23,15 +23,24 @@ class AddTaskAssignment extends Component {
     if(this.props.task) {
       let task = this.props.task
       this.getTaskID(this.props.tasks, task)
+      let required = this.convertBoolean(task.required)
       this.setState({
         child_id: task.child_id,
         frequency: task.frequency,
         time_of_day: task.time_of_day,
         points: task.points,
-        required: task.required,
+        required: required,
         editing: true,
         btnDone: 'Cancel'
       })
+    }
+  }
+
+  convertBoolean = (string) => {
+    if(string === 't') {
+      return true
+    } else {
+      return false
     }
   }
 
@@ -110,7 +119,7 @@ class AddTaskAssignment extends Component {
         task_id: 0,
         frequency: '',
         time_of_day: '',
-        points: 0,
+        points: 'Points',
         required: true,
         completed: false,
         editing: false
@@ -129,7 +138,7 @@ class AddTaskAssignment extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className='data-form'>
           <select onChange={this.handleChange} id='task_id' value={this.state.task_id}>
             <option value='0'>---Choose Task---</option>
             {this.props.tasks.map((task, index) => {
@@ -150,7 +159,7 @@ class AddTaskAssignment extends Component {
             <option value='pm'>PM</option>
             <option value='any'>Any</option>
           </select>
-          <input type='number' onChange={this.handleChange} id='points' value={this.state.points}/>
+          <input type='number' onChange={this.handleChange} id='points' placeholder={this.state.points} value={this.state.points}/>
           <select onChange={this.handleChange} id='required' value={this.state.required}>
             <option>--Choose Option--</option>
             <option value='true'>Required</option>

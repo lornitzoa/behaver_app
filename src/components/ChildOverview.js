@@ -42,14 +42,8 @@ class ChildOverview extends Component {
     return(
       <Router>
         <div>
-
           <table>
             <thead>
-              <tr colSpan='5'>
-                <th>
-                  <h2>Main Dashbaord</h2>
-                </th>
-              </tr>
               <tr>
                 <th className='childNameCol'>CHILD</th>
                 <th>BEHAVIOR POINTS</th>
@@ -59,6 +53,7 @@ class ChildOverview extends Component {
               </tr>
             </thead>
             <tbody>
+
             {
               this.props.children ? this.props.children.map((child, index) => {
                 return (
@@ -66,10 +61,10 @@ class ChildOverview extends Component {
                     this.props.changeView(child.member_id)
                   }>
                     <td className='childNameCol childName'>{child.name}</td>
-                    <td >{this.props.scores[0].bx_points_earned}</td>
-                    <td >{this.props.scores[0].task_points_earned}</td>
-                    <td >{this.props.scores[0].total_points_earned}</td>
-                    <td >{this.props.scores[0].stashed_cash}</td>
+                    <td >{this.props.scores[index].bx_points_earned}</td>
+                    <td >{this.props.scores[index].task_points_earned}</td>
+                    <td >{this.props.scores[index].total_points_earned}</td>
+                    <td >{this.props.scores[index].stashed_cash}</td>
                   </tr>
                 )
               }

@@ -92,7 +92,7 @@ class AddBehaviorAssignment extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} className='data-form'>
           <select onChange={this.handleChange} id='behavior_id' value={this.state.behavior_id}>
             <option value='0'>---Choose Behavior---</option>
               {this.props.behaviors.map((behavior, index) => {

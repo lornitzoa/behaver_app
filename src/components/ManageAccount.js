@@ -33,7 +33,7 @@ class ManageAccount extends Component {
   render() {
     return (
       <div>
-        Edit Account
+        <h1>Edit Account Details</h1>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor='familyname'>Family Name</label>
           <input type='text' onChange={this.handleChange} id='familyname'/>

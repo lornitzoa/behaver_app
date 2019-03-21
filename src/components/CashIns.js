@@ -24,19 +24,13 @@ class CashIns extends Component {
   render() {
     return (
       <div>
-        {this.state.listView ?
-          <div>
-          <h2>Available Cashins</h2>
-          <button onClick={this.changeView}>Make Cashin Available</button>
-          </div>
-          :
-          <AddCashinAssignment
-            cashIns={this.props.cashIns}
-            addData={this.props.addData}
-            changeView={this.changeView}
-            child={this.props.child}
-          />
-        }
+        <h2>Available Cashins</h2>
+        <AddCashinAssignment
+          cashIns={this.props.cashIns}
+          addData={this.props.addData}
+          changeView={this.changeView}
+          child={this.props.child}
+        />
         <CashinList
           changeView={this.changeView}
           updateScore={this.props.updateScore}

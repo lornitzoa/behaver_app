@@ -27,11 +27,11 @@ class ManageTBs extends Component {
     return (
       <div>
         <div>
-          <h2>Manage Tasks and Behaviors</h2>
+          <h1>Manage Tasks and Behaviors</h1>
           <div className='TBDashboard'>
             <div>
               <div>
-                <h3>Tasks</h3>
+                <h2>Tasks</h2>
               </div>
               <div>
                 <AddTask
@@ -53,13 +53,17 @@ class ManageTBs extends Component {
                         </li>
                         :
                         <li key={index}>
-                          {task.task}
-                          <button onClick={() => {
-                            this.setEditParams(index, 'task')
-                          }}>Edit</button>
-                          <button onClick={() => {
-                            this.props.deleteData('tasks',task.id)
-                          }}>Delete</button>
+                          <div className='list-details'>
+                            {task.task}
+                          </div>
+                          <div className='list-btns'>
+                            <button onClick={() => {
+                              this.setEditParams(index, 'task')
+                            }}>Edit</button>
+                            <button onClick={() => {
+                              this.props.deleteData('tasks',task.id)
+                            }}>Delete</button>
+                          </div>
                         </li>
                       }
                     </div>
@@ -69,7 +73,7 @@ class ManageTBs extends Component {
             </div>
             <div>
               <div>
-                <h3>Behaviors</h3>
+                <h2>Behaviors</h2>
               </div>
               <div>
                 <AddBehavior
@@ -91,14 +95,18 @@ class ManageTBs extends Component {
                       </li>
                       :
                       <li key={index}>
-                        {behavior.behavior} <br/>
-                        {behavior.targeted_for}
-                        <button onClick={() => {
-                          this.setEditParams(index, 'behavior')
-                        }}>Edit</button>
-                        <button onClick={() => {
-                          this.props.deleteData('behaviors',behavior.id)
-                        }}>Delete</button>
+                        <div className='list-details'>
+                          {behavior.behavior} <br/>
+                          {behavior.targeted_for}
+                        </div>
+                        <div className='list-btns'>
+                          <button onClick={() => {
+                            this.setEditParams(index, 'behavior')
+                          }}>Edit</button>
+                          <button onClick={() => {
+                            this.props.deleteData('behaviors',behavior.id)
+                          }}>Delete</button>
+                        </div>
                       </li>
                     }
                   </div>
