@@ -29,6 +29,7 @@ class App extends Component {
         this.setState({
           auth: true
         })
+
       },
       err => console.log(err)
       )
@@ -55,17 +56,18 @@ class App extends Component {
         <div>
           {this.state.auth ?
             <Route
-              to='/home'
-              component={() =>
+              to='/'
+              render={() =>
                 <Main
                   logout={this.logout}
+                  auth={this.state.auth}
                 />
               }
             />
             :
             <Route
-              to='/auth'
-              component={() =>
+              to='/landing'
+              render={() =>
                 <Landing login={this.login}/>
               }
 

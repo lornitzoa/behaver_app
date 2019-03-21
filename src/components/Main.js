@@ -145,9 +145,9 @@ class Main extends Component {
     this.getData('tasks')
     this.getData('behaviors')
     this.getData('reinforcements')
-    this.getData('tasks/assignments')
-    this.getData('reinforcements/assignments')
-    this.getData('behaviors/assignments')
+    // this.getData('tasks/assignments')
+    // this.getData('reinforcements/assignments')
+    // this.getData('behaviors/assignments')
     this.getData('scores')
     this.getFamilyName()
   }
@@ -179,7 +179,7 @@ class Main extends Component {
             <Switch>
               <Route
                 path='/dashboard'
-                component={() =>
+                render={() =>
                   <Dashboard
                     children={this.state.members.filter(member => member.role.includes('child'))}
                     goToChildDashboard={this.goToChildDashboard}
@@ -203,7 +203,7 @@ class Main extends Component {
               />
               <Route
                 path='/manage-tbs'
-                component={() =>
+                render={() =>
                   <ManageTBs
                     addData={this.addData}
                     deleteData={this.deleteData}
@@ -215,8 +215,9 @@ class Main extends Component {
               />
               <Route
                 path='/manage-cashins'
-                component={() =>
+                render={() =>
                   <ManageCashins
+                    getData={this.getData}
                     addData={this.addData}
                     deleteData={this.deleteData}
                     updateData={this.updateData}

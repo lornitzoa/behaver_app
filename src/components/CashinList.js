@@ -21,7 +21,7 @@ class CashinList extends Component {
     let updateData = {
       points_used: cashin.points
     }
-    console.log(cashin);
+    console.log(updateData);
     this.props.updateScore(cashin.child_id, updateData)
     let updateNoAvailable = {
       id: cashin.id,

@@ -9,8 +9,14 @@ class Index extends Component {
   constructor(props) {
     super(props)
     this.state = {
-
+      view: false
     }
+  }
+
+  changeView = () => {
+    this.setState({
+      view: !this.state.view
+    })
   }
 
   render() {
@@ -24,20 +30,29 @@ class Index extends Component {
           <Link to='/register' className='router-links'>
             <button>Create Family</button>
           </Link>
-          <Switch>
-            <Route
-              path='/login'
-              component={() =>
-                <Login login={this.props.login} history={this.props.history}/>
-                }
-              />
-            <Route
-              path='/register'
-              component={() =>
-                <CreateAccount/>
-                }
-              />
-            </Switch>
+
+            <div>
+              <Switch>
+                <Route
+                  path='/login'
+                  component={() =>
+                    <Login
+                      login={this.props.login}
+                      changeView={this.changeView}
+                      />
+                    }
+                  />
+                <Route
+                  path='/register'
+                  component={() =>
+                    <CreateAccount
+                      changeView={this.ChangeView}
+                    />
+                    }
+                  />
+              </Switch>
+            </div>
+
         </div>
 
       </Router>

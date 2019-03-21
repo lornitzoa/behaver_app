@@ -17,9 +17,7 @@ class ManageCashins extends Component {
     })
   }
 
-  componentDidMount() {
-    // console.log(this.props.reinforcements);
-  }
+
 
   render() {
     return (

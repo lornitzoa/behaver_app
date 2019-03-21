@@ -9,13 +9,15 @@ import AddBehaviorAssignment from './AddBehaviorAssignment'
 class TasksBehaviors extends Component {
 
 
-  // componentDidMount() {
-  //   // console.log(this.props.tasksassignments);
-  // }
+  componentDidMount() {
+    console.log('im here!');
+  }
 
   render() {
     return (
       <div>
+        {console.log(this.props.tasksassignments)}
+        {console.log(this.props.behaviorsassignments)}
         <AddTaskAssignment
           changeSheetTo={this.changeSheetTo}
           addData={this.props.addData}

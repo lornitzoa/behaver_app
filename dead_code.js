@@ -1,3 +1,32 @@
+// TERNERY ROUTING FROM Dashboard
+
+{this.state.viewDashboard ?
+
+
+  :
+  <ChildDashboard
+    getData={this.props.getData}
+    addData={this.props.addData}
+    deleteData={this.props.deleteData}
+    updateData={this.props.updateData}
+    tasks={this.props.tasks}
+    behaviors={this.props.behaviors}
+    reinforcements={this.props.reinforcements}
+    tasksassignments={this.props.tasksassignments.filter(task =>
+      task.child_id === this.state.childID)}
+    behaviorsassignments={this.props.behaviorsassignments.filter(task =>
+      task.child_id === this.state.childID)}
+    reinforcementsassignments={this.props.reinforcementsassignments}
+    scores={this.props.scores.filter(score => score.member_id === this.state.childID)}
+    child={this.props.children.filter(child =>
+      child.member_id === this.state.childID
+    )}
+  />
+}
+
+
+
+
 
 // REMOVED FROM DASHBOARD AFTER REARRANGING TO MAIN.JS
 

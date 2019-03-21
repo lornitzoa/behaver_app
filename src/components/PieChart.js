@@ -12,7 +12,7 @@ const Slice = props => {
 
   return pie.map((slice, index) => {
     let sliceColor = interpolate(index / (pie.length - 1))
-    return <path d={arc(slice)} fill={sliceColor}/>
+    return <path d={arc(slice)} fill={sliceColor} key={index}/>
   })
 }
 

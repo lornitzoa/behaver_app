@@ -45,9 +45,9 @@ class TaskList extends Component {
     let points = {
       task_points_earned: parseInt(task.points)
     }
-    this.props.updateScore(task.child_id, points)
-    // create variable to hold taskID, retrieved from getTaskID function
-    // using the task list and the completed task
+    // this.props.updateScore(task.child_id, points)
+    // // create variable to hold taskID, retrieved from getTaskID function
+    // // using the task list and the completed task
     let taskID = this.getTaskID(this.props.tasks, task)
     let required = this.checkBooleans(task.required)
     // create data object to update assigned task table
@@ -69,14 +69,14 @@ class TaskList extends Component {
   }
 
   componentDidMount() {
-    // console.log(this.props.tasksassignments);
+
     // console.log(this.props.score);
     // console.log(this.props.tasksassignments);
   }
 
   render() {
     return (
-      <div>      
+      <div>
         <div className='list-headers'>
           <h3 className='list-title-header'>Task</h3>
           <h3 className='list-data-header'>Points</h3>
