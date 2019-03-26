@@ -5,7 +5,7 @@ import ManageAccount from './ManageAccount'
 import ShowMembers from './ShowMembers'
 // import AuthService from '../services/user.service'
 
-let api_url = 'http://localhost:3000'
+let api_url = 'https://behaver-api.herokuapp.com/'
 
 // Components for Managing Basic Household Infos
 class ManageHousehold extends Component {
