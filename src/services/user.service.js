@@ -31,7 +31,7 @@ export default class AuthService {
 
     register(user) {
       console.log(user);
-      return this.fetch(`http://localhost:3000/users/register`,
+      return this.fetch(`https://behaver-api.herokuapp.com/users/register`,
         {
           body: JSON.stringify(user),
           method: 'POST'
