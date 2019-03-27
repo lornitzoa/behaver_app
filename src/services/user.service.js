@@ -2,7 +2,7 @@ import decode from 'jwt-decode';
 export default class AuthService {
     // Initializing important variables
     constructor(domain) {
-        this.domain = 'https://behaver-api.herokuapp.com/' // API server domain
+        this.domain = 'https://behaver-api.herokuapp.com' // API server domain
         this.fetch = this.fetch.bind(this) // React binding stuff
         this.login = this.login.bind(this)
         this.getProfile = this.getProfile.bind(this)
