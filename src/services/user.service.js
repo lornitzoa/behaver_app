@@ -9,6 +9,7 @@ export default class AuthService {
     }
 
     login(username, password) {
+      console.log(username)
       // Get a token from api server using the fetch api
       return this.fetch(`${this.domain}/users/login?user[username]=${username}&user[password]=${password}`, {
           method: 'POST',
