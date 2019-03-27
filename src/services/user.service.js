@@ -32,7 +32,7 @@ export default class AuthService {
     }
 
     register(user) {
-      console.log(user);
+
       return this.fetch(`https://behaver-api.herokuapp.com/users/register`,
         {
           body: JSON.stringify(user),
@@ -85,6 +85,8 @@ export default class AuthService {
 
 
     fetch(url, options) {
+      console.log(url)
+      console.log(options)
         // performs api calls sending the required authentication headers
         const headers = {
             'Accept': 'application/json',
