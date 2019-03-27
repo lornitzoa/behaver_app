@@ -96,11 +96,10 @@ export default class AuthService {
         }
 
         return fetch(url, {
-            console.log(url)
             headers,
             ...options
         })
-            .then(this._checkStatus)
+            .then(console.log(url))
             .then(response => response.json())
     }
 
