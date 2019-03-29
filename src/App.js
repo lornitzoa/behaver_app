@@ -24,6 +24,7 @@ class App extends Component {
   }
 
   login = (username, password) => {
+    console.log(username)
     this.Auth.login(username, password)
       .then(res => {
         this.setState({
