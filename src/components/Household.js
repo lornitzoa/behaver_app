@@ -34,17 +34,17 @@ class ManageHousehold extends Component {
   }
 
   // Create New Member
-  createMember = (member) => {
-    fetch(`${api_url}/members`, {
-      body: JSON.stringify(member),
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json, text/plain, */*',
-        'Content-Type': 'application/json'
-      }
-    })
-    .catch(err => console.log(err))
-  }
+  // createMember = (member) => {
+  //   fetch(`${api_url}/members`, {
+  //     body: JSON.stringify(member),
+  //     method: 'POST',
+  //     headers: {
+  //       'Accept': 'application/json, text/plain, */*',
+  //       'Content-Type': 'application/json'
+  //     }
+  //   })
+  //   .catch(err => console.log(err))
+  // }
 
 
   render() {
@@ -70,20 +70,28 @@ class ManageHousehold extends Component {
           {
             this.state.showTab === 'showMembers' ? <ShowMembers
               showTab={this.changeTabTo}
-              editMember={this.editMember}
-
+              getData={this.props.getData}
+              addData={this.props.addData}
+              deleteData={this.props.deleteData}
+              updateData={this.props.updateData}
+              members={this.props.members}
 
             /> : ''
           }
           {
             this.state.showTab === 'newMember' ?
             <NewMember
+              getData={this.props.getData}
+              addData={this.props.addData}
+              deleteData={this.props.deleteData}
+              updateData={this.props.updateData}
               showTab={this.changeTabTo}
-              createMember={this.createMember}
+
             /> : ''
           }
           {
-            this.state.showTab === 'manageAccount' ? <ManageAccount
+            this.state.showTab === 'manageAccount' ?
+            <ManageAccount
               showTab={this.changeTabTo}
               updateAccount={this.updateAccount}
             /> : ''

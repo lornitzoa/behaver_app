@@ -8,7 +8,7 @@ class AddTaskAssignment extends Component {
       task_id: 0,
       frequency: '',
       time_of_day: '',
-      points: 'Points',
+      points: 0,
       required: true,
       completed: false,
       changed: false,
@@ -85,7 +85,8 @@ class AddTaskAssignment extends Component {
         time_of_day: this.state.time_of_day,
         points: parseInt(this.state.points),
         required: JSON.parse(this.state.required),
-        completed: JSON.parse(this.state.completed)
+        completed: JSON.parse(this.state.completed),
+        family_id: localStorage.getItem('family_id')
       }
       // send object to updateData with route string
       this.props.updateData('tasks/assignments', updatedAssignment)
@@ -106,7 +107,8 @@ class AddTaskAssignment extends Component {
         time_of_day: this.state.time_of_day,
         points: parseInt(this.state.points),
         required: JSON.parse(this.state.required),
-        completed: JSON.parse(this.state.completed)
+        completed: JSON.parse(this.state.completed),
+        family_id: parseInt(localStorage.getItem('family_id'))
       }
       // console.log(newAssignment);
       // send object to addData with route string
@@ -119,7 +121,7 @@ class AddTaskAssignment extends Component {
         task_id: 0,
         frequency: '',
         time_of_day: '',
-        points: 'Points',
+        points: 0,
         required: true,
         completed: false,
         editing: false

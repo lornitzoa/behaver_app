@@ -39,6 +39,7 @@ class ManageTBs extends Component {
                 />
               </div>
               <ul>
+                {console.log(this.props.tasks)}
                 {this.props.tasks.map((task, index) => {
                   return (
                     <div key={index}>
@@ -81,6 +82,7 @@ class ManageTBs extends Component {
                 />
               </div>
               <ul>
+              {console.log(this.props.behaviors)}
               {this.props.behaviors.map((behavior, index) => {
                 return (
                   <div key={index}>

@@ -53,9 +53,12 @@ class ChildOverview extends Component {
               </tr>
             </thead>
             <tbody>
-
+            {console.log(this.props.familyID)}
             {
-              this.props.children ? this.props.children.map((child, index) => {
+              
+            }
+            {
+              this.props.children.length > 0 ? this.props.children.map((child, index) => {
                 return (
                   <tr key={index} onClick={() =>
                     this.props.changeView(child.member_id)
@@ -70,7 +73,7 @@ class ChildOverview extends Component {
               }
             )
               :
-              ''
+              <h2>You don't have any children yet</h2>
             }
             </tbody>
           </table>

@@ -43,7 +43,7 @@ class NewMember extends Component {
         family_id: this.state.family_id
       }
       // send new member to create route
-      this.props.createMember(member)
+      this.props.addData('members', member)
       // change sheet to ShowMembers
       this.props.showTab('showMembers')
     } else if(this.state.type === 'editMember') {
@@ -56,7 +56,7 @@ class NewMember extends Component {
         family_id: this.state.family_id
       }
       // send edited member to update route
-      this.props.editMember(updatedMember)
+      this.props.updateData('members', updatedMember)
       // change static state to return to ShowMembers component
       this.props.changeStaticState()
     }

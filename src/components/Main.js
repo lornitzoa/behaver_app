@@ -11,7 +11,7 @@ import ManageCashins from './ManageCashins'
 import AuthService from '../services/user.service'
 
 
-let api_url = 'http://localhost:3000/'
+let api_url = 'http://localhost:3000'
 
 class Main extends Component {
   constructor(props) {
@@ -34,6 +34,7 @@ class Main extends Component {
     }
     this.Auth = new AuthService()
     this.childID = null
+    this.familyID = localStorage.getItem('family_id')
   }
 
   // logout functionality
@@ -56,7 +57,7 @@ class Main extends Component {
 
   // get children from db and display Children in Children Overview component
   getData = (dataType) => {
-    axios.get(`${api_url}/${dataType}`)
+    axios.get(`${api_url}/${dataType}/${this.familyID}`)
       .then(json => json.data)
       .then(data => {
           let array = dataType.replace('/', '')
@@ -71,6 +72,7 @@ class Main extends Component {
           }
 
 
+
           // console.log(dataType);
           // console.log(data);
 
@@ -81,8 +83,8 @@ class Main extends Component {
   //               DELETE DATA
   //////////////////////////////////////////////
   deleteData = (dataType, id) => {
-    // console.log(dataType);
-    // console.log(id);
+    console.log(dataType);
+    console.log(id);
     axios.delete(`${api_url}/${dataType}/${id}`)
       .then(data => {
         this.getData(dataType)
@@ -90,7 +92,7 @@ class Main extends Component {
         console.log(dataType);
         if(dataType === 'tasks/assignments') {
           this.getData('scores')
-          console.log('getting scores');
+          // console.log('getting scores');
         }
       }
 
@@ -104,6 +106,7 @@ class Main extends Component {
     // console.log(data);
     axios.post(`${api_url}/${dataType}`, data)
       .then(newData => {
+        // console.log(newData.data)
         return newData.data
       })
       .then(resData => {
@@ -121,23 +124,40 @@ class Main extends Component {
   //               EDIT DATA
   //////////////////////////////////////////////
   updateData = (dataType, data) => {
-    // console.log(dataType)
-    console.log(data)
-    // console.log(data.id)
-    axios.put(`${api_url}/${dataType}/${data.id}`, data)
-      .then(updatedData => {
-        // console.log(updatedData);
-        return updatedData.data
-      })
-      .then(resData => {
-        this.getData(dataType)
-        if(dataType === 'tasks/assignments') {
-          console.log('getting scores');
-          this.getData('scores')
+    console.log(dataType)
+    console.log(data.id)
+    if(dataType === 'members') {
+      axios.put(`${api_url}/${dataType}/${data.member_id}`, data)
+        .then(updatedData => {
+          // console.log(updatedData);
+          return updatedData.data
+        })
+        .then(resData => {
+          this.getData(dataType)
+          if(dataType === 'tasks/assignments') {
 
-        }
-      })
-      .then(err => console.log(err))
+            this.getData('scores')
+
+          }
+        })
+        .then(err => console.log(err))
+    } else {
+      axios.put(`${api_url}/${dataType}/${data.id}`, data)
+        .then(updatedData => {
+          // console.log(updatedData);
+          return updatedData.data
+        })
+        .then(resData => {
+          this.getData(dataType)
+          if(dataType === 'tasks/assignments') {
+
+            this.getData('scores')
+
+          }
+        })
+        .then(err => console.log(err))
+    }
+
   }
 
   componentDidMount() {
@@ -182,6 +202,7 @@ class Main extends Component {
                 render={() =>
                   <Dashboard
                     children={this.state.members.filter(member => member.role.includes('child'))}
+                    familyID={this.familyID}
                     goToChildDashboard={this.goToChildDashboard}
                     scores={this.state.scores}
                     getData={this.getData}
@@ -199,7 +220,15 @@ class Main extends Component {
               />
               <Route
                 path='/household'
-                component={ManageHousehold}
+                render={() =>
+                  <ManageHousehold
+                    getData={this.getData}
+                    addData={this.addData}
+                    deleteData={this.deleteData}
+                    updateData={this.updateData}
+                    members={this.state.members}
+                  />
+                }
               />
               <Route
                 path='/manage-tbs'

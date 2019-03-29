@@ -32,21 +32,28 @@ class ManageAccount extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Edit Account Details</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor='familyname'>Family Name</label>
-          <input type='text' onChange={this.handleChange} id='familyname'/>
-          <label htmlFor='password'>Update Password</label>
-          <input type='password' onChange={this.handleChange} id='password'/>
-          <input type='submit'/>
-        </form>
-        <button onClick={() => {
-          this.props.showTab('showMembers')
-        }}>Done</button>
-      </div>
+      <h1>UNDER CONSTRUCTION</h1>
     )
+
   }
+
+  // render() {
+  //   return (
+  //     <div>
+  //       <h1>Edit Account Details</h1>
+  //       <form onSubmit={this.handleSubmit}>
+  //         <label htmlFor='familyname'>Family Name</label>
+  //         <input type='text' onChange={this.handleChange} id='familyname'/>
+  //         <label htmlFor='password'>Update Password</label>
+  //         <input type='password' onChange={this.handleChange} id='password'/>
+  //         <input type='submit'/>
+  //       </form>
+  //       <button onClick={() => {
+  //         this.props.showTab('showMembers')
+  //       }}>Done</button>
+  //     </div>
+  //   )
+  // }
 }
 
 export default ManageAccount

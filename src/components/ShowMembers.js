@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import NewMember from './NewMember'
 
-let api_url = 'http://localhost:3000/'
+let api_url = 'http://localhost:3000'
 
 class ShowMembers extends Component {
   constructor(props) {
@@ -99,7 +99,7 @@ class ShowMembers extends Component {
 
   componentDidMount() {
     // Get all members
-    this.fetchMembers()
+    // this.fetchMembers()
   }
 
 
@@ -110,7 +110,9 @@ class ShowMembers extends Component {
           <div>
             {this.state.staticState ?
               <ul>
-                {this.state.members.map((member, index) => {
+    
+                {this.props.members.map((member, index) => {
+
                   return (
                     <li key={index}>
                       <div className='list-details'>
@@ -123,7 +125,7 @@ class ShowMembers extends Component {
                           this.changeStaticState()
                         }}>Edit</button>
                         <button onClick={() => {
-                          this.deleteMember(member.member_id, index)
+                          this.props.deleteData('members', member.member_id)
                         }}>Delete</button>
                       </div>
                     </li>
@@ -135,7 +137,10 @@ class ShowMembers extends Component {
                 member={this.member}
                 index={this.index}
                 changeStaticState={this.changeStaticState}
-                editMember={this.editMember}
+                getData={this.props.getData}
+                addData={this.props.addData}
+                deleteData={this.props.deleteData}
+                updateData={this.props.updateData}
 
                 />
             }
