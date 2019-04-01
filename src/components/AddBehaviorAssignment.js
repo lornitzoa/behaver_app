@@ -58,6 +58,7 @@ class AddBehaviorAssignment extends Component {
         child_id: this.state.child_id,
         behavior_id: parseInt(this.state.behavior_id),
         points: parseInt(this.state.points)
+
       }
       // send obejct to updateData function with route string
       this.props.updateData('behaviors/assignments', updatedAssignment)
