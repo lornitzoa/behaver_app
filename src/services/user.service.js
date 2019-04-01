@@ -34,7 +34,7 @@ export default class AuthService {
     register(user) {
 
 
-      return this.fetch(`https://behaver-api.herokuapp.com/users/register`,
+      return this.fetch(`https://behaver-api.herokuapp.comusers/register`,
 
         {
           body: JSON.stringify(user),

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import NewMember from './NewMember'
 
 
-let api_url = 'https://behaver-api.herokuapp.com/'
+let api_url = 'https://behaver-api.herokuapp.com'
 
 
 class ShowMembers extends Component {
@@ -112,7 +112,7 @@ class ShowMembers extends Component {
           <div>
             {this.state.staticState ?
               <ul>
-    
+
                 {this.props.members.map((member, index) => {
 
                   return (
