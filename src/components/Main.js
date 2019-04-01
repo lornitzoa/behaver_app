@@ -79,6 +79,21 @@ class Main extends Component {
           // console.log(data);
 
       })
+      .then(err => {
+        let array = dataType.replace('/', '')
+        this.setState({
+          [array]: []
+        })
+        if(dataType === 'scores') {
+          this.setState({
+            loaded: true
+          })
+        }
+        console.log(err);
+      }
+
+
+    )
   }
 
   //////////////////////////////////////////////
