@@ -9,6 +9,7 @@ export default class AuthService {
     }
 
     login(username, password) {
+      console.log(username)
       // Get a token from api server using the fetch api
       return this.fetch(`${this.domain}/users/login?user[username]=${username}&user[password]=${password}`, {
           method: 'POST',
@@ -17,6 +18,7 @@ export default class AuthService {
               password
           })
       }).then(res => {
+          console.log(res)
           this.setLocalStorage(res.token, res.user.username, res.user.id) // Setting the token in localStorage
           return Promise.resolve(res)
 
@@ -30,8 +32,10 @@ export default class AuthService {
     }
 
     register(user) {
-      console.log(user);
-      return this.fetch(`http://localhost:3000/users/register`,
+
+
+      return this.fetch(`https://behaver-api.herokuapp.com/users/register`,
+
         {
           body: JSON.stringify(user),
           method: 'POST'
@@ -83,6 +87,8 @@ export default class AuthService {
 
 
     fetch(url, options) {
+      console.log(url)
+      console.log(options)
         // performs api calls sending the required authentication headers
         const headers = {
             'Accept': 'application/json',
@@ -94,7 +100,7 @@ export default class AuthService {
         if (this.loggedIn()) {
             headers['Authorization'] = 'Bearer ' + this.getToken()
         }
-
+        console.log(headers)
         return fetch(url, {
             headers,
             ...options
