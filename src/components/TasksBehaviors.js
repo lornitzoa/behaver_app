@@ -9,9 +9,6 @@ import AddBehaviorAssignment from './AddBehaviorAssignment'
 class TasksBehaviors extends Component {
 
 
-  componentDidMount() {
-    console.log('im here!');
-  }
 
   render() {
     return (

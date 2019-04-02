@@ -36,7 +36,7 @@ class Main extends Component {
     }
     this.Auth = new AuthService()
     this.childID = null
-    this.familyID = localStorage.getItem('family_id')
+    this.familyID = parseInt(localStorage.getItem('family_id'))
   }
 
   // logout functionality
@@ -59,8 +59,11 @@ class Main extends Component {
 
   // get children from db and display Children in Children Overview component
   getData = (dataType) => {
+
     axios.get(`${api_url}/${dataType}/${this.familyID}`)
-      .then(json => json.data)
+      .then(json => {
+        return json.data
+      } )
       .then(data => {
           let array = dataType.replace('/', '')
           this.setState({
@@ -72,27 +75,8 @@ class Main extends Component {
               loaded: true
             })
           }
-
-
-
-          // console.log(dataType);
-          // console.log(data);
-
       })
-      .then(err => {
-        let array = dataType.replace('/', '')
-        this.setState({
-          [array]: []
-        })
-        if(dataType === 'scores') {
-          this.setState({
-            loaded: true
-          })
-        }
-        console.log(err);
-      }
-
-
+      .then(err => console.log(err)
     )
   }
 
@@ -100,8 +84,8 @@ class Main extends Component {
   //               DELETE DATA
   //////////////////////////////////////////////
   deleteData = (dataType, id) => {
-    console.log(dataType);
-    console.log(id);
+    // console.log(dataType);
+    // console.log(id);
     axios.delete(`${api_url}/${dataType}/${id}`)
       .then(data => {
         this.getData(dataType)
@@ -141,8 +125,8 @@ class Main extends Component {
   //               EDIT DATA
   //////////////////////////////////////////////
   updateData = (dataType, data) => {
-    console.log(dataType)
-    console.log(data.id)
+    // console.log(dataType)
+    // console.log(data.id)
     if(dataType === 'members') {
       axios.put(`${api_url}/${dataType}/${data.member_id}`, data)
         .then(updatedData => {
@@ -214,8 +198,10 @@ class Main extends Component {
               </NavLink>
             </div>
             <Switch>
+
               <Route
                 path='/dashboard'
+
                 render={() =>
                   <Dashboard
                     children={this.state.members.filter(member => member.role.includes('child'))}

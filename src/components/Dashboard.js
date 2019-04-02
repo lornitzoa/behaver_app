@@ -14,7 +14,11 @@ class Dashboard extends Component {
     super(props)
     this.state ={
       viewDashboard: true,
-      childID: null
+      childID: null,
+      tasksassignments: [],
+      reinforcementsassignments: [],
+      behaviorsassignments: []
+
     }
   }
 
@@ -29,8 +33,14 @@ class Dashboard extends Component {
         childID: childID
       })
     }
+  }
 
-
+  checkNullArray = (array) => {
+    if(array.length > 0) {
+      this.setState({
+        tasksassignments: array
+      })
+    }
   }
 
   componentDidMount() {
@@ -67,6 +77,7 @@ class Dashboard extends Component {
                 />
               }
             />
+            {console.log(this.props.tasksassignments)}
             <Route
               path='/child-dashboard'
               render={() =>

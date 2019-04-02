@@ -57,6 +57,7 @@ class AddCashinAssignment extends Component {
         points: parseInt(this.state.points),
         daily_allotment: parseInt(this.state.daily_allotment),
         no_available: parseInt(this.state.daily_allotment),
+        family_id: parseInt(localStorage.getItem('family_id'))
       }
       // console.log(updatedAssignment);
       // send object to updateData with route string
@@ -72,6 +73,7 @@ class AddCashinAssignment extends Component {
         points: parseInt(this.state.points),
         daily_allotment: parseInt(this.state.daily_allotment),
         no_available: parseInt(this.state.daily_allotment),
+        family_id: parseInt(localStorage.getItem('family_id'))
       }
       // send objec to addData with route string
       this.props.addData('reinforcements/assignments', newAssignment)

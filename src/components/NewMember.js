@@ -39,8 +39,8 @@ class NewMember extends Component {
       let member = {
         name: this.state.name,
         role: this.state.role,
-        pin: this.state.pin,
-        family_id: this.state.family_id
+        pin: parseInt(this.state.pin),
+        family_id: parseInt(this.state.family_id)
       }
       // send new member to create route
       this.props.addData('members', member)

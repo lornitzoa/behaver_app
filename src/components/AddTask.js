@@ -48,7 +48,9 @@ import React, { Component } from 'react'
         }
         this.props.setEditParams(null, 'task')
         this.props.updateData('tasks', task)
-
+        this.setState({
+          task: 'Add Task'
+        })
       }
     }
 

@@ -53,10 +53,7 @@ class ChildOverview extends Component {
               </tr>
             </thead>
             <tbody>
-            {console.log(this.props.familyID)}
-            {
-              
-            }
+
             {
               this.props.children.length > 0 ? this.props.children.map((child, index) => {
                 return (
