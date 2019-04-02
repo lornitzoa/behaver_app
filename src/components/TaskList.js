@@ -60,7 +60,8 @@ class TaskList extends Component {
       time_of_day: task.time_of_day,
       points: parseInt(task.points),
       required: required,
-      completed: true
+      completed: true,
+      family_id: parseInt(localStorage.getItem('family_id'))
     }
     // console.log(updateComplete);
     // send data objec to updateData function with route

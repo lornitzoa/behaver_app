@@ -135,17 +135,13 @@ class Main extends Component {
         })
         .then(resData => {
           this.getData(dataType)
-          if(dataType === 'tasks/assignments') {
-
-            this.getData('scores')
-
-          }
         })
         .then(err => console.log(err))
     } else {
+
+      console.log(data)
       axios.put(`${api_url}/${dataType}/${data.id}`, data)
         .then(updatedData => {
-          // console.log(updatedData);
           return updatedData.data
         })
         .then(resData => {
