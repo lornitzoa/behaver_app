@@ -7,7 +7,7 @@ import ChildOverview from './ChildOverview'
 import ChildDashboard from './ChildDashboard'
 
 
-// let api_url = 'https://behaver-api.herokuapp.com'
+// let api_url = 'http://localhost:3000'
 
 class Dashboard extends Component {
   constructor(props) {
@@ -47,7 +47,6 @@ class Dashboard extends Component {
     this.props.getData('tasks/assignments')
     this.props.getData('reinforcements/assignments')
     this.props.getData('behaviors/assignments')
-
   }
 
 
@@ -77,7 +76,7 @@ class Dashboard extends Component {
                 />
               }
             />
-            {console.log(this.props.tasksassignments)}
+            // {console.log(this.props.tasksassignments)}
             <Route
               path='/child-dashboard'
               render={() =>

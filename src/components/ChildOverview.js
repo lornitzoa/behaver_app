@@ -34,6 +34,7 @@ class ChildOverview extends Component {
   componentDidMount() {
     // send incoming data to scoreboard
     this.setData()
+    console.log(this.props.children);
     // console.log(this.props.scores);
 
   }
@@ -55,7 +56,9 @@ class ChildOverview extends Component {
             <tbody>
 
             {
-              this.props.children.length > 0 ? this.props.children.map((child, index) => {
+              this.props.children.length > 0 ?
+              this.props.children.map((child, index) => {
+                console.log(child);
                 return (
                   <tr key={index} onClick={() =>
                     this.props.changeView(child.member_id)
@@ -70,7 +73,11 @@ class ChildOverview extends Component {
               }
             )
               :
-              <h2>You don't have any children yet</h2>
+              <tr>
+                <td>
+                  <h2>You don't have any children yet</h2>
+                </td>
+              </tr>
             }
             </tbody>
           </table>

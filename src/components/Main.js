@@ -12,7 +12,7 @@ import AuthService from '../services/user.service'
 
 
 
-let api_url = 'https://behaver-api.herokuapp.com'
+let api_url = 'http://localhost:3000'
 
 
 class Main extends Component {
@@ -56,8 +56,6 @@ class Main extends Component {
   //////////////////////////////////////////////
   //               GET DATA
   //////////////////////////////////////////////
-
-  // get children from db and display Children in Children Overview component
   getData = (dataType) => {
 
     axios.get(`${api_url}/${dataType}/${this.familyID}`)
@@ -90,7 +88,7 @@ class Main extends Component {
       .then(data => {
         this.getData(dataType)
       }).then(scores => {
-        console.log(dataType);
+        // console.log(dataType);
         if(dataType === 'tasks/assignments') {
           this.getData('scores')
           // console.log('getting scores');
@@ -162,9 +160,6 @@ class Main extends Component {
     this.getData('tasks')
     this.getData('behaviors')
     this.getData('reinforcements')
-    // this.getData('tasks/assignments')
-    // this.getData('reinforcements/assignments')
-    // this.getData('behaviors/assignments')
     this.getData('scores')
     this.getFamilyName()
   }
