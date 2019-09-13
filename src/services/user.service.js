@@ -35,7 +35,7 @@ export default class AuthService {
     register(user) {
 
 
-      return this.fetch(`http://localhost:3000/users/register`,
+      return this.fetch(`${this.domain}/users/register`,
 
         {
           body: JSON.stringify(user),

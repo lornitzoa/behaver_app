@@ -12,7 +12,7 @@ import AuthService from '../services/user.service'
 
 
 
-let api_url = 'https://behaver-api.herokuapp.com/'
+let api_url = 'https://behaver-api.herokuapp.com'
 // let api_url = 'http://localhost:3000'
 
 
