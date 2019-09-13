@@ -76,7 +76,7 @@ class Dashboard extends Component {
                 />
               }
             />
-            // {console.log(this.props.tasksassignments)}
+
             <Route
               path='/child-dashboard'
               render={() =>

@@ -54,11 +54,13 @@ class ChildOverview extends Component {
               </tr>
             </thead>
             <tbody>
-
+            {console.log(this.props.scores)}
             {
               this.props.children.length > 0 ?
+
               this.props.children.map((child, index) => {
                 console.log(child);
+
                 return (
                   <tr key={index} onClick={() =>
                     this.props.changeView(child.member_id)

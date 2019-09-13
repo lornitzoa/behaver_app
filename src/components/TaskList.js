@@ -42,9 +42,11 @@ class TaskList extends Component {
 
   // handle completion of task
   handleCompleted = (task) => {
+    console.log('clicked');
     let points = {
       task_points_earned: parseInt(task.points)
     }
+    // console.log(points);
     this.props.updateScore(task.child_id, points)
     // // create variable to hold taskID, retrieved from getTaskID function
     // // using the task list and the completed task
@@ -65,7 +67,7 @@ class TaskList extends Component {
     }
     // console.log(updateComplete);
     // send data objec to updateData function with route
-    console.log('completing');
+    // console.log(updateComplete);
     this.props.updateData('tasks/assignments', updateComplete)
   }
 

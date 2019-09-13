@@ -34,10 +34,11 @@ class ChildDashboard extends Component {
   updateScore = (id, data) => {
     axios.patch(`${api_url}/scores/${id}`, data)
       .then(updatedData => {
+        // console.log(updatedData);
         return updatedData.data
       })
       .then(resData => {
-        console.log(resData);
+        console.log("Scores: " + this.props.getData('scores'));
         this.props.getData('scores')
       })
       .then(err => console.log(err))
