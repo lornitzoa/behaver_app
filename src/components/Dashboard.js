@@ -6,7 +6,7 @@ import ChildList from './ChildList'
 import ChildOverview from './ChildOverview'
 import ChildDashboard from './ChildDashboard'
 
-
+let api_url = 'https://behaver-api.herokuapp.com'
 // let api_url = 'http://localhost:3000'
 
 class Dashboard extends Component {
