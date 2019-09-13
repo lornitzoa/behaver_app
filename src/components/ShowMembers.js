@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import NewMember from './NewMember'
 
 
-let api_url = 'http://localhost:3000'
+// let api_url = 'http://localhost:3000'
+let api_url = 'https://behaver-api.herokuapp.com'
 
 
 class ShowMembers extends Component {
