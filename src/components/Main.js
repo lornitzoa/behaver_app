@@ -73,6 +73,7 @@ class Main extends Component {
             this.setState({
               loaded: true
             })
+            console.log(this.state.scores)
           }
       })
       .then(err => console.log(err)
