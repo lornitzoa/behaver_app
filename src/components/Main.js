@@ -73,7 +73,7 @@ class Main extends Component {
             this.setState({
               loaded: true
             })
-            console.log(this.state.scores)
+
           }
       })
       .then(err => console.log(err)
@@ -163,6 +163,7 @@ class Main extends Component {
     this.getData('behaviors')
     this.getData('reinforcements')
     this.getData('scores')
+    console.log(this.state.scores);
     this.getFamilyName()
   }
 
